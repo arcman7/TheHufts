@@ -1,0 +1,72 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>My Parse App</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+</head>
+
+<body>
+<input type="file" name="file" id="file">
+<script type="text/javascript">
+Parse.initialize("6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA", "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm");
+var StockOIHtick = Parse.Object.extend("StockOIHtick");
+
+document.getElementById('file').onchange = function(){
+
+  var file = this.files[0];
+
+  var reader = new FileReader();
+  reader.onload = function(progressEvent){
+    // Entire file
+    //console.log(this.result);
+
+    // By lines
+    var lines = this.result.split('\n');
+    console.log(lines.length)
+    for(var line = 0; line < lines.length; line++){
+      console.log(lines[line]);
+       var tickData = lines[line].split(",");
+      // var dateData = tickData[0].split("/");
+      // var hourData = tickData[1].split(":");
+      // var dateHash = { year: dateData[3], month: dateData[1] -1, day: dateData[1], hour: hourData[0], minute: hourData[1] };
+      // var currentTimeStamp = new Date(dateHash.year, dateHash.month, dateHash.day, dateHash.hour, dateHash.minute);
+      // var bookMark = new Date("2001","6"-1,"26","11","40");
+          //st = new Date("2001","6"-1,"29","11","51")
+          //Fri Jun 29 2001 11:51:00 GMT-0700 (PDT)
+      var stockOIHtick = new StockOIHtick();
+      stockOIHtick.set("Date", tickData[0]);
+      stockOIHtick.set("Time", tickData[1]);
+      stockOIHtick.set("Open", tickData[2]);
+      stockOIHtick.set("High", tickData[3]);
+      stockOIHtick.set("Low",  tickData[4]);
+      stockOIHtick.set("Close",tickData[5]);
+      stockOIHtick.set("Volume",tickData[6]);
+      stockOIHtick.set("stockID", "1");
+      //if (currentTimeStamp > bookMark){
+        // stockOIHtick.save(null, {
+        //   success: function(stockOIHtick) {
+        //     // Execute any logic that should take place after the object is saved.
+        //     //alert('New object created with objectId: ' + stockOIHtick.id);
+        //     //console.log('New object created with objectId: ' + stockOIHtick.id);
+        //   },
+        //   error: function(stockOIHtick, error) {
+        //     // Execute any logic that should take place if the save fails.
+        //     // error is a Parse.Error with an error code and message.
+        //     alert('Failed to create new object, with error code: ' + error.message);
+        //       }
+        // });//end save function
+      //}//if statement
+
+    }//end for-loop
+  };
+  reader.readAsText(file);
+};
+
+</script>
+</body>
