@@ -1,0 +1,73 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="d3.js"></script>
+<style type="text/css">
+      div {
+        display: inline-block;
+        /*height:420px;*/
+      }
+      div.bar {
+        display: inline-block;
+        width: 15px;
+        height: 75px; /* Gets overriden by D3-assigned height below */
+        margin-right: 1px;
+        background-color: teal;
+      }
+      div.skinnybar{
+        display: inline-block;
+        width: 3.5px;
+        height: 75px; /* Gets overriden by D3-assigned height below */
+        margin-right: 1px;
+        background-color: gray/*#0d7484*/;
+      }
+      #entropy,#mappedEntropy {
+        margin-left:310px;
+        border: 1px solid black;
+        padding-top: 10px ;
+      }
+      .line,.label{
+        display: block;
+        margin-left: 310px;
+      }
+
+    </style>
+
+<script type="text/javascript" src="data.js"></script>
+<script type="text/javascript" src="demo.js"></script>
+
+
+<body>
+  <p>
+    In this example I pulled 265 days worth of stock data from Google Finance for the stock DIG. Each bar represents the closing stock price at a certain day. The data set starts from 8/1/2014 and ends on 8/18/2015. Keep in mind this is an application of the algorithim in day to day data, but it is better used on shorter time intervals such as minute to minute. The reason for this is same reason why compounding interest, say quarterly, will never grow as fast as continous interest. The faster you buy/sell, the more money you have to re-invest in your next buy/sell transaction, and we begin to approximate continous interest the shorter the time-interval becomes between buy/sell transactions.
+  </p>
+  <br>
+  <br>
+  <button id="backwards">Backwards</button>
+  <div id="old"></div>
+  <div id="current"></div>
+  <div id="future"></div>
+  <button id="forward">Forward</button>
+  <div class="line">___________________</div>
+  <div class="label"> Current time window </div>
+  <br>
+  <br>
+  <div id="entropy"></div>
+  <div class="line">___________________</div>
+  <div class="label"> Entropy State (where the right leading edge is the current entropy state)
+  </div>
+  <br>
+  <br>
+  <div id="mappedEntropy"></div>
+  <div class="line">___________________</div>
+  <div class="label">MappedEntropy(X), where X = relativeEntropy(arrayData)
+  </div>
+  <div class="label">MappedEntropy(X) = 1 - relativeEntropy(currentTimeWindowArray)^2 </div>
+  <p>
+    You're really only intersted in the function relativeEntropy starting on line 195 in the demo.js file. That entropy value is then used to generate buy signals using the rule:
+  </p>
+   <p> MappedEntropy(X) > 0.8 </p>
+  <p>
+  Where 0.8 was a value that I found to work best on certain stocks. In general it is parameter to be found through optimization tests being run on the stock in question.
+  </p>
+</body>
