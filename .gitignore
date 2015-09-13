@@ -9,6 +9,7 @@
 /test/version_tmp/
 /tmp/
 /App/node_modules
+npm-debug.log
 
 ## Specific to RubyMotion:
 .dat*
