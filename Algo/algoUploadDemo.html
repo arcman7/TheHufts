@@ -1,0 +1,57 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>My Parse App</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+</head>
+
+<body>
+<input type="file" name="file" id="file">
+<script type="text/javascript">
+Parse.initialize("6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA", "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm");
+var StockOIHtick = Parse.Object.extend("StockOIHtick");
+
+document.getElementById('file').onchange = function(){
+
+  var file = this.files[0];
+
+  var reader = new FileReader();
+  reader.onload = function(progressEvent){
+    // Entire file
+    //console.log(this.result);
+
+    // By lines
+    var lines = this.result.split('\n');
+    var algo = this.result;
+    console.log(lines.length)
+    for(var line = 0; line < lines.length; line++){
+      console.log(lines[line]);
+       var tickData = lines[line].split(",");
+
+
+        stockOIHtick.save(null, {
+          success: function(stockOIHtick) {
+            // Execute any logic that should take place after the object is saved.
+            //alert('New object created with objectId: ' + stockOIHtick.id);
+            //console.log('New object created with objectId: ' + stockOIHtick.id);
+          },
+          error: function(stockOIHtick, error) {
+            // Execute any logic that should take place if the save fails.
+            // error is a Parse.Error with an error code and message.
+            alert('Failed to create new object, with error code: ' + error.message);
+              }
+        });//end save function
+
+    }//end for-loop
+  };
+  reader.readAsText(file);
+};
+
+</script>
+</body>
