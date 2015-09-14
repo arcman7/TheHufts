@@ -1,0 +1,8 @@
+function test(){
+  return {
+    buy:  [["t",12]],
+    sell: [["t",13]]
+  };
+}
+
+console.log(test());
