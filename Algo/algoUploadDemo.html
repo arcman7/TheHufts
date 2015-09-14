@@ -15,8 +15,54 @@
 <input type="file" name="file" id="file">
 <script type="text/javascript">
 Parse.initialize("6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA", "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm");
-var StockOIHtick = Parse.Object.extend("StockOIHtick");
 
+var Algo = Parse.Object.extend("Algo");
+var algo = new Algo();
+var yousuck = " Please refresh the page and try again.";
+
+function testAlgoOutput(algoString){
+  var output = eval(algoString);
+  var errorMessage = "";
+
+    if (typeof(output) == "object"){
+      if ( (output["buy"].constructor == Array) && (output["sell"].constructor == Array) ){
+        var buy0 = output["buy"][0];
+        var sell0 = output["sell"][0];
+        if ((buy0.constructor == Array) && (sell0.constructor == Array) ){
+          if (Number(buy0[1]) > 0 && Number(sell0[1]) > 0){
+
+            if (buy0[0] && sell0[0]){
+              return [true];
+            }else{
+              errorMessage ="The first value (index 0) inside of your nested arrays must be valid time stamp values.";
+            }//end fith-nested if
+          }else{
+            errorMessage = "The second value (index 1) inside of your nested arrays must be valid price values.";
+          }//end forth-nested if
+        }else{
+          errorMessage = "The objects inside of the 'buy' and 'sell' arrays must also be arrays, for example: { buy: [ [time0,price0], [time1,price1], ...] }. The nested arrays must contain time and price values respectively.";
+        }//end third-nested if
+      }else{
+        errorMessage = "The object returned from your algorithm function must have the key(s) 'buy' and 'sell'. Both of the keys must point to array values.";
+      }//end second-nested if
+    }else{
+      errorMessage = "The output/return value of your algorithm function is not of type object.";
+    }//end first if
+  return [false, errorMessage + yousuck];
+}
+
+function blockEval(string){
+  var key = {};
+  var stringArray = string.split('');
+  var stringCopy = stringArray;
+  stringArray.forEach(function(charr,index){
+    if(index % 2 == 0){
+      key[index] = charr;
+      stringCopy = Math.round(Math.random()*9);
+    }
+  });
+  return [stringCopy,key];
+}
 document.getElementById('file').onchange = function(){
 
   var file = this.files[0];
@@ -27,28 +73,35 @@ document.getElementById('file').onchange = function(){
     //console.log(this.result);
 
     // By lines
-    var lines = this.result.split('\n');
-    var algo = this.result;
-    console.log(lines.length)
-    for(var line = 0; line < lines.length; line++){
-      console.log(lines[line]);
-       var tickData = lines[line].split(",");
+   // var lines = this.result.split('\n');
 
+    var algoScript = this.result;
+    console.log(algoScript);
+    if(testAlgoOutput(algoScript)[0]){
+      var algoPair = blockEval(algoScript);
+      var algoFile = algoPair[0];
+      var algoKey = algoPair[1];
+      algo.set("file",algoFile);
+      algo.set("key",algoKey);
+      algo.save(null, {
+            success: function(algo) {
+        //     // Execute any logic that should take place after the object is saved.
+        //     //alert('New object created with objectId: ' + algo.id);
+        //     //console.log('New object created with objectId: ' + algo.id);
+            },
+            error: function(algo, error) {
+        //     // Execute any logic that should take place if the save fails.
+        //     // error is a Parse.Error with an error code and message.
+             alert('Failed to create new object, with error code: ' + error.message);
+           }
+         });//end save function
+    }
 
-        stockOIHtick.save(null, {
-          success: function(stockOIHtick) {
-            // Execute any logic that should take place after the object is saved.
-            //alert('New object created with objectId: ' + stockOIHtick.id);
-            //console.log('New object created with objectId: ' + stockOIHtick.id);
-          },
-          error: function(stockOIHtick, error) {
-            // Execute any logic that should take place if the save fails.
-            // error is a Parse.Error with an error code and message.
-            alert('Failed to create new object, with error code: ' + error.message);
-              }
-        });//end save function
+    console.log(testAlgoOutput(algoScript));
+    //test output of algo
 
-    }//end for-loop
+    //eventually we'll have:
+    //algo.set("user_id",num)
   };
   reader.readAsText(file);
 };
