@@ -11,7 +11,8 @@ var db = monk('localhost:27017/nodetest1');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+//var query = require('./public/javascript/query');
+//module.exports = query;
 var app = express();
 
 // view engine setup
@@ -25,7 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+// app.use("/public/javascript", express.static(__dirname + "/public/javascript"));
 app.use('/', routes);
 app.use('/users', users);
 
