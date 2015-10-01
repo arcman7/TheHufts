@@ -38,3 +38,4 @@ build/
 
 # parse app keys
 /Algo/keys/
+/App/public/keys/

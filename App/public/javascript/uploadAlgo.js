@@ -1,19 +1,3 @@
-<!doctype html>
-<head>
-  <meta charset="utf-8">
-
-  <title>My Parse App</title>
-  <meta name="description" content="My Parse App">
-  <meta name="viewport" content="width=device-width">
-
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
-  <script type="text/javascript" src="./keys/parseSecrets.js"></script>
-</head>
-
-<body>
-<input type="file" name="file" id="file">
-<script type="text/javascript">
 Parse.initialize(parseSecret1, parseSecret2);
 
 var Algo = Parse.Object.extend("Algo");
@@ -22,6 +6,7 @@ var yousuck = " Please refresh the page and try again.";
 
 function testAlgoOutput(algoString){
   var output = eval(algoString);
+  console.log(output);
   var errorMessage = "";
 
     if (typeof(output) == "object"){
@@ -65,56 +50,60 @@ function blockEval(string){
       stringCopy[index] = Math.round(Math.random()*9);
     }
   });
-  console.log(stringCopy,key);
+  //console.log(stringCopy,key);
   return [stringCopy,key];
 }
 
-document.getElementById('file').onchange = function(){
+function uploadFileListener(){
+  document.getElementById('file-upload').onchange = function(){
 
-  var file = this.files[0];
+    var file = this.files[0];
 
-  var reader = new FileReader();
-  reader.onload = function(progressEvent){
-    // Entire file
-    //console.log(this.result);
+    var reader = new FileReader();
+    reader.onload = function(progressEvent){
+      // Entire file
+      //console.log(this.result);
 
-    // By lines
-   // var lines = this.result.split('\n');
+      // By lines
+     // var lines = this.result.split('\n');
 
-    var algoScript = this.result;
-    //console.log(algoScript);
-    var results = testAlgoOutput(algoScript);
-    if(results[0]){
-      var algoPair = blockEval(algoScript);
-      var algoFile = algoPair[0].join('');
-      var algoKey = JSON.stringify(algoPair[1]);
-      algo.set("algoFile",algoFile);
-      algo.set("algoKey",algoKey);
-      algo.save(null, {
-            success: function(algo) {
-        //     // Execute any logic that should take place after the object is saved.
-        //     //alert('New object created with objectId: ' + algo.id);
-        //     //console.log('New object created with objectId: ' + algo.id);
-               alert("You have successfully saved an encripted version of your algorithm in your account.");
-            },
-            error: function(algo, error) {
-        //     // Execute any logic that should take place if the save fails.
-        //     // error is a Parse.Error with an error code and message.
-             alert('Failed to create new object, with error code: ' + error.message);
-           }
-         });//end save function
-    }else{
-      alert(results[1]);
-    }//end testAlgoOutput if
-    //console.log(eval(algoScript));
-    //console.log(testAlgoOutput(algoScript));
-    //test output of algo
+      var algoScript = this.result;
+      //console.log(algoScript);
+      var results = testAlgoOutput(algoScript);
+      if(results[0]){
+        var algoPair = blockEval(algoScript);
+        var algoFile = algoPair[0].join('');
+        var algoKey = JSON.stringify(algoPair[1]);
+        algo.set("algoFile",algoFile);
+        algo.set("algoKey",algoKey);
+        algo.save(null, {
+              success: function(algo) {
+          //     // Execute any logic that should take place after the object is saved.
+          //     //alert('New object created with objectId: ' + algo.id);
+          //     //console.log('New object created with objectId: ' + algo.id);
+                 alert("You have successfully saved an encripted version of your algorithm in your account.");
+              },
+              error: function(algo, error) {
+          //     // Execute any logic that should take place if the save fails.
+          //     // error is a Parse.Error with an error code and message.
+               alert('Failed to create new object, with error code: ' + error.message);
+             }
+           });//end save function
+      }else{
+        alert(results[1]);
+      }//end testAlgoOutput if
+      //console.log(eval(algoScript));
+      //console.log(testAlgoOutput(algoScript));
+      //test output of algo
 
-    //eventually we'll have:
-    //algo.set("user_id",num)
+      //eventually we'll have:
+      //algo.set("user_id",num)
+    };
+    reader.readAsText(file);
   };
-  reader.readAsText(file);
-};
+}
 
-</script>
-</body>
+$(document).on('ready',function(){
+  uploadFileListener();
+})
+
