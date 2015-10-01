@@ -3,9 +3,13 @@ Parse.initialize(parseSecret1, parseSecret2);
 var Algo = Parse.Object.extend("Algo");
 var algo = new Algo();
 var yousuck = " Please refresh the page and try again.";
-
+var algoFunction;
 function testAlgoOutput(algoString){
-  var output = eval(algoString);
+  algoFunction = new Function('return ' + algoString);
+  algoFunction = algoFunction();
+  //var output = eval(algoString);
+  var testArray = [["1",2],["2",3],["3",1],["4",4],["5",5],["6",6],["7",5],["8",4],["9",5]];
+  output = algoFunction(testArray);
   console.log(output);
   var errorMessage = "";
 
