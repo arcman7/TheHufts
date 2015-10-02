@@ -3,13 +3,13 @@ Parse.initialize(parseSecret1, parseSecret2);
 var Algo = Parse.Object.extend("Algo");
 var algo = new Algo();
 var yousuck = " Please refresh the page and try again.";
-var algoFunction;
+var algoFunction1;3
 function testAlgoOutput(algoString){
-  algoFunction = new Function('return ' + algoString);
-  algoFunction = algoFunction();
+  algoFunction1 = new Function('return ' + algoString);
+  algoFunction1 = algoFunction1();
   //var output = eval(algoString);
   var testArray = [["1",2],["2",3],["3",1],["4",4],["5",5],["6",6],["7",5],["8",4],["9",5]];
-  output = algoFunction(testArray);
+  output = algoFunction1(testArray);
   console.log(output);
   var errorMessage = "";
 
@@ -54,7 +54,6 @@ function blockEval(string){
       stringCopy[index] = Math.round(Math.random()*9);
     }
   });
-  //console.log(stringCopy,key);
   return [stringCopy,key];
 }
 
@@ -95,19 +94,100 @@ function uploadFileListener(){
            });//end save function
       }else{
         alert(results[1]);
-      }//end testAlgoOutput if
-      //console.log(eval(algoScript));
-      //console.log(testAlgoOutput(algoScript));
-      //test output of algo
+      }
 
       //eventually we'll have:
       //algo.set("user_id",num)
     };
     reader.readAsText(file);
-  };
+    $("#uploaded-algos-container").append("<button id='algo1'>Test algo-1</button>");
+    algoTesterListener();
+  };//end .onchange function
 }
 
+function algoTesterListener(algoId){
+  $("#algo1").on('click',function(){
+      var series = generateSignals(globalSymbol);
+      graphHome([],$(".graph"),"Day",series,globalSymbol);
+      //clearing mysterious 'A' text value from markers
+      // $("#highcharts-6 > svg > g.highcharts-series-group > g > g > text").text('');
+      //edit: The 'A' still fucking comes back anytime you adjust the graph!?
+  });
+}
+
+function generateSignals(symbol){
+  var series = [];
+  var scale = "Day"
+
+  series.push({
+           id  : scale + "price",
+           name: scale + "price",
+           data: processedStockData[symbol],
+       });
+  //call algoFunction on stock data:
+  var buySellSignals = algoFunction1(processedStockData[symbol]);
+  var buyFlagSeries = buySellSignals.buy.map(function(signal,index){
+    return {
+              "x"   : signal[0],
+              "text": "bought at: $"+ signal[1],
+              "id"  : "bflag-"+index,
+           }//end return
+  });
+  var sellFlagSeries = buySellSignals.sell.map(function(signal,index){
+    return {
+              "x"   : signal[0],
+              "text": "sold at: $"+ signal[1],
+              "id"  : "sflag-"+index,
+           }//end return
+  });
+
+  series.push(
+   {
+    "type"      : "flags",
+    "onSeries"  : scale + "price",
+    "shadow"    : false,
+    "width"     : 7,
+    "shape"     : "url(https://mt.google.com/vt/icon?psize=20&font=fonts/Roboto-Regular.ttf&color=ff330000&name=icons/spotlight/spotlight-waypoint-a.png&ax=44&ay=48&scale=1&text=%E2%80%B2)",
+    "data"      : buyFlagSeries,
+    showInLegend: true,
+    color       : "#1eaa56",
+    name        : "Buy"
+   });
+
+  series.push(
+   {
+    "type"      :"flags",
+    "onSeries"  : scale + "price",
+    "shadow"    : false,
+    "width"     : 7,
+    "shape"     : "url(https://camo.githubusercontent.com/b4f21ebe4ad7c00f459e8ed115e6efb37fe69348/687474703a2f2f63686172742e676f6f676c65617069732e636f6d2f63686172743f636873743d645f6d61705f70696e5f6c65747465722663686c643d7c464630303030)",
+    "data"      : sellFlagSeries,
+    showInLegend: true,
+    color       : "#f20000",
+    name        : "Sell"
+
+     // radius: 6,
+     // fillColor: '#f20000',
+     // lineWidth: 2,
+     // lineColor: null, // inherit from series
+     // symbol   :'circle',
+     // shape    :"circle",
+     // states: {
+     //     hover: {
+     //         fillColor: null,
+     //         lineWidth: 2,
+     //       radius:6
+     //     }
+     // }
+   });
+
+  // series.push({
+  // })
+
+  return series //contains regular stock data in addition to the newly generated signals
+}//end generateSignals
+
 $(document).on('ready',function(){
-  uploadFileListener();
+  uploadFileListener();//Note: when this event is fired it has the effect of producing addtional listeners
 })
 
