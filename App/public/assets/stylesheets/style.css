@@ -1,0 +1,42 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h3 {
+  display: inline-block;
+}
+
+div {
+  display: inline-block;
+}
+
+#upload-algo-container {
+  float:right;
+  margin-right: -16em;
+}
+
+#upload {
+  display: inline-block;
+  float: right;
+}
+
+.submit {
+  display: inline-block;
+}
+
+#file-upload {
+  float: right;
+  display: inline-block;
+}
+
+.graph {
+  margin-top: 1em;
+  display: none;
+  border: solid 1px black;
+  background-repeat: no-repeat;
+}

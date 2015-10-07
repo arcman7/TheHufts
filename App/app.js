@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 //insterted code
 var mongo = require('mongodb');
 var monk = require('monk');
+var expressUglify = require('express-uglify');
 var db = monk('localhost:27017/nodetest1');
 
 var index = require('./routes/index');
@@ -26,6 +27,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(require('express-uglify').middleware({ src: __dirname + '/assets/' }));
+//1
+// app.use(expressUglify.middleware({
+//   src: __dirname + '/public',
+//   logLevel: 'info',
+// }));
+//2
+// app.use(expressUglify.middleware({
+//   src: __dirname + '/assets',
+//   logLevel: 'info',
+// }));
 
 app.use('/', index);
 app.use('/users', users);
