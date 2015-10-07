@@ -11,6 +11,7 @@ var db = monk('localhost:27017/nodetest1');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+//var gateKeeper = require('./routes/gateKeeper');
 //var query = require('./public/javascript/query');
 //module.exports = query;
 var app = express();
@@ -26,9 +27,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 // app.use("/public/javascript", express.static(__dirname + "/public/javascript"));
+
+
 app.use('/', index);
 app.use('/users', users);
+//app.use('/login', login)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
