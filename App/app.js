@@ -18,12 +18,15 @@ var winston = require('winston');
 var public_path = __dirname + "/public";
 
 var app = express();
-   // app.use(function(req,res, next){
-   //      // console.log(req.path);
-   //      //console.log("full path: ",public_path+'javascript/'+req.path);
+   // app.get('/query.js',function(req,res, next){
+   //       console.log(req.path);
+   //      console.log('\n');
+
+   //      console.log("full path: ",public_path+'/javascript'+req.path);
+   //      console.log('\n');
    //      //next();
    //    // res.send(UglifyJS.minify(public_path+req.path));
-   //  fs.readFile(public_path+'/javascript/'+req.path, function(err,data)
+   //  fs.readFile(public_path+'/javascript'+req.path, function(err,data)
    //      {
    //        //console.log(data.toString());
    //        if (err) throw err;
@@ -45,15 +48,15 @@ var app = express();
    //          }); //end obfuscator function call
    //      }); //end fs file read function call
    //  });//end app.use function call
-    app.use(function(req, res) {
-        res.statusCode = 404;
-        res.end("Not found");
-    });
-    app.use(function(err, req, res, next) {
-        console.error(err);
-        res.statusCode = 500;
-        res.end("Internal server error");
-    });
+    // app.use(function(req, res) {
+    //     res.statusCode = 404;
+    //     res.end("Not found");
+    // });
+    // app.use(function(err, req, res, next) {
+    //     console.error(err);
+    //     res.statusCode = 500;
+    //     res.end("Internal server error");
+    // });
 //});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -66,9 +69,14 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
-app.use('/users', users);
-// app.use('/query', obuscateJS);
-// app.use('/uploadAlgo', obuscateJS);
+///app.use('/users', users);
+app.use('/query.js', obuscateJS('/query.js'));
+app.use('/uploadAlgo.js', obuscateJS('/uploadAlgo.js'));
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);

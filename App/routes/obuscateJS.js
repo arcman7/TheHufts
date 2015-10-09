@@ -1,20 +1,26 @@
-var express = require('express');
-var router = express.Router();
-var fs = require('fs');
-var http = require('http');
-var Options = require('obfuscator').Options;
-var obfuscator = require('obfuscator').obfuscator;
-var public_path = __dirname + "/public";
-router.get('/assets',function(req,res,next){
+
+//__dirname +
+//var app = express();
+
+function wrapper(assetName){
+  var express = require('express');
+  var router = express.Router();
+  var fs = require('fs');
+  var http = require('http');
+  var obfuscator = require('obfuscator').obfuscator;
+  var Options = require('obfuscator').Options;
+  var public_path = "/Users/Jedi_scholar/Desktop/phase-4/hiring_mixers/TheHufts/App" + '/public/javascript';//+assetName;
+  //console.log(public_path+assetName);
+  return router.get('/',function(req,res,next){
         // console.log(req.path);
-        console.log("full path: ",public_path+'javascript/'+req.path);
+    console.log("full path: ",public_path+assetName);
         //next();
       // res.send(UglifyJS.minify(public_path+req.path));
-    fs.readFile(public_path+'/javascript/'+req.path, function(err,data)
+    fs.readFile(public_path+assetName, function(err,data)
         {
-          //console.log(data.toString());
+          console.log(data.toString());
           if (err) throw err;
-          var options = new Options([public_path+'/javascript/'+req.path],public_path+'/javascript/',req.path, true);
+          var options = new Options([public_path+assetName],public_path,assetName, true);
           options.compressor = {
             conditionals: true,
             evaluate: true,
@@ -32,5 +38,6 @@ router.get('/assets',function(req,res,next){
             }); //end obfuscator function call
         }); //end fs file read function call
     });//end app.use function call
-
-module.exports = router;
+}
+module.exports = wrapper;
+//module.exports = router;

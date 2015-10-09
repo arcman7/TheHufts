@@ -6,5 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'TheHufts' });
 });
 
+var fs = require('fs');
+var http = require('http');
+var Options = require('obfuscator').Options;
+var obfuscator = require('obfuscator').obfuscator;
+var public_path = __dirname + "/public";
 
 module.exports = router;
