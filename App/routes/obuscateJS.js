@@ -5,7 +5,7 @@ var http = require('http');
 var Options = require('obfuscator').Options;
 var obfuscator = require('obfuscator').obfuscator;
 var public_path = __dirname + "/public";
-router.get('/assets',function(req,res, next){
+router.get('/assets',function(req,res,next){
         // console.log(req.path);
         console.log("full path: ",public_path+'javascript/'+req.path);
         //next();
