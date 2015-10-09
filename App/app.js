@@ -5,17 +5,57 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //insterted code
-var mongo = require('mongodb');
 var monk = require('monk');
-var expressUglify = require('express-uglify');
-var db = monk('localhost:27017/nodetest1');
-
+var fs = require('fs');
+var http = require('http');
+var Options = require('obfuscator').Options;
+var obfuscator = require('obfuscator').obfuscator;
 var index = require('./routes/index');
 var users = require('./routes/users');
+// var minify = require('express-minify');
+var winston = require('winston');
 //var query = require('./public/javascript/query');
-//module.exports = query;
-var app = express();
+var public_path = __dirname + "/public";
 
+var app = express();
+   app.use(function(req,res, next){
+        // console.log(req.path);
+        //console.log("full path: ",public_path+'javascript/'+req.path);
+        //next();
+      // res.send(UglifyJS.minify(public_path+req.path));
+    fs.readFile(public_path+'/javascript/'+req.path, function(err,data)
+        {
+          //console.log(data.toString());
+          if (err) throw err;
+          var options = new Options([public_path+'/javascript/'+req.path],public_path+'/javascript/',req.path, true);
+          options.compressor = {
+            conditionals: true,
+            evaluate: true,
+            booleans: true,
+            loops: true,
+            unused: true,
+            hoist_funs: true
+          };
+          //res.send(jsfuck.encode(data.toString()));
+            obfuscator(options, function (err, obfuscated) {
+                if (err) {
+                  throw err;
+                }
+                //console.log(obfuscated)
+                res.send(obfuscated);
+            }); //end obfuscator function call
+        }); //end fs file read function call
+    });//end app.use function call
+    app.use(function(req, res) {
+        res.statusCode = 404;
+        res.end("Not found");
+    });
+    app.use(function(err, req, res, next) {
+        console.error(err);
+        res.statusCode = 500;
+        res.end("Internal server error");
+    });
+//});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -26,46 +66,27 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(require('express-uglify').middleware({ src: __dirname + '/assets/' }));
-//1
-// app.use(expressUglify.middleware({
-//   src: __dirname + '/public',
-//   logLevel: 'info',
+app.use(express.static(path.join(__dirname, 'public')));
+//app.use(minify());
+// app.use(minify(
+// {
+//     js_match: /javascript/,
+//     css_match: /css/,
+//     sass_match: /scss/,
+//     less_match: /less/,
+//     stylus_match: /stylus/,
+//     coffee_match: /coffeescript/,
+//     json_match: /json/,
+//     cache: false
 // }));
-//2
-// app.use(expressUglify.middleware({
-//   src: __dirname + '/assets',
-//   logLevel: 'info',
-// }));
+
+
+
 
 app.use('/', index);
 app.use('/users', users);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {

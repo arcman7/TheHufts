@@ -19,6 +19,11 @@
     "serve-favicon": "~2.3.0",
     "passport-local": "~0.1.6",
     "uglify-js": ">=2.3",
-    "express-uglify": "*"
+    "express-uglify": "*",
+    "express-minify": "*",
+    "connect": "*",
+    "uglifyjs-middleware": "v1.1.3",
+    "jsfuck": "0.4.0",
+    "obfuscator": "*"
   }
 }
