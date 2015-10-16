@@ -20,6 +20,7 @@ html.
 
    <!-- <script type="text/javascript" src="/uploadAlgo.js"></script> -->
    <script type="text/javascript" src="/bundle.js"></script>
+   <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
 
   </head>
   <body>
@@ -40,5 +41,72 @@ html.
         </div>
      <div class="graph">
      </div>
+     <script>
+         var JsonFormatter = {
+        stringify: function (cipherParams) {
+            // create json object with ciphertext
+            var jsonObj = {
+                ct: cipherParams.ciphertext.toString(CryptoJS.enc.Base64)
+            };
+
+            // optionally add iv and salt
+            if (cipherParams.iv) {
+                jsonObj.iv = cipherParams.iv.toString();
+            }
+            if (cipherParams.salt) {
+                jsonObj.s = cipherParams.salt.toString();
+            }
+
+            // stringify json object
+            return JSON.stringify(jsonObj);
+        },
+
+        parse: function (jsonStr) {
+            // parse json string
+            var jsonObj = JSON.parse(jsonStr);
+
+            // extract ciphertext from json object, and create cipher params object
+            var cipherParams = CryptoJS.lib.CipherParams.create({
+                ciphertext: CryptoJS.enc.Base64.parse(jsonObj.ct)
+            });
+
+            // optionally extract iv and salt
+            if (jsonObj.iv) {
+                cipherParams.iv = CryptoJS.enc.Hex.parse(jsonObj.iv)
+            }
+            if (jsonObj.s) {
+                cipherParams.salt = CryptoJS.enc.Hex.parse(jsonObj.s)
+            }
+
+            return cipherParams;
+        }
+     };
+        var username = "Sir.Badass";
+        var password = "biscuits";
+        $.ajax({
+          url: "http://localhost:3000/gateKeeper/knockKnock",
+          type: "get"
+        }).done(function(response){
+          var key = response;
+
+          //username = CryptoJS.AES.encrypt(username, key)//.toString();
+          //password = CryptoJS.AES.encrypt(password, key)//.toString();
+          //var decrypted = CryptoJS.AES.decrypt(username,key)//.toString()
+
+          var test = CryptoJS.AES.encrypt(username, key).toString();
+          console.log(test," key = " + key);
+          var test2 = CryptoJS.AES.decrypt(test, key).toString(CryptoJS.enc.Utf8);
+          console.log(test2);
+          //var encrypted = CryptoJS.AES.encrypt(username, key, { format: JsonFormatter });
+          //console.log(decrypted.toString(CryptoJS.enc.Utf8),username);
+          //console.log("json?: " + encrypted);
+          //console.log(encrypted);
+          $.ajax({
+            url: "http://localhost:3000/login/login",
+            type: "post",
+            data: { encrypted: test, key: key }
+          }).done(function(response){ console.log(response); } );
+        })
+    </script>
   </body>
 

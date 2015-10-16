@@ -34,5 +34,5 @@ function wrapper(assetName){
 
 module.exports = wrapper;
 // module.exports.storedData = "DrunkenZebra";
-console.log(module.exports);
+// console.log(module.exports);
 //module.exports = router;

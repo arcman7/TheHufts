@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var gateKeeper = require('./routes/gateKeeper');
 var obuscateJS = require('./routes/obuscateJS');
+var login = require('./routes/login');
 var winston = require('winston');
 //var query = require('./public/javascript/query');
 var public_path = __dirname + "/public";
@@ -35,7 +36,8 @@ app.use('/', index);
 app.use('/query.js', obuscateJS('/query.js'));
 app.use('/uploadAlgo.js', obuscateJS('/uploadAlgo.js'));
 app.use('/bundle.js', obuscateJS('/bundle.js'));
-app.use('/gateKeeper',gateKeeper)
+app.use('/gateKeeper',gateKeeper);
+app.use('/login',login);
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;

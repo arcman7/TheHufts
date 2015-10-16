@@ -9,6 +9,7 @@ function randomString(length, chars) {
     return result;
 }
 //var SHA256 = require("crypto-js/sha256");
+
 //function yieldKey(antiCachingArgument){
   var express = require('express');
   var router = express.Router();
@@ -23,7 +24,17 @@ function randomString(length, chars) {
       for (var i = length; i > 0; --i) result += mask[Math.round(Math.random() * (mask.length - 1))];
       return result;
   }
-
+ function determineKey(){
+   var currentMin = new Date().getMinutes();
+   if( module.exports.currentMin == currentMin){
+       return (module.exports.gateKey);
+    }
+   else{
+      module.exports.currentMin = currentMin;
+      module.exports.gateKey = randomString(77,"aA#!");
+      return (module.exports.gateKey);
+   }
+ }
    router.get('/knockKnock', function(req, res, next) {
      var currentMin = new Date().getMinutes();
      //console.log("currentMin = ",currentMin);
