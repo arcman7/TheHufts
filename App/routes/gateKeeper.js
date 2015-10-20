@@ -37,17 +37,16 @@ function randomString(length, chars) {
  }
    router.get('/knockKnock', function(req, res, next) {
      var currentMin = new Date().getMinutes();
-     //console.log("currentMin = ",currentMin);
-     //console.log("module.exports.currentMin = ",module.exports.currentMin);
 
-    if( module.exports.currentMin == currentMin){
-      res.send(module.exports.gateKey);
-    }
-    else{
-      module.exports.currentMin = currentMin;
-      module.exports.gateKey = randomString(77,"aA#!");
-      res.send(module.exports.gateKey);
-    }
+    // if( module.exports.currentMin == currentMin){
+    //   res.send(module.exports.gateKey);
+    // }
+    // else{
+    //   module.exports.currentMin = currentMin;
+    //   module.exports.gateKey = randomString(77,"aA#!");
+    //   res.send(module.exports.gateKey);
+    // }
+    res.send(determineKey());
   });
 //}
 module.exports = router;

@@ -22,7 +22,7 @@ router.post('/login', function (req, res) {
   console.log(message);
   //console.log(decrypted);
   //var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase", { format: JsonFormatter });
-
+  console.log("gateKey: " + module.exports.gateKey);
   //var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
   res.send('you used key: '+ key + " and the message is " + message);
 
