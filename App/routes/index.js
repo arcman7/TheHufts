@@ -10,8 +10,8 @@ router.get('/homepage', function(req, res, next) {
   res.render('homepage', { title: 'TheHufts' });
 });
 
-router.get('/parallax', function(req, res, next) {
-  res.render('parallax', { title: 'TheHufts' });
+router.get('/landingPage', function(req, res, next) {
+  res.render('landingPage', { title: 'TheHufts' });
 });
 
 module.exports = router;

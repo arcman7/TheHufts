@@ -1,0 +1,218 @@
+#page_header p {
+margin-top:20px;
+font-size:18px;
+font-family: Athelas;
+font-style:italic;
+color:#fff;
+}
+
+.pagination li > a, .pagination li > span {
+    background: #fff;
+}
+#page_header {
+padding:30rem 0 20rem;
+}
+
+#page_header:before {
+content:'';
+position:absolute;
+bottom:-26px;
+left:0;
+width:100%;
+height:20px;
+opacity:.6;
+filter:alpha(opacity=60);
+}
+
+#page_header .container {
+z-index:1;
+position:relative;
+}
+
+
+.color-yellow {
+  background: #fba628;
+}
+
+#page_header:after {
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+.custom-parallax-wrapper h3,
+#page_header h2 {
+  color:#fff;
+  text-transform: uppercase;
+  font-size:48px;
+  font-weight: bold;
+}
+
+.milestone i {
+    margin-top:60px;
+}
+
+
+
+.owl-controls .owl-nav [class*="owl-"]:hover, .section-colorful, .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span, 
+.bf ul.items.bflayhover li .caption, .ImageWrapper .ImageOverlayLi:before, .ImageWrapper:hover .ImageOverlayLi:before, .ImageWrapper .ImageOverlayLi:after, .ImageWrapper:hover .ImageOverlayLi:after {
+    background: rgba(251,166,40, 0.8) !important;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    margin: 5px;
+}
+
+#freelancer-style  .owl-controls {
+    position: relative;
+}
+
+.about-tabbed-wrap {
+    text-align: center;
+}
+.about-tabbed-wrap p {
+    font-family: Athelas;
+    font-style:italic;
+    font-size:20px;
+    color:#9d9d9d;
+    font-weight: 300;
+    margin-bottom: 20px;
+    margin-top:0;
+    line-height: 38px;
+}
+
+.about-tabbed-wrap span{
+    font-size:20px;
+    color:#fba628 !important;
+}
+
+.about-tabbed-wrap .title-wrapper {
+    margin-bottom:37px;
+}
+
+.about-tabbed-wrap .mini-2-title h3 {
+    background: #282828 !important;
+    color: #fff !important;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 16px !important;
+    margin: 20px auto  0 !important;
+    padding: 10px 32px;
+}
+
+
+.section-title h3 {
+    background: none repeat scroll 0 0 #282828;
+    color: #fff;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px !important;
+    padding: 10px 25px;
+    text-transform: uppercase;
+}
+
+.section-content {
+    padding:8rem 0;
+}
+
+.section-title-2 h3 {
+    color: #282828;
+    display: inline-block;
+    font-size: 28px;
+    line-height: 1.8;
+    font-weight: 700;
+    margin-bottom: 20px !important;
+    padding:0 0;
+    text-transform: uppercase;
+}
+
+.center-image img {
+    margin:50px auto 0;
+}
+
+.sidebar-nav li a:hover, .sidebar-nav li a:focus, .sidebar-nav li a:active, .sidebar-nav li a.active, #style10.header .dropdown-menu li a.active, #style10.header .dropdown-menu li a:active, .dark-header .dropdown-menu li a.active, .dark-header .dropdown-menu li a:active, .testi-sidebar small, .cs4 .not-found h1, .color-gray i, .cs2 p.count-details, .cs2 .stat-count, .tp-caption.slider-title7 span, .slider-title7 span, .tp-caption.slider-title-baron2, .slider-title-baron2, .tp-caption.blue-color, .tp-caption.slider-title4 span, .slider-title4 span, #testimonial small, .section-title .baron, #accordion-first .accordion-heading .accordion-toggle > em, .tp-caption.slider-title span, .slider-title span, a, .bubble, .service-style-1 i, .mini-title h2 span, .service-hover i, .section-title h3 span, .callus .dropdown-menu > li > a:hover, .callus .dropdown-menu > li > a:focus, .dropdown-submenu > .dropdown-menu li a:hover, .dropdown-submenu > .dropdown-menu li a:focus, .yamm .dropdown-menu li a:hover, .yamm .dropdown-menu li a:focus, .yamm .box li a:hover, .yamm .box li a:focus, .callus .spanme i, #header-one .navbar-nav > li > a:focus, #header-one .navbar-nav > li > a:active, #header-one .navbar-nav > li > a.active, #header-one .navbar-nav > li > a:hover
+
+ {
+    color:#fba628;
+ }
+
+
+
+.pagination li > a:hover, .pagination li > span:hover,
+ .background-blue {
+    background: #fba628 !important;
+    border-color:#fba628;
+}
+
+.items .bubble:hover,
+.bf ul.filter li a:hover, .bf ul.filter li a:focus, .bf ul.filter li a.active, .bf ul.filter li a:active,
+.btn-primary {
+    background: #fba628;
+    border-color:#fba628;
+}
+
+.btn-transparent {
+    border:2px solid #fff;
+    background: transparent;
+}
+
+.dropdown-submenu > .dropdown-menu li a:hover, 
+.dropdown-submenu > .dropdown-menu li a:focus, 
+.yamm .dropdown-menu li a:hover, 
+.yamm .dropdown-menu li a:focus, 
+.yamm .box li a:hover, 
+.yamm .box li a:focus, 
+.caps-desc p,
+#page_header h2 span,
+.icon-container i,
+.icon-container .bubble,
+#testimonial small,
+a {
+    color: #fba628;
+}
+
+
+
+.tooltip-inner,
+.social-icons i:hover,
+.mycolor {
+background: #fba628 !important;
+background: -moz-linear-gradient(top,  #fba628 7%, #6f6a62 100%) !important;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(7%,#fba628), color-stop(100%,#6f6a62)) !important;
+background: -webkit-linear-gradient(top,  #fba628 7%,#6f6a62 100%) !important;
+background: -o-linear-gradient(top,  #fba628 7%,#6f6a62 100%) !important;
+background: -ms-linear-gradient(top,  #fba628 7%,#6f6a62 100%) !important;
+background: linear-gradient(to bottom,  #fba628 7%,#6f6a62 100%) !important;
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fba628', endColorstr='#6f6a62',GradientType=0 ) !important;
+
+}
+
+#preloader_1 span:nth-child(5){
+left:44px;
+animation-delay: .8s;
+}
+@keyframes preloader_1 {
+    0% {height:5px;transform:translateY(0px);background:#fba628;}
+    25% {height:30px;transform:translateY(15px);background:#fba628;}
+    50% {height:5px;transform:translateY(0px);background:#6f6a62;}
+    100% {height:5px;transform:translateY(0px);background:#6f6a62;}
+}
+
+.yamm .yamm-content, .dropdown-submenu > .dropdown-menu, .yamm .dropdown-menu {
+      border-top-color: #fba628;
+
+}
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #fba628;
+}
+
+.bf ul.items.bflayhover li .caption.white-effect  {
+    background: rgba(255,255,255,0.7) !important;
+    color:#fff !important;
+}
+

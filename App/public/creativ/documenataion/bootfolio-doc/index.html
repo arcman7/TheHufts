@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+	  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="bfassets/css/bootFolio.css" rel="stylesheet">
+    <link href="bfassets/css/prettyPhoto.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <style type="text/css">
+    .sw {
+        z-index: 50000;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 252px;
+        margin-left: -270px;
+        height: 100%;
+        background: #d9d9d9;
+        -webkit-transition: all .9s ease-in-out;
+        -moz-transition: all .9s ease-in-out;
+        -o-transition: all .9s ease-in-out;
+        transition: all .9s ease-in-out;
+    }
+    .sw br{
+
+    }
+    .sw_inn{
+    	width: 270px;
+    	overflow-y:scroll; 
+    	 background: #d9d9d9;
+    	 height: 100%;
+    }
+    .sw-toog {
+        position: absolute;
+        width: 46px;
+        height: 51px;
+        right: -64px;
+        top: 0px;
+        background: #428bca;
+        cursor: pointer;
+        font-size: 34px;
+        padding: 5px;
+        color: #fff;
+    }
+    .steAni .btn {
+        margin-bottom: 3px;
+    }
+    .sw h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 3px 3px 4px;
+    }
+
+
+
+    </style>
+<style type="text/css">
+    .fea i {
+        font-size: 40px;
+        display: block;
+        margin-bottom: 10px;
+    }
+    </style>
+<div class="sw">
+
+  <div class="sw-toog"> <span class="glyphicon glyphicon-cog"></span>
+  </div>
+<div class="sw_inn">
+  <table class="table table-striped" width="250" cellpadding="0" cellspacing="0" border="0">
+    <tbody>
+      <tr>
+        <td valign="top"><b>Nav Align</b> 
+        </td>
+        <td>
+          <input name="ntxc" class="ntxc" value="0" type="radio" checked="">Left
+          <br>
+          <input name="ntxc" class="ntxc" value="1" type="radio">Right
+          <br>
+          <input name="ntxc" class="ntxc" value="2" type="radio">Center
+        
+            <br> <br><a class="btn btn-xs btn-info" href="">Demo</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top"><b>Layout</b>
+        </td>
+        <td>
+          <select name="layout" class="chanLay form-control">
+            <option value="bflayhover">bflayhover</option>
+            <option value="bflay0">bflay0</option>
+            <option value="bflay0border">bflay0border</option>
+            <option value="bflay1">bflay1</option>
+            <option value="bflay1border">bflay1border</option>
+            <option value="bflay2">bflay2</option>
+            <option value="bflay2border">bflay2border</option>
+            <option value="bflay3">bflay3</option>
+            <option value="bflay4">bflay4</option>
+            <option value="bflay5">bflay5</option>
+            <option value="bflay6">bflay6</option>
+            <option value="bflay7">bflay7</option>
+            <option value="bflay8">bflay8</option>
+            <option value="bflay9">bflay9</option>
+            <option value="bflay10">bflay10</option>
+            <option value="bflay11">bflay11</option>
+            <option value="bflay12">bflay12</option>
+            <option value="bflay13">bflay13</option>
+            <option value="bflay14">bflay14</option>
+          </select>
+          
+           <br><a class="btn btn-xs btn-info" href="">Demo</a>
+        </td>
+      </tr>
+
+
+      <tr>
+
+        <td valign="top"><b>Spaceing</b>
+        </td>
+        <td>
+          <input name="spac" class="spac" value="0" type="radio">Yes
+          <br>
+          <input name="spac" class="spac" value="1" type="radio" checked="">No
+         
+            <br><br> <a class="btn btn-xs btn-info" href="">Demo</a>
+        </td>
+      </tr>
+      
+      <tr>
+
+        <td valign="top"><b>Full Width</b>
+        </td>
+        <td>
+          <input name="fullwid" class="fullwid" value="0" type="radio" checked="">Yes
+          <br>
+          <input name="fullwid" class="fullwid" value="1" type="radio">No
+         
+             <br><br><a class="btn btn-xs btn-info" href="">Demo</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top"><b>Repalec Animation</b> 
+        </td>
+        <td>
+          <div class="steAni"> <a href="#" class="btn btn-xs btn-primary active">default</a>
+            <a href="#" class="btn btn-xs btn-primary">matrix</a>
+            <a href="#" class="btn btn-xs btn-primary">translate</a>
+            <a href="#" class="btn btn-xs btn-primary">translateX</a>
+            <a href="#" class="btn btn-xs btn-primary">translateY</a>
+            <a href="#" class="btn btn-xs btn-primary">scale</a>
+            <a href="#" class="btn btn-xs btn-primary">scaleX</a>
+            <a href="#" class="btn btn-xs btn-primary">scaleY</a>
+            <a href="#" class="btn btn-xs btn-primary">rotate</a>
+            <a href="#" class="btn btn-xs btn-primary">rotateX</a>
+            <a href="#" class="btn btn-xs btn-primary">rotateY</a>
+            <a href="#" class="btn btn-xs btn-primary">skew</a>
+            <a href="#" class="btn btn-xs btn-primary">skewX</a>
+            <a href="#" class="btn btn-xs btn-primary">skewY</a>
+           
+             <br><br><a class="btn btn-xs btn-info" href="">Demo</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%"><b>Hover Style </b>  <span class="glyphicon glyphicon-question-sign" id="tt" data-toggle="tooltip" data-placement="right" title="For activation hover style please select pflhover from Item Layout"></span>
+        </td>
+        <td>
+          <select class="chanHo form-control" name="chanHo">
+            <script>
+              var e = 1;
+              var f = 1;
+              while (e < 168) {
+                document.write('<option value="bfhover' + e + '">bfhover' + f + '</option>');
+                e++;
+                f++;
+              }
+            </script>
+          </select>
+           <br><a class="btn btn-xs btn-info" href="">Demo</a>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top"><b>Animation Duration</b>  <span class="glyphicon glyphicon-question-sign" id="tt1" data-toggle="tooltip" data-placement="right" title="" data-original-title="Ex: .1, .5, 1, 2 etc"></span>
+        </td>
+        <td>
+          <input style="width:60px;text-align:center;" type="text" value="500" class="tdu form-control">
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top"><b>Caption Text align</b> 
+        </td>
+        <td>
+          <input name="txc" class="txc" value="0" type="radio">Left
+          <br>
+          <input name="txc" class="txc" value="1" type="radio">Right
+          <br>
+          <input name="txc" class="txc" value="2" type="radio" checked="">Center
+         
+           <br><br><a class="btn btn-xs btn-info" href="">Demo</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top"><b>Caption Bg Color</b>
+        </td>
+        <td>
+          <input class="color_ch color" value="#072B4B">
+        </td>
+      </tr>
+      <tr>
+        <td valign="top"><b>Caption text Color</b>
+        </td>
+        <td>  <input class="color_crh color" value="#ffffff">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">bootFolio</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="layout.html">Layouts</a></li>
+        <li><a href="hover.html">Hovers</a></li>
+        <li><a href="ani.html">Animations</a></li>
+
+
+      </ul>
+    &nbsp;  &nbsp; <a class="btn btn-default navbar-btn" href="doc.html">Documentation</a>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<br>
+
+<div id="second" class="bf full-width">
+
+<ul class="filter text-center">
+  <li><a data-cat="all" href="#" class="active">All</a></li>
+  <li><a data-cat="html" href="#">HTML</a></li>
+  <li><a data-cat="css" href="#">CSS</a></li>
+  <li><a data-cat="wordpress" href="#">WordPress</a></li>
+  <li><a data-cat="responsive" href="#">Responsive</a></li>
+  <li><a data-cat="bootstrap" href="#">Bootstrap</a></li>
+</ul>
+
+
+
+
+<ul class="items bflayhover nospace">
+  <li class="html">
+    <div class="bf-single-item">
+    	<img src="bfimages/1.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+          <a href="">more info</a> <a href="bfimages/large/1.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="css html">
+    <div class="bf-single-item">
+      <img src="bfimages/2.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/2.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="wordpress">
+    <div class="bf-single-item">
+    <img src="bfimages/3.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/3.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+
+  <li class="responsive bootstrap">
+    <div class="bf-single-item">
+    <img src="bfimages/4.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/4.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="html">
+    <div class="bf-single-item">
+    <img src="bfimages/5.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/5.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="bootstrap">
+    <div class="bf-single-item">
+    <img src="bfimages/6.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/6.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+
+
+
+
+  <li class="html">
+    <div class="bf-single-item">
+    <img src="bfimages/7.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/7.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="css">
+    <div class="bf-single-item">
+    <img src="bfimages/8.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/8.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="wordpress">
+    <div class="bf-single-item">
+    <img src="bfimages/9.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/9.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+
+  <li class="responsive">
+    <div class="bf-single-item">
+    <img src="bfimages/10.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/10.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="html responsive">
+    <div class="bf-single-item">
+    <img src="bfimages/1.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/1.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="bootstrap">
+    <div class="bf-single-item">
+    <img src="bfimages/2.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/2.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+
+</ul>
+
+
+
+
+</div>
+
+
+
+<section>
+        <div class="container">
+            <hr>
+            <h3>Main Features</h3>
+            <hr>
+            <div class="row fea">
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-leaf"></i> Lightweight code</h4>
+                    <p>It is build with very much light code, about 2KB js script use here with jQuery. No others plaguin used here.
+                        <br><small>(<b>Note:</b>prityPhoto used for pup up priview.)</small>
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-check-square-o"></i> Boootstrap Optimize</h4>
+                    <p>bootFolio is complitle bootstrap optimeze. the main Item layout built with default bootstrap code.</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-mobile"></i> Responsive/fluid</h4>
+                    <p>It is fully responsive, flued, elastic what erer you say.</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-css3"></i> CSS3 Animation</h4>
+                    <p>Here we used 100% CSS3 animatino. for hover effect and replacing item animations.</p>
+                </div>
+            </div>
+            <div class="row fea">
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-cut"></i> Fully customizeable</h4>
+                    <p>It is totally customizeabme with very easy process. you can easyly chanege layout, hover effect, animation, effect duration etc.</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-share-square-o"></i> Easy instalation</h4>
+                    <p>Very easy instalation process, like coppy paste work, and set settinngs as your wise</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-arrows-alt"></i> Cross Browser</h4>
+                    <p>Tt is cross broser suported, with all media</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-ambulance"></i> Support</h4>
+                    <p>Quick support and regular update is promosed</p>
+                </div>
+            </div>
+            <div class="row fea">
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-picture-o"></i> 17+ Item Layout</h4>
+                    <p>bootFolio have 17+ item layout with different style</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-hand-o-right"></i> 90+ Hover Style</h4>
+                    <p>bootFolio have 90+ item caption hover effect with different style</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-thumb-tack"></i> 14+ relplacing Animations</h4>
+                    <p>bootFolio have 9+ animation for replaceing items with different style</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                			<a class="btn btn-lg btn-primary col-xs-12" href="http://codecanyon.net/item/bootfolio-most-lightweight-portfolio-filtering/7232474">Buy Now</a>
+                		</div>
+                	</div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </section>
+
+
+
+<div style="height:0px; overflow:hidden;" class="gtAni">scale</div>
+<div style="height:0px; overflow:hidden;" class="phHover">bfhover162</div>
+<div style="height:0px; overflow:hidden;" class="tdu">500</div>
+<div style="height:0px; overflow:hidden;" class="cap_col">#072B4B</div>
+<div style="height:0px; overflow:hidden;" class="captex_col">#ffffff</div>
+
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="bfassets/js/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bfassets/js/jquery.bootFolio.js"></script>
+    <script src="bfassets/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="bfassets/jscolor.js"></script>
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $("#second").bootFolio({
+        bfLayout:"bflayhover", 		// bflayhover, bflay1, bflay2, bflay3, ......... bflay14 
+        bfHover:"bfhover16", 		// bfhover1, bfhover2,......... bfhover167 
+        bfSpace:"nospace", 			// translateY
+        bfAnimation:"scale",		// matrix, translate, translateX, translateY, scale, scaleX, scaleY, rotate, rotateX, rotateY, skew, skewX, skewY
+        bfSpace:"space",			// nospace, space
+        bfAniDuration:1000,			
+        bfCaptioncolor:"#072B4B"
+      });
+
+      $("a[rel^='prettyPhoto']").prettyPhoto();
+
+
+
+
+
+        $(".sw-toog").click(function () {
+            $(".sw").css("margin-left", "-270px");
+            var checkSta = $(".sw").css("margin-left");
+            if (checkSta == "-270px") {
+                $(".sw").css("margin-left", "0px");
+            }
+        });
+
+
+
+
+
+
+
+
+
+        $(".chanLay").change(function () {
+            var lay = $(".chanLay").val();
+            $(".items").removeClass(lay)
+            .removeClass("bflayhover")
+            .removeClass("bflay0")
+            .removeClass("bflay0border")
+            .removeClass("bflay1")
+            .removeClass("bflay1border")
+            .removeClass("bflay2")
+            .removeClass("bflay2border")
+            .removeClass("bflay3")
+            .removeClass("bflay4")
+            .removeClass("bflay5")
+            .removeClass("bflay6")
+            .removeClass("bflay7")
+            .removeClass("bflay8")
+            .removeClass("bflay9")
+            .removeClass("bflay10")
+            .removeClass("bflay11")
+            .removeClass("bflay12")
+            .removeClass("bflay13")
+            .removeClass("bflay14");
+
+
+            $(".items").addClass(lay);
+            
+            if (lay == "bflayhover") {
+                $(".chanHo").attr("disabled", false);
+            } else{
+                $(".chanHo").attr("disabled", true);
+            }
+            
+        });
+
+
+
+
+
+        $(".spac").click(function () {
+            var sp = $(this).val();
+            if (sp == "1") {
+                $(".items").addClass("nospace");
+                $(".items").removeClass("space");
+                
+            }
+            if (sp == "0") {
+                $(".items").addClass("space");
+                $(".items").removeClass("nospace");
+              
+
+            }
+        });
+
+
+        $(".fullwid").click(function () {
+            var sp = $(this).val();
+            if (sp == "1") {
+                
+ $(".bf").removeClass("full-width");
+                
+            }
+            if (sp == "0") {
+
+               
+              $(".bf").addClass("full-width");
+
+            }
+        });
+
+
+
+
+
+
+
+
+        
+        $(".steAni a").click(function () {
+
+            var e = $(this).text();
+            var t = $(".gtAni").text(e);
+            var n = $(".gtAni").text();
+            $("ul.items li." + ac).removeClass(ac).addClass(n);
+            $("ul.items li.un-" + ac).removeClass("un-" + ac).addClass("un-" + n);
+            $(".gtAni").text(e);
+            ac = e
+        });
+
+
+
+
+  
+
+        $(".chanHo").change(function () {
+            var oldHo = $(".phHover").text();
+            $(".items").removeClass(oldHo);
+            var newHo = $(".chanHo").val();
+            $(".phHover").text(newHo);
+            $(".items").removeClass(oldHo).addClass(newHo);
+        });
+
+
+
+        $(".tdu").change(function () {
+            var gg = $(".tdu").val();
+            $(".bf .items img, .bf .items .caption, .bf .items .bf-single-item, .bf .items, .bf .items li").css({
+                "-webkit-transition-duration": +gg/1000 + "s",
+                "-moz-transition-duration": +gg/1000 + "s",
+                "-o-transition-duration": +gg/1000 + "s",
+                "transition-duration": +gg/1000 + "s"
+            });
+        })
+
+
+        $(".txc").click(function () {
+            var sp = $(this).val();
+            if (sp == "0") {
+                $(".bf .items").addClass("text-left").removeClass("text-right").removeClass("text-right");
+            }
+            if (sp == "1") {
+                $(".bf .items").addClass("text-right").removeClass("text-left").removeClass("text-center");
+            }
+
+            if (sp == "2") {
+                $(".bf .items").addClass("text-center").removeClass("text-right").removeClass("text-left");
+            }
+
+        });
+
+
+        $(".ntxc").click(function () {
+            var sp = $(this).val();
+            if (sp == "0") {
+                $(".bf .filter").addClass("text-left").removeClass("text-right").removeClass("text-center");
+            }
+            if (sp == "1") {
+                $(".bf .filter").addClass("text-right").removeClass("text-left").removeClass("text-center");
+            }
+
+            if (sp == "2") {
+                $(".bf .filter").addClass("text-center").removeClass("text-right").removeClass("text-left");
+            }
+
+        });
+
+
+
+
+
+
+
+        $(".color_ch").change(function () {
+
+        var tyu = $(this).val();
+
+        $(".cap_col").text("#"+tyu);
+
+      
+
+        });
+
+
+
+
+        $(".color_crh").change(function () {
+
+        var tyru = $(this).val();
+
+        $(".captex_col").text("#"+tyru);
+
+        
+
+        });
+
+
+
+
+
+
+
+
+
+    });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+</script>

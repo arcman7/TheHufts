@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="bfassets/css/bootFolio.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+<style type="text/css">
+.bf ul.items li{
+  -webkit-transition-duration: .5s;
+    -moz-transition-duration: .5s;
+    -o-transition-duration: .5s;
+    transition-duration: .5s;
+  }
+
+
+
+.bf ul.items li:hover{
+    opacity: 0;
+}
+
+
+.un-matrix:hover{
+/*transform*/
+-webkit-transform:matrix(0.1,.1,11.8,-0.034,0,1);
+   -moz-transform:matrix(0.1,.1,11.8,-0.034,0,1);
+    -ms-transform:matrix(0.1,.1,11.8,-0.034,0,1);
+     -o-transform:matrix(0.1,.1,11.8,-0.034,0,1);
+        transform:matrix(0.1,.1,11.8,-0.034,0,1);
+       
+}
+
+.un-translate:hover{
+/*transform*/
+-webkit-transform:translate(100px,100px);
+   -moz-transform:translate(100px,100px);
+    -ms-transform:translate(100px,100px);
+     -o-transform:translate(100px,100px);
+        transform:translate(100px,100px);
+}
+
+.un-translateX:hover{
+/*transform*/
+-webkit-transform:translateX(100%);
+   -moz-transform:translateX(100%);
+    -ms-transform:translateX(100%);
+     -o-transform:translateX(100%);
+        transform:translateX(100%);
+}
+
+.un-translateY:hover{
+/*transform*/
+-webkit-transform:translateY(100%);
+   -moz-transform:translateY(100%);
+    -ms-transform:translateY(100%);
+     -o-transform:translateY(100%);
+        transform:translateY(100%);
+}
+
+.un-scale:hover{
+/*transform*/
+-webkit-transform:scale(0,0);
+   -moz-transform:scale(0,0);
+    -ms-transform:scale(0,0);
+     -o-transform:scale(0,0);
+        transform:scale(0,0);
+}
+.un-scaleX:hover{
+/*transform*/
+-webkit-transform:scaleX(0);
+   -moz-transform:scaleX(0);
+    -ms-transform:scaleX(0);
+     -o-transform:scaleX(0);
+        transform:scaleX(0);
+}
+
+.un-scaleY:hover{
+/*transform*/
+-webkit-transform:scaleY(0);
+   -moz-transform:scaleY(0);
+    -ms-transform:scaleY(0);
+     -o-transform:scaleY(0);
+        transform:scaleY(0);
+}
+
+.un-rotate:hover{
+/*transform*/
+-webkit-transform:rotate(180deg);
+   -moz-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+     -o-transform:rotate(180deg);
+        transform:rotate(180deg);
+        
+}
+
+.un-rotateX:hover{
+/*transform*/
+-webkit-transform:rotateX(180deg);
+   -moz-transform:rotateX(180deg);
+    -ms-transform:rotateX(180deg);
+     -o-transform:rotateX(180deg);
+        transform:rotateX(180deg);
+}
+
+.un-rotateY:hover{
+/*transform*/
+-webkit-transform:rotateY(180deg);
+   -moz-transform:rotateY(180deg);
+    -ms-transform:rotateY(180deg);
+     -o-transform:rotateY(180deg);
+        transform:rotateY(180deg);
+}
+
+.un-skew:hover{
+/*transform*/
+-webkit-transform:skew(180deg,180deg);
+   -moz-transform:skew(180deg,180deg);
+    -ms-transform:skew(180deg,180deg);
+     -o-transform:skew(180deg,180deg);
+        transform:skew(180deg,180deg);
+}
+
+.un-skewX:hover{
+/*transform*/
+-webkit-transform:skewX(180deg);
+   -moz-transform:skewX(180deg);
+    -ms-transform:skewX(180deg);
+     -o-transform:skewX(180deg);
+        transform:skewX(180deg);
+}
+
+.un-skewY:hover{
+/*transform*/
+-webkit-transform:skewY(180deg);
+   -moz-transform:skewY(180deg);
+    -ms-transform:skewY(180deg);
+     -o-transform:skewY(180deg);
+        transform:skewY(180deg);
+}
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">bootFolio</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="layout.html">Layouts</a></li>
+        <li><a href="hover.html">Hovers</a></li>
+        <li class="active"><a href="ani.html">Animations</a></li>
+
+
+      </ul>
+    &nbsp;  &nbsp; <a class="btn btn-default navbar-btn" href="doc.html">Documentation</a>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<br>
+
+<div id="second" class="bf">
+
+
+<ul class="items bflay2border space ">
+
+  <li class="html un-fade">
+    <div class="bf-single-item">
+        <img src="bfimages/1.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+          <a href="">more info</a> <a href="bfimages/large/1.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+
+  <li class="html un-matrix">
+    <div class="bf-single-item">
+        <img src="bfimages/1.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+          <a href="">more info</a> <a href="bfimages/large/1.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="css html un-translate">
+    <div class="bf-single-item">
+      <img src="bfimages/2.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/2.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="wordpress un-translateX">
+    <div class="bf-single-item">
+    <img src="bfimages/3.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/3.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+
+  <li class="responsive bootstrap un-translateY">
+    <div class="bf-single-item">
+    <img src="bfimages/4.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/4.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="html un-scale">
+    <div class="bf-single-item">
+    <img src="bfimages/5.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/5.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="bootstrap un-scaleX">
+    <div class="bf-single-item">
+    <img src="bfimages/6.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/6.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+
+
+
+
+  <li class="html un-scaleY">
+    <div class="bf-single-item">
+    <img src="bfimages/7.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/7.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="css un-rotate">
+    <div class="bf-single-item">
+    <img src="bfimages/8.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/8.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="wordpress un-rotateX">
+    <div class="bf-single-item">
+    <img src="bfimages/9.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/9.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+
+  <li class="responsive un-rotateY">
+    <div class="bf-single-item">
+    <img src="bfimages/10.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/10.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="html responsive un-skew">
+    <div class="bf-single-item">
+    <img src="bfimages/1.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/1.jpg" rel="prettyPhoto">view large</a> 
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="bootstrap un-skewX">
+    <div class="bf-single-item">
+    <img src="bfimages/2.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/2.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+  <li class="bootstrap un-skewY">
+    <div class="bf-single-item">
+    <img src="bfimages/2.jpg">
+    <div class="caption">
+      <div class="cap-in">
+        <h3>FOCii Website</h3> 
+        <div class="bfcatagory-cap">
+          <a href="">Logo</a>, <a href="">Web</a>
+        </div>
+        <div class="bflink-preview">
+           <a href="">more info</a> <a href="bfimages/large/2.jpg" rel="prettyPhoto">view large</a>  
+        </div>    
+      </div>
+    </div>
+    </div>
+  </li>
+
+</ul>
+
+
+
+
+</div>
+
+
+
+<section>
+        <div class="container">
+            <hr>
+            <h3>Main Features</h3>
+            <hr>
+            <div class="row fea">
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-leaf"></i> Lightweight code</h4>
+                    <p>It is build with very much light code, about 2KB js script use here with jQuery. No others plaguin used here.
+                        <br><small>(<b>Note:</b>prityPhoto used for pup up priview.)</small>
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-check-square-o"></i> Boootstrap Optimize</h4>
+                    <p>bootFolio is complitle bootstrap optimeze. the main Item layout built with default bootstrap code.</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-mobile"></i> Responsive/fluid</h4>
+                    <p>It is fully responsive, flued, elastic what erer you say.</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-css3"></i> CSS3 Animation</h4>
+                    <p>Here we used 100% CSS3 animatino. for hover effect and replacing item animations.</p>
+                </div>
+            </div>
+            <div class="row fea">
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-cut"></i> Fully customizeable</h4>
+                    <p>It is totally customizeabme with very easy process. you can easyly chanege layout, hover effect, animation, effect duration etc.</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-share-square-o"></i> Easy instalation</h4>
+                    <p>Very easy instalation process, like coppy paste work, and set settinngs as your wise</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-arrows-alt"></i> Cross Browser</h4>
+                    <p>Tt is cross broser suported, with all media</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-ambulance"></i> Support</h4>
+                    <p>Quick support and regular update is promosed</p>
+                </div>
+            </div>
+            <div class="row fea">
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-picture-o"></i> 17+ Item Layout</h4>
+                    <p>bootFolio have 17+ item layout with different style</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-hand-o-right"></i> 90+ Hover Style</h4>
+                    <p>bootFolio have 90+ item caption hover effect with different style</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <h4><i class="fa fa-thumb-tack"></i> 14+ relplacing Animations</h4>
+                    <p>bootFolio have 9+ animation for replaceing items with different style</p>
+                </div>
+                <div class="col-md-3 col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <a class="btn btn-lg btn-primary col-xs-12" href="http://codecanyon.net/item/bootfolio-most-lightweight-portfolio-filtering/7232474">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+  </body>
+</html>
+</script>
