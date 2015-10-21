@@ -60,18 +60,6 @@ html.
           </div>
       </div>
 
-
-
-        <div id="collapse1" class="collapse myform">
-            <div class="container-fluid ">
-                <div class="topbar">
-                    <form role="search" action="#" class="search_form_top" method="get">
-                        <input type="text" placeholder="What are you looking for?" name="s" class="form-control" autocomplete="off">
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <header id="header-one" class="dark-header header">
             <div class="container-fluid">
                 <div class="menu-wrapper">
@@ -88,9 +76,8 @@ html.
                                 <ul class="nav navbar-nav">
                                     <li class="wps-half"><a href="#">Home</a>
                                         </li><!-- end mega menu -->
-                                        <li class="wps-full"><a href="#services">Services</a>
-
-                                    <li><a href="#contact">Contact</a></li>
+                                        <li class="wps-full"><a href="#">Log In</a>
+                                        <li class="wps-full"><a href="#">Sign Up</a>
                                 </ul><!-- end navbar-right -->
                                 <div class="pull-right clearfix">
                                     <div class="right-menu">
@@ -273,14 +260,6 @@ html.
         </footer><!-- end footer -->
 
 
-
-
-
-
-
-
-
-
       <!-- /#wrapper -->
 
       <!-- jQuery -->
@@ -291,6 +270,10 @@ html.
       <script src="creativ/creativ/default/js/wow.min.js"></script>
       <script src="creativ/creativ/default/js/jquery.stellar.js"></script>
       <script src="creativ/creativ/default/js/home-scripts.js"></script>
+      <script src="creativ/creativ/default/js/smooth-scroll.js"></script>
+      <script src="creativ/creativ/default/js/jquery.flexslider.js"></script>
+
+
       <!-- Portfolio -->
       <script src="creativ/creativ/default/js/jquery.isotope.min.js"></script>
       <script src="creativ/creativ/default/js/portfolio_01.js"></script>
@@ -299,16 +282,19 @@ html.
       <script src="creativ/creativ/default/js/owl-scripts.js"></script>
       <!-- FlexSlider Scripts-->
       <script src="creativ/creativ/default/js/jquery.flexslider.js"></script>
-      <script type="text/javascript">
-      (function($) {
-        "use strict";
+
+    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script type="text/javascript" src="creativ/creativ/default/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="creativ/creativ/default/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
           $('.flexslider').flexslider({
               animation: 'fade',
               slideshow: false,
               controlNav: true,
               animationLoop: true,
-            });
-      })(jQuery);
+          });
+        });
       </script>
 
   </body>
