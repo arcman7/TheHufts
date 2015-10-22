@@ -10,8 +10,6 @@ function wrapper(assetName){
     //  if (module.exports.storedData == "DrunkenZebra"){
     //   console.log("shit works");
     // }
-  // var obfuscator = require('obfuscator').obfuscator;
-  // var Options = require('obfuscator').Options;
   var public_path = "/Users/Jedi_scholar/Desktop/phase-4/hiring_mixers/TheHufts/App" + '/public/javascript';//+assetName;
   //console.log(public_path+assetName);
   return router.get('/',function(req,res,next){

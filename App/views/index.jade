@@ -20,12 +20,38 @@ html.
 
    <!-- <script type="text/javascript" src="/uploadAlgo.js"></script> -->
    <script type="text/javascript" src="/bundle.js"></script>
+   <script type="text/javascript" src="/loginFront.js"></script>
+
    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
 
   </head>
+
   <body>
+      <div class="navbox"><!--Art, you can take the lead on this stuff whenever -->
+        <button id="login">Login</button><br><br>
+        <button id="register">Register</button>
+        <form class="login-form">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username">
+          <label for="password">Password</label>
+          <input type="text" name="password" id="password">
+          <input type="submit" class="submit">
+          <button class="cancel">cancel</button>
+        </form>
+        <form class="register-form">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username">
+          <label for="password">Password</label>
+          <input type="text" name="password" id="password">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email">
+          <input type="submit" class="submit">
+          <button class="cancel">cancel</button>
+        </form>
+      </div>
       <h2> Welcome, Huft <h2>
       <h3> Feel free to begin looking up the stocks you're interested in.</h3>
+
       <h3 id="upload"> Upload an algorithm </h3>
 
       <br>
@@ -83,30 +109,27 @@ html.
      };
         var username = "Sir.Badass";
         var password = "biscuits";
-        $.ajax({
-          url: "http://localhost:3000/gateKeeper/knockKnock",
-          type: "get"
-        }).done(function(response){
-          var key = response;
+   //     $.ajax({
+   //       url: "http://localhost:3000/gateKeeper/knockKnock",
+   //       type: "get"
+   //     }).done(function(response){
+   //       var key = response;
 
           //username = CryptoJS.AES.encrypt(username, key)//.toString();
           //password = CryptoJS.AES.encrypt(password, key)//.toString();
           //var decrypted = CryptoJS.AES.decrypt(username,key)//.toString()
+          //var test = CryptoJS.AES.encrypt(username, key).toString();
 
-          var test = CryptoJS.AES.encrypt(username, key).toString();
-          console.log(test," key = " + key);
-          var test2 = CryptoJS.AES.decrypt(test, key).toString(CryptoJS.enc.Utf8);
-          console.log(test2);
-          //var encrypted = CryptoJS.AES.encrypt(username, key, { format: JsonFormatter });
+    //      console.log(test," key = " + key);
+          //var test2 = CryptoJS.AES.decrypt(test, key).toString(CryptoJS.enc.Utf8);
           //console.log(decrypted.toString(CryptoJS.enc.Utf8),username);
-          //console.log("json?: " + encrypted);
-          //console.log(encrypted);
-          $.ajax({
-            url: "http://localhost:3000/login/login",
-            type: "post",
-            data: { encrypted: test, key: key }
-          }).done(function(response){ console.log(response); } );
-        })
+    //      confirmation = CryptoJS.AES.encrypt(key,"DrunkenZebra");
+     //     $.ajax({
+     //       url: "http://localhost:3000/login/login",
+     //       type: "post",
+     //       data: { encrypted: test, confirmation: confirmation }
+     //     }).done(function(response){ console.log(response); } );
+    //    })
     </script>
   </body>
 

@@ -33,9 +33,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 ///app.use('/users', users);
+//Front-end assets
 app.use('/query.js', obuscateJS('/query.js'));
 app.use('/uploadAlgo.js', obuscateJS('/uploadAlgo.js'));
 app.use('/bundle.js', obuscateJS('/bundle.js'));
+app.use('/loginFront.js', obuscateJS('/loginFront.js'));
+
 app.use('/gateKeeper',gateKeeper);
 app.use('/login',login);
 app.use(function(req, res, next) {
