@@ -44,7 +44,19 @@ function formSubmitListener(){
     console.log("form submitted");
     var username = $('.login-form input[name="username"]').val();
     var password = $('.login-form input[name="password"]').val();
-    var data = { username: username, password: password, confirmation: confirmation};
+    var data = { username: username, password: password, confirmation: confirmation, login:true};
+    ajaxLoginRouter(data,decrypt(gateKeeperURL,confirmation));
+  });
+
+   $(".register-form").on("submit",function(event){
+    event.preventDefault();
+    console.log("form submitted");
+    var username = $('.register-form input[name="username"]').val();
+    var password = $('.register-form input[name="password"]').val();
+    var email = $('.register-form input[name="email"]').val();
+
+    var data = { username: username, password: password, email: email, confirmation: confirmation, login:false};
+
     ajaxLoginRouter(data,decrypt(gateKeeperURL,confirmation));
   });
 
@@ -66,7 +78,15 @@ function ajaxLoginRouter(data,url){
         type: "post",
         data: {data: data}
     })
-    .done(function(response){ console.log(response); } );
+    .done(function(response){
+      //response = JSON.parse(response);
+      console.log(response);
+      if(response == "{error-code:k}"){
+        var retryURL = this.url;
+        var retryData = this.data;
+        ajaxLoginRouter(retryData,retryURL);
+      }
+    });
   });
 }
 

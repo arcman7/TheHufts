@@ -81,6 +81,7 @@ function uploadFileListener(){
         var algoKey = JSON.stringify(algoPair[1]);
         algo.set("algoFile",algoFile);
         algo.set("algoKey",algoKey);
+        algo.set("user_id",'1');
         algo.save(null, {
               success: function(algo) {
           //     // Execute any logic that should take place after the object is saved.

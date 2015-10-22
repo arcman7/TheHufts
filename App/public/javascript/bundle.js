@@ -422,24 +422,6 @@ function graphHome(array,container,scale,series,symbol){
 	 }//end generateSignals
 	$(document).on('ready',function(){
 	  uploadFileListener();//Note: when this event is fired it has the effect of producing addtional listeners
-	   // var username = "Sir.Badass";
-    //  var password = "biscuits";
-    //  $.ajax({
-    //       url: "http://localhost:3000/gateKeeper/knockKnock",
-    //       type: "get"
-    //   }).done(function(response){
-    //       var key = response;
-    //       var test = CryptoJS.AES.encrypt(username, key).toString();
-
-    //       //var test2 = CryptoJS.AES.decrypt(test, key).toString(CryptoJS.enc.Utf8);
-    //       //console.log(decrypted.toString(CryptoJS.enc.Utf8),username);
-    //       var confirmation = CryptoJS.AES.encrypt("TheHufts",key).toString();
-    //       $.ajax({
-    //         url: "http://localhost:3000/login/login",
-    //         type: "post",
-    //         data: { encrypted: test, confirmation: confirmation }
-    //       }).done(function(response){ console.log(response); } );
-    //     })
 	});
 
 	//})//end anon global function
