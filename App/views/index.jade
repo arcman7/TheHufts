@@ -6,7 +6,27 @@ html.
     <title>TheHufts</title>
     <meta name="description" content="test page">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <!-- Art's-->
+   <!-- Bootstrap Core CSS -->
+    <link href="creativ/creativ/default/css/bootstrap.min.css" rel="stylesheet">
+    <link href="creativ/creativ/default/css/font-awesome.css" rel="stylesheet">
+    <link href="creativ/creativ/default/style.css" rel="stylesheet">
+    <link href="stylesheets/form-elements.css" rel="stylesheet" >
+    <link href="stylesheets/form-elements2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- end-->
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
@@ -19,6 +39,46 @@ html.
 
   </head>
   <body>
+    <div id="loader">
+      <div class="loader-container">
+        <div id="preloader_1">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+      </div>
+    </div>
+    <header id="header-one" class="dark-header header">
+        <div class="container-fluid">
+            <div class="menu-wrapper">
+                <nav id="navigation" class="navbar yamm" role="navigation">
+                    <div class="navbar-inner">
+                        <div class="navbar-header">
+                            <a id="brand" class="clearfix navbar-brand" href="/landingPage"><img src="" alt="TheHufts" data-selector="img"></a>
+                        </div><!-- end navbar-header -->
+                        <div id="navbar-collapse" class="navbar-right navbar-collapse collapse clearfix">
+                            <ul class="nav navbar-nav">
+                                <li class="wps-half"><a href="/landingPage">Home</a>
+                                    </li><!-- end mega menu -->
+                                    <li class="wps-full"><a href="/logIn">Log In</a>
+                                    <li class="wps-full"><a href="/signUp">Sign Up</a>
+                            </ul><!-- end navbar-right -->
+                            <div class="pull-right clearfix">
+                                <div class="right-menu">
+                                    <span></span>
+                                </div><!-- end custom-menu -->
+                            </div><!-- end widget -->
+                        </div><!-- end navbar-callopse -->
+                    </div><!-- end navbar-inner -->
+                </nav><!-- end navigation -->
+            </div><!-- menu wrapper -->
+        </div>
+    </header><!-- end header -->
+
+
+
       <h2> Welcome, Huft <h2>
       <h3> Feel free to begin looking up the stocks you're interested in.</h3>
       <h3 id="upload"> Upload an algorithm </h3>
@@ -36,5 +96,18 @@ html.
         </div>
      <div class="graph">
      </div>
+      <!-- Art's scripts -->
+     <!-- jQuery -->
+      <script src="creativ/creativ/default/js/jquery.js"></script>
+      <script src="creativ/creativ/default/js/bootstrap.min.js"></script>
+      <script src="creativ/creativ/default/js/retina.js"></script>
+      <script src="creativ/creativ/default/js/home-scripts.js"></script>
+
+
+      <!--[if lt IE 10]>
+          <script src="assets/js/placeholder.js"></script>
+      <![endif]-->
+
+      <!-- end -->
   </body>
 
