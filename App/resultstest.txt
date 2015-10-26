@@ -1,0 +1,1 @@
+{"symbol":"DIG","LastTradePriceOnly":"37.50","Volume":"60388"}
