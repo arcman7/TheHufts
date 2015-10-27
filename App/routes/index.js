@@ -14,7 +14,7 @@ router.get('/logIn', function(req, res, next) {
   res.render('logIn', { title: 'TheHufts' });
 });
 
-router.get('/signUp', function(req, res, next) {
-  res.render('signUp', { title: 'TheHufts' });
+router.get('/register', function(req, res, next) {
+  res.render('register', { title: 'TheHufts' });
 });
 module.exports = router;
