@@ -1,27 +1,28 @@
-function navboxListener(){
-  //#login
-  //#register
-  $('.cancel').on("click",function(){
-    event.preventDefault();
-    if ( $(".active-form") ){
-      $(".active-form") .removeClass("active-form");
-    }
-  });
+//Don't need this as of right now, all it does is make the forms appear or dissapear when login or register is clicked
+// function navboxListener(){
+//   //#login
+//   //#register
+//   $('.cancel').on("click",function(event){
+//     event.preventDefault();
+//     if ( $(".active-form") ){
+//       $(".active-form").removeClass("active-form");
+//     }
+//   });
 
-  $("#login").on("click",function(){
-    event.preventDefault();
-    $(".active-form").removeClass("active-form");
-    $(".login-form").addClass("active-form");
-    console.log("login clicked");
-  });
+//   $("#login").on("click",function(event){
+//     event.preventDefault();
+//     $(".active-form").removeClass("active-form");
+//     $(".login-form").addClass("active-form");
+//     console.log("login clicked");
+//   });
 
-  $("#register").on("click",function(event){
-    event.preventDefault();
-    $(".active-form").removeClass("active-form");
-    $(".register-form").addClass("active-form");
-    console.log("register clicked");
-  });
-}
+//   $("#register").on("click",function(event){
+//     event.preventDefault();
+//     $(".active-form").removeClass("active-form");
+//     $(".register-form").addClass("active-form");
+//     console.log("register clicked");
+//   });
+// }
 
 function encrypt(string,key){
   var encrypted = CryptoJS.AES.encrypt(string,key).toString();
@@ -39,11 +40,11 @@ function formSubmitListener(){
   var confirmation = "TheHufts";
   var gateKeeperURL = "U2FsdGVkX1/TgCOk5cMhFLg/9AnetMh2IYRno+wQGk78aKwkRS39/rop2c/Cm3SpOtrz2UQHSNgZOie01+kZQg==";
 
-  $(".login-form").on("submit",function(event){
+  $("#logIn-button").on("click",function(event){
     event.preventDefault();
     console.log("form submitted");
-    var username = $('.login-form input[name="username"]').val();
-    var password = $('.login-form input[name="password"]').val();
+    var username = $('.login-form input[name="form-email"]').val();
+    var password = $('.login-form input[name="form-password"]').val();
     var data = { username: username, password: password, confirmation: confirmation, login:true};
     ajaxLoginRouter(data,decrypt(gateKeeperURL,confirmation));
   });
@@ -93,6 +94,6 @@ function ajaxLoginRouter(data,url){
 
 
 $(document).on("ready",function(){
-  navboxListener();
+  //navboxListener();
   formSubmitListener();
 })
