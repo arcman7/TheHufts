@@ -4,7 +4,7 @@
   Template Name: Creativ
   Created By: Filiz OZER
   http://themeforest.net/user/jollythemes
-  
+
   1) SKELETON
   2) HEADER STYLES
   3) FOOTER STYLES
@@ -21,7 +21,7 @@
   14) DARK STYLES
 
 
-################################################################# */ 
+################################################################# */
 
 /* ----------------------------------------------------
   SKELETON
@@ -39,7 +39,7 @@
   font-style: normal;
 }
 
-body { 
+body {
     background:#fff;
     color: #999;
     font-family: "Source Sans Pro",sans-serif;
@@ -89,7 +89,7 @@ h6 {
 
 a:hover,a:focus {
   text-decoration:none;
-  color:#494c50;
+  color:##18e2ba;
 }
 
 .alignleft {
@@ -139,8 +139,8 @@ a:hover,a:focus {
   margin-top: 5px;
   font-family: Georgia;
   display: block;
-}  
-    
+}
+
 .drop-caps.full p:first-child:first-letter {
   color: #fff;
   background: #232323 !important;
@@ -194,7 +194,7 @@ a:hover,a:focus {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out; 
+  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -499,8 +499,8 @@ a:hover,a:focus {
   z-index: 1038;
 }
 
-.header.transparent .dropdown-menu li a, 
-.header.transparent .right-menu a, 
+.header.transparent .dropdown-menu li a,
+.header.transparent .right-menu a,
 .header.transparent .navbar-nav > li > a {
   color:#fff;
 }
@@ -515,8 +515,8 @@ a:hover,a:focus {
 }
 
 .dark-header .navbar-toggle,
-.dark-header .dropdown-menu li a, 
-.dark-header .right-menu a, 
+.dark-header .dropdown-menu li a,
+.dark-header .right-menu a,
 .dark-header .navbar-nav > li > a {
   color:#fff;
 }
@@ -585,9 +585,9 @@ a:hover,a:focus {
   border-radius: 30px;
 }
 
-.header.header7 .navbar-nav > li > a, 
-.header.header7 .right-menu a, 
-.header.header3 .right-menu a, 
+.header.header7 .navbar-nav > li > a,
+.header.header7 .right-menu a,
+.header.header3 .right-menu a,
 .header.header3 .navbar-nav > li > a {
   color:#fff !important;
   font-size: 14px !important;
@@ -608,7 +608,7 @@ a:hover,a:focus {
   padding:13px 0 8px !important;
 }
 
-.header.header6 .right-menu a, 
+.header.header6 .right-menu a,
 .header.header6 .navbar-nav > li > a {
   color:#242424 !important;
   font-size: 14px !important;
@@ -678,7 +678,7 @@ a:hover,a:focus {
 #style7 .navbar-nav > li > a:active,
 #style7 .navbar-nav > li > a:hover {
   color: #fff;
-} 
+}
 
 #style7 .navbar-nav > li > .dropdown-menu {
   margin-top: 0 !important;
@@ -961,7 +961,7 @@ a:hover,a:focus {
 .slider-title-baron{
   font-size:40px;
   line-height:40px;
-  font-weight:700; 
+  font-weight:700;
   font-family: baron_neue_boldbold;
   color:rgb(36,36,36);
   text-decoration:none;
@@ -977,7 +977,7 @@ a:hover,a:focus {
 .slider-title-baron2{
   font-size:48px;
   line-height:48px;
-  font-weight:700; 
+  font-weight:700;
   font-family: baron_neue_boldbold;
   color:rgb(36,36,36);
   text-decoration:none;
@@ -993,7 +993,7 @@ a:hover,a:focus {
 .slider-title{
   font-size:60px;
   line-height:70px;
-  font-weight:300; 
+  font-weight:300;
   color:rgb(36,36,36);
   text-decoration:none;
   padding:0px;
@@ -1094,7 +1094,7 @@ a:hover,a:focus {
 .slider-title4{
   font-size:60px;
   line-height:70px;
-  font-weight:400; 
+  font-weight:400;
   color:rgb(36,36,36);
   text-decoration:none;
   padding:0px;
@@ -1108,7 +1108,7 @@ a:hover,a:focus {
 .slider-title5{
   font-size:48px;
   line-height:48px;
-  font-weight:400; 
+  font-weight:400;
   letter-spacing: 1px;
   color:rgb(36,36,36);
   text-decoration:none;
@@ -1125,7 +1125,7 @@ a:hover,a:focus {
   font-family: "Montserrat",sans-serif;
   font-size:48px;
   line-height:48px;
-  font-weight:400; 
+  font-weight:400;
   letter-spacing: 1px;
   color:rgb(36,36,36);
   text-decoration:none;
@@ -1142,7 +1142,7 @@ a:hover,a:focus {
   font-family: "Montserrat",sans-serif;
   font-size:50px;
   line-height:65px;
-  font-weight:400; 
+  font-weight:400;
   color:rgb(36,36,36);
   text-decoration:none;
   padding:0px;
@@ -1170,7 +1170,7 @@ a:hover,a:focus {
 .tp-caption.slider-title-baron.white-color,
 .slider-title-baron.white-color {
   font-size:60px;
-  line-height:70px; 
+  line-height:70px;
 }
 
 .tp-caption.slider-btn a,
@@ -1548,7 +1548,7 @@ a:hover,a:focus {
 ------------------------------------------------------- */
 
 .portfolio-media {
-  margin-bottom: 30px;    
+  margin-bottom: 30px;
 }
 
 .portfolio-meta {
@@ -2005,7 +2005,7 @@ figure.effect-chico:hover h2 {
   font-family: "Source Sans Pro",sans-serif;
   font-size: 18px;
   font-weight: 300;
-} 
+}
 
 .portfolio-filter li a,
 .bf ul.filter li a {
@@ -2060,7 +2060,7 @@ figure.effect-chico:hover h2 {
 /* boxed layout */
 
 body#boxed {
-	background: url(demos/slider_01.jpg) no-repeat center center fixed; 
+	background: url(demos/slider_01.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -2132,7 +2132,7 @@ body#boxed #wrapper {
         font-weight: bold;
         text-transform: uppercase;
      }
-     
+
 /* 404  */
 
 .not-found .form-inline {
@@ -2164,23 +2164,23 @@ body#boxed #wrapper {
 
 /* COMING SOON */
 
-.cs1 { 
-  background: url(demos/cs1.jpg) no-repeat center center fixed; 
+.cs1 {
+  background: url(demos/cs1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 
-.cs2 { 
-  background: url(demos/cs2.jpg) no-repeat center center fixed; 
+.cs2 {
+  background: url(demos/cs2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-.cs3 { 
-  background: url(demos/cs3.jpg) no-repeat center center fixed; 
+.cs3 {
+  background: url(demos/cs3.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -2529,9 +2529,9 @@ body#boxed #wrapper {
 }
 
 @media (max-width: 991px) {
-	
+
 	.background-image-wrapper {
-	position:absolute	
+	position:absolute
 	}
 .image-container .mini-title,
 .full-image-section .background-image {
@@ -2543,14 +2543,14 @@ body#boxed #wrapper {
 }
 
 @media (max-width: 700px) {
-.page-header h1 { 
+.page-header h1 {
   font-size: 1.8em;
   }
-  
+
 ul.timeline:before {
   left: 40px;
 }
-  
+
 .tldate { width: 140px; }
 
 ul.timeline li .timeline-panel {
@@ -2727,11 +2727,11 @@ blockquote.mini {
 }
 
 .stylish-input-group .input-group-addon{
-  background: white !important; 
+  background: white !important;
   border-radius: 0 30px 30px 0;
 }
 .stylish-input-group .form-control{
-  box-shadow:0 0 0; 
+  box-shadow:0 0 0;
   border-radius: 30px;
   border-color:#d6d6d6;
 }
@@ -2966,11 +2966,11 @@ blockquote.mini {
   padding-left:14%;
 }
 
-#colorful-tab .nav-tabs > li > a, 
-#colorful-tab .nav-tabs > li > a:hover, 
+#colorful-tab .nav-tabs > li > a,
+#colorful-tab .nav-tabs > li > a:hover,
 #colorful-tab .nav-tabs > li > a:focus,
-#colorful-tab .nav-tabs > li.active > a, 
-#colorful-tab .nav-tabs > li.active > a:hover, 
+#colorful-tab .nav-tabs > li.active > a,
+#colorful-tab .nav-tabs > li.active > a:hover,
 #colorful-tab .nav-tabs > li.active > a:focus {
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
@@ -2990,8 +2990,8 @@ blockquote.mini {
   margin-bottom: 30px;
 }
 
-#colorful-tab .nav-tabs > li.active > a, 
-#colorful-tab .nav-tabs > li.active > a:hover, 
+#colorful-tab .nav-tabs > li.active > a,
+#colorful-tab .nav-tabs > li.active > a:hover,
 #colorful-tab .nav-tabs > li.active > a:focus {
   width: 100px;
   height: 100px;
@@ -2999,7 +2999,7 @@ blockquote.mini {
   line-height: 100px;
 }
 
-#colorful-tab .nav-tabs > li, 
+#colorful-tab .nav-tabs > li,
 #colorful-tab .nav-pills > li {
   float:none;
   display:inline-block;
@@ -3592,7 +3592,7 @@ blockquote.mini {
 }
 
 .text-left {
-    text-align: left !important; 
+    text-align: left !important;
 }
 
 .pagination li > a, .pagination li > span,
@@ -3737,11 +3737,11 @@ blockquote.mini {
   position:absolute;
   animation: preloader_1 1.5s  infinite ease-in-out;
 }
- 
+
 #preloader_1 span:nth-child(2){
 left:11px;
 animation-delay: .2s;
- 
+
 }
 #preloader_1 span:nth-child(3){
 left:22px;
@@ -3932,7 +3932,7 @@ acronym {
     .header.transparent {
         padding-top:40px !important;
         position: relative !important;
-        background: #282828 !important; 
+        background: #282828 !important;
     }
     .header.transparent .navbar-toggle {
         color:#fff;
@@ -3943,11 +3943,11 @@ acronym {
         padding:4px 10px;
         margin:0;
     }
-    #colorful-tab .nav-tabs > li > a, 
-    #colorful-tab .nav-tabs > li > a:hover, 
-    #colorful-tab .nav-tabs > li > a:focus, 
-    #colorful-tab .nav-tabs > li.active > a, 
-    #colorful-tab .nav-tabs > li.active > a:hover, 
+    #colorful-tab .nav-tabs > li > a,
+    #colorful-tab .nav-tabs > li > a:hover,
+    #colorful-tab .nav-tabs > li > a:focus,
+    #colorful-tab .nav-tabs > li.active > a,
+    #colorful-tab .nav-tabs > li.active > a:hover,
     #colorful-tab .nav-tabs > li.active > a:focus,
     #colorful-tab .nav-tabs > li  {
         display: block;
@@ -4036,7 +4036,7 @@ acronym {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #282828;
+  background-color: #18e2ba;
   border-color: #282828;
 }
 
@@ -4105,7 +4105,7 @@ acronym {
 }
 
 .quote-post,
-.pagination li > a:hover, 
+.pagination li > a:hover,
 .pagination li > span:hover,
 #style7 .navbar-nav > li:focus,
 #style7 .navbar-nav > li:active,
