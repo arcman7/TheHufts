@@ -32,7 +32,6 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
-///app.use('/users', users);
 //Front-end assets
 app.use('/query.js', obuscateJS('/query.js'));
 app.use('/uploadAlgo.js', obuscateJS('/uploadAlgo.js'));
