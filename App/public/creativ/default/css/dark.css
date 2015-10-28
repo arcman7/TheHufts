@@ -1,0 +1,70 @@
+/* ----------------------------------------------------
+  DARK STYLES
+------------------------------------------------------- */
+
+#footer-second.footer,
+#topbar,
+.section-white {
+	background:#242424 !important;
+}
+.timeline li.timeline-inverted .timeline-panel:after  {
+	border-right-color:#343434 !important
+}
+.timeline li .timeline-panel:after {
+	border-left-color:#343434 !important
+}
+.timeline li.timeline-inverted .timeline-panel:before  {
+	border-right-color:#343434 !important
+}
+.timeline li .timeline-panel:before {
+	border-left-color:#343434 !important
+}
+
+.masonry_wrapper_blog .blog-item,
+.timeline li .timeline-panel,
+.pagination li > a, .pagination li > span,
+.pager li > a, .pager li > span,
+.general-form .form-control,
+.tab-pane,
+.tab-content,
+.icon-container,
+#topbar,
+.border-boxed,
+.service-hover {
+	border-color:#343434 !important;
+}
+
+.masonry_wrapper_blog .blog-item,
+.timeline li .timeline-panel,
+.with-text .caps-desc {
+	background:#343434 !important;
+}
+.pagination li > a, .pagination li > span,
+.pager li > a, .pager li > span,
+.general-form .form-control,
+.color-gray,
+.pricing-box.background-gray,
+#footer-second.footer .social-icons i,
+.pricing-box,
+.section-gray,
+.social-icons i,
+.header,
+.full-image-section {
+	background-color:#343434;
+}
+
+.media-heading,
+blockquote,
+.single-blog-title h3,
+.pagination li > a, .pagination li > span,
+#sidebar .featured-widget h3 a,
+#accordion-first .accordion-heading .accordion-toggle,
+.copytext h4,
+.caps-desc h3 a,
+.dropdown-menu li a, .right-menu a, .navbar-nav > li > a,
+.blog-title h3 a,
+h1, h2, h3, h4, h5, h6 {
+	color:#fff;
+}
+
+

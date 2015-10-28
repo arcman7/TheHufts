@@ -6,49 +6,62 @@ html.
     <title>TheHufts</title>
     <meta name="description" content="test page">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="/stylesheets/style.css"/>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
-    <script src="http://code.highcharts.com/stock/highstock.js"></script>
-    <script src="http://code.highcharts.com/stock/highcharts-more.js"></script>
-    <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
-    <script src="http://requirejs.org/docs/release/2.1.20/comments/require.js"></script>
 
-    <!-- <script type="text/javascript" src="/query.js"></script> -->
+    <!-- Art's-->
+   <!-- Bootstrap Core CSS -->
+    <link href="creativ/default/css/bootstrap.min.css" rel="stylesheet">
+    <link href="creativ/default/css/font-awesome.css" rel="stylesheet">
+    <link href="creativ/default/style.css" rel="stylesheet">
+    <link href="stylesheets/form-elements.css" rel="stylesheet" >
+    <link href="stylesheets/form-elements2.css" rel="stylesheet">
+    <link href="stylesheets/landing-page.css" rel="stylesheet">
 
-    <script type="text/javascript" src="/javascript/keys/parseSecrets.js"></script>
 
-   <!-- <script type="text/javascript" src="/uploadAlgo.js"></script> -->
-   <script type="text/javascript" src="/bundle.js"></script>
-   <script type="text/javascript" src="/loginFront.js"></script>
-
-   <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
-
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
-      <div class="navbox"><!--Art, you can take the lead on this stuff whenever -->
-        <button id="login">Login</button><br><br>
-        <button id="register">Register</button>
-        <form class="login-form">
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username">
-          <label for="password">Password</label>
-          <input type="text" name="password" id="password">
-          <input type="submit" class="submit">
-          <button class="cancel">cancel</button>
-        </form>
-        <form class="register-form">
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username">
-          <label for="password">Password</label>
-          <input type="text" name="password" id="password">
-          <label for="email">Email</label>
-          <input type="text" name="email" id="email">
-          <input type="submit" class="submit">
-          <button class="cancel">cancel</button>
-        </form>
+    <div id="loader">
+      <div class="loader-container">
+        <div id="preloader_1">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
       </div>
+    </div>
+    <header id="header-one" class="dark-header header">
+        <div class="container-fluid">
+            <div class="menu-wrapper">
+                <nav id="navigation" class="navbar yamm" role="navigation">
+                    <div class="navbar-inner">
+                        <div class="navbar-header">
+                            <a id="brand" class="clearfix navbar-brand" href="/landingPage"><img src="" alt="TheHufts" data-selector="img"></a>
+                        </div><!-- end navbar-header -->
+                        <div id="navbar-collapse" class="navbar-right navbar-collapse collapse clearfix">
+                            <ul class="nav navbar-nav">
+                                <li class="wps-half"><a href="/landingPage">Home</a>
+                                    </li><!-- end mega menu -->
+                                    <li class="wps-full"><a href="/logIn">Log In</a>
+                                    <li class="wps-full"><a href="/register">Sign Up</a>
+                            </ul><!-- end navbar-right -->
+                            <div class="pull-right clearfix">
+                                <div class="right-menu">
+                                    <span></span>
+                                </div><!-- end custom-menu -->
+                            </div><!-- end widget -->
+                        </div><!-- end navbar-callopse -->
+                    </div><!-- end navbar-inner -->
+                </nav><!-- end navigation -->
+            </div><!-- menu wrapper -->
+        </div>
+    </header><!-- end header -->
+
       <h2> Welcome, Huft <h2>
       <h3> Feel free to begin looking up the stocks you're interested in.</h3>
 
@@ -67,8 +80,26 @@ html.
         </div>
      <div class="graph">
      </div>
-     <script>
-      //stuff for testing can go here
-    </script>
+
+     <!-- Art's scripts -->
+     <!-- jQuery -->
+      <script src="creativ/default/js/jquery.js"></script>
+      <script src="creativ/default/js/bootstrap.min.js"></script>
+      <script src="creativ/default/js/retina.js"></script>
+      <script src="creativ/default/js/home-scripts.js"></script>
+      <!--[if lt IE 10]>
+          <script src="assets/js/placeholder.js"></script>
+      <![endif]-->
+      <!-- end -->
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/stock/highcharts-more.js"></script>
+    <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
+    <script type="text/javascript" src="/javascript/query.js"></script>
+    <script type="text/javascript" src="/javascript/keys/parseSecrets.js"></script>
+    <script type="text/javascript" src="/javascript/uploadAlgo.js"></script>
   </body>
 

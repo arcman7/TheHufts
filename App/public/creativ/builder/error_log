@@ -1,0 +1,7 @@
+[22-Jul-2015 14:55:45 America/New_York] PHP Fatal error:  Uncaught exception 'UnexpectedValueException' with message 'RecursiveDirectoryIterator::__construct(elements/bootstrap): failed to open dir: No such file or directory' in /home/template/public_html/builder_front/save.php:23
+Stack trace:
+#0 /home/template/public_html/builder_front/save.php(23): RecursiveDirectoryIterator->__construct('elements/bootst...')
+#1 {main}
+  thrown in /home/template/public_html/builder_front/save.php on line 23
+[22-Jul-2015 14:58:38 America/New_York] PHP Warning:  unlink(website.zip): No such file or directory in /home/template/public_html/builder_front/save.php on line 76
+[22-Jul-2015 15:01:09 America/New_York] PHP Warning:  unlink(website.zip): No such file or directory in /home/template/public_html/builder_front/save.php on line 76

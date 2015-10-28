@@ -1,0 +1,229 @@
+@font-face {
+    font-family: 'baron_neue_boldbold';
+    src: url('fonts/baron_neue_bold-webfont.eot');
+    src: url('fonts/baron_neue_bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('fonts/baron_neue_bold-webfont.woff2') format('woff2'),
+        url('fonts/baron_neue_bold-webfont.woff') format('woff'),
+        url('fonts/baron_neue_bold-webfont.ttf') format('truetype'),
+        url('fonts/baron_neue_bold-webfont.svg#baron_neue_boldbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.masonry_wrapper {
+  margin:0;
+  padding:0;
+}
+
+.item figure h3 {
+  font-size:18px !important;
+}
+.pagination li > a, .pagination li > span,
+.timeline li .timeline-panel {
+  background: #fff;
+}
+.timeline li .timeline-panel:after {
+  border-right-color:#fff;
+}
+.timeline li .timeline-panel:after {
+  border-left-color:#fff
+}
+#page_header p {
+margin-top:50px;
+font-size:34px;
+color:#fff;
+font-weight:700;
+}
+
+#page_header {
+padding:25rem 0 20rem;
+}
+
+#page_header:before {
+content:'';
+position:absolute;
+bottom:-26px;
+left:0;
+width:100%;
+height:20px;
+opacity:.6;
+filter:alpha(opacity=60);
+}
+
+#page_header .container {
+z-index:1;
+position:relative;
+}
+
+#page_header:after {
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+.custom-parallax-wrapper h3,
+#page_header h2 {
+  color:#fff;
+  text-transform: uppercase;
+  font-size:48px;
+  font-weight: bold;
+}
+
+
+
+#sidebar-fix {
+  width: inherit;
+  min-width: 260px;
+  max-width: 260px;
+  background-color:#242423;
+  float: left;
+  height:100%;
+  bottom:0;
+  left: :0;
+  overflow-y:auto;
+  z-index: 900;
+  text-align: center;
+  overflow-x:hidden;
+  -webkit-box-shadow:10px 0px 50px -2px rgba(0, 0, 0, 0.14);
+  -moz-box-shadow:10px 0px 50px -2px rgba(0, 0, 0, 0.14);
+  box-shadow:10px 0px 50px -2px rgba(0, 0, 0, 0.14);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  -webkit-overflow-scrolling:touch;
+  overflow:auto;
+}
+
+.social-icons i {
+  background-color: #2e2e2e;
+}
+#main {
+  height:100%;
+  overflow:auto;
+  margin-left:260px;
+}
+
+#sidebar-fix .social-icons {
+  margin:0 0 30px !important;
+}
+
+.side-copyrights {
+  text-align: center;
+}
+
+.side-logo a img {
+  width: 157px;
+  display: block;
+  position: relative;
+  margin:20px auto;
+}
+.sidebar-nav {
+  margin: 30px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+    line-height: 50px;
+    margin: 2px 0;
+}
+
+.sidebar-nav li a {
+  font-weight: bold;
+  font-size:14px;
+  padding:23px 16px;
+  color:#fff;
+  text-transform: uppercase;
+  font-family: "Montserrat",sans-serif;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+.mobile-menu {
+  z-index: 9999;
+  display: block;
+  position: fixed;
+  top:0;
+  left: 0;
+  display: none;
+}
+
+.mobile-menu .btn {
+  border-radius: 0 !important;
+}
+.photo-gallery {
+  position:relative;
+}
+
+.gallery-desc {
+  right: 5px;
+  bottom:5px;
+  background: rgba(255, 255, 255, 0.4);
+  padding:5px 60px;
+  position: absolute;
+}
+
+.gallery-desc.right-slot {
+  left:0;
+  right: auto
+}
+
+.gallery-desc h3,
+.gallery-desc p,
+.gallery-desc h3 a {
+  color:#fff !important;
+  padding:0;
+  margin:3px 0;
+}
+
+.gallery-desc p {
+  font-style:italic;
+  font-family: Athelas;
+}
+
+.photo-gallery img {
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+    #sidebar-fix {
+        position: relative;
+        box-shadow: none;
+    }
+   .mobile-menu{
+      display: normal!important;
+   }
+}
+
+@media screen and (max-width: 1024px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    width:calc(100% + 260px);
+  }  .row-offcanvas-left
+  {
+    left: -260px;
+  }
+
+  .row-offcanvas-left.active {
+    left: 0;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+  }
+}

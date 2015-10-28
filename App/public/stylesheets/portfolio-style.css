@@ -1,0 +1,206 @@
+#parallax-three.white-color  .stat-count, #parallax-three.white-color .milestone-details h4
+
+ {
+
+    color:#fff !important;
+}
+
+.tweet-wrapper p {
+    text-align: center;
+    font-family: Source Sans Pro;
+    font-style: italic;
+    font-size: 18px;
+}
+.tweet-button {
+    border:1px solid #14a8ed !important;
+    color:#14a8ed !important;
+    width:55px;
+    vertical-align:-moz-middle-with-baseline;
+    height:55px;
+    margin:0 15px;
+    display:inline-block;
+   -webkit-border-radius: 6055pxpx;
+    -moz-border-radius: 55px;
+    border-radius: 55px;
+    font-size:18px;
+    line-height:53px;
+    background:transparent !important;
+}
+.copytext {
+    padding: 50px 0 0
+}
+
+.copytext i {
+    color:#14d9c0;
+}
+#footer-second.footer .social-icons i {
+    background: transparent;
+    border:1px solid #444;
+}
+#footer-second.dark-footer {
+    background: #282828 !important;
+}
+
+.copytext h4 {
+    padding:0;
+    color:#fff;
+}
+.max-height{
+    height:100vh;}
+
+.mixed,
+.masonry_wrapper {
+    margin: 0 !important
+}
+.message {
+    margin:20px auto;
+    position:absolute;
+    max-width: 800px;
+    right:0;
+    left:0;
+    top:40%;
+    text-align:center;
+    z-index: 90;
+}
+.main-title {
+    border: 5px solid #fff;
+    color: #fff !important;
+    padding:10px !important;
+    font-family: "Montserrat",sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    text-transform:uppercase;
+}
+.mini-title {
+    color: #fff !important;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    margin-top: 30px;
+    position: relative;
+}
+.mini-title span {
+    font-weight:bold;
+}
+
+
+#overlay {
+    position: fixed;
+    z-index:9999;
+    top: 0;
+    left: 0;
+    background: rgba(22,22,22,1);
+    width:100%;
+    height:100%;
+    margin:auto;
+    right:0;
+}
+.overlay .overlay-close {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    right: 0;
+    top: 10px;
+    overflow: hidden;
+    border: none;
+    background: url(images/cross.png) no-repeat center center;
+    text-indent: 200%;
+    color: transparent;
+    outline: none;
+    z-index: 100;
+}
+.overlay nav {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    height: 60%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.overlay ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    z-index:9999;
+    top: 0;
+    margin:0 auto;
+    left: 0;
+    background: rgba(22,22,22,1);
+    width:500px;
+    height:500px;
+    margin:auto;
+    right:0;
+}
+.overlay ul li {
+    display: block;
+    margin: 10px 0 0;
+    padding: 10px 0 0;
+}
+.overlay ul li a {
+    font-size: 24px;
+    font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+    display: block;
+    text-transform:uppercase;
+    color: #fff;
+    margin:0;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+.overlay ul li a:hover,
+.overlay ul li a:focus {
+    color: rgba(3, 172, 220, 1);
+}
+.overlay-scale {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s, visibility 0s 0.2s;
+    transition: transform 0.2s, opacity 0.2s, visibility 0s 0.2s;
+}
+.overlay-scale.open {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);    
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+    transition: transform 0.4s, opacity 0.4s;
+}
+
+.fheader {
+    line-height:75px;
+    position:absolute;
+    z-index:99;
+    padding:40px 0;
+    top:0;
+    width:100%;
+}
+.fheader .p-menu span a {
+  font-weight: bold;
+  font-size:14px;
+  padding:20px 0 0 10px;
+  color:#fff;
+  text-transform: uppercase;
+  font-family: "Montserrat",sans-serif;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 700px) {
+.main-title {
+    font-size:24px;
+}
+
+.overlay ul {
+    width: 280px;
+    height: 280px;
+}
+
+}

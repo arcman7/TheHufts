@@ -1,10 +1,11 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //insterted code
+
 var monk = require('monk');
 var fs = require('fs');
 var http = require('http');
@@ -16,6 +17,7 @@ var gateKeeper = require('./routes/gateKeeper');
 var obuscateJS = require('./routes/obuscateJS');
 var login = require('./routes/login');
 var winston = require('winston');
+
 //var query = require('./public/javascript/query');
 var public_path = __dirname + "/public";
 
@@ -31,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/', index);
 //Front-end assets
 app.use('/query.js', obuscateJS('/query.js'));
@@ -40,11 +43,14 @@ app.use('/loginFront.js', obuscateJS('/loginFront.js'));
 
 app.use('/gateKeeper',gateKeeper);
 app.use('/login',login);
+app.use('/users', users);
+
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
 
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
