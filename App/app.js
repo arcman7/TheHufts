@@ -9,8 +9,6 @@ var bodyParser = require('body-parser');
 var monk = require('monk');
 var fs = require('fs');
 var http = require('http');
-var Options = require('obfuscator').Options;
-var obfuscator = require('obfuscator').obfuscator;
 var index = require('./routes/index');
 var users = require('./routes/users');
 var gateKeeper = require('./routes/gateKeeper');
@@ -18,7 +16,6 @@ var obuscateJS = require('./routes/obuscateJS');
 var login = require('./routes/login');
 //mozilla session manager
 var session = require('client-sessions');//mozilla
-var connect = require('connect')
 //secondary session management options
 //package.json: "express-session": "^1.7.6"
 // var session = require('express-session');
