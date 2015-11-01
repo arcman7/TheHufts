@@ -4,6 +4,8 @@ var CryptoJS   = require("crypto-js");
 var gateKeeper = require('./gateKeeper');
 var Parse      = require('parse/node');
 var AES        = require("crypto-js/aes");
+var session = require('client-sessions');
+
 
 //Parse initialization
 var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
@@ -26,13 +28,38 @@ function aesEncrypt(string,key){
 }
 //Encryption-Decryption END
 
-router.post('/login', function (req, res) {
+//this function is made for use in context of middle where with access to the next parameter in app.use(function(req, res, next) { }
+function queryParseUser(options) {
 
-  console.log(req.body);
+   query.equalTo( "email", options.email );
+    query.first({
+      success: function(object) {
+        console.log("Successfully retrieved " + object);
+        var user ={};
+        user.email = object.get('email');
+        user.username = object.get('username');
+        user.accessToken = object.get('accessToken');
+        // req.user = user;
+        // req.session.user = user;  //refresh the session value
+        // res.locals.user = user;
+        // finishing processing the middleware and run the route
+        next();
+      },
+      error: function(error) {
+        console.log("Error: " + error.code + " " + error.message);
+        // finishing processing the middleware and run the route
+        next();
+      }
+    }); //end query.first function call
+}//end queryParseUser
+
+
+router.post('/login', function (req, res) {
+  //sess = req.session;
+  //console.log(req.body);
   var key          = gateKeeper.gateKey;
   var confirmation = "TheHufts";
   var data         = aesDcrypt(req.body.data, key);
-  console.log(data)
   data             = JSON.parse(data);
   //switching to custom user class, since parse has it's own user class already defined - problems wich are covered later.
   //use custom fclass name: UserC
@@ -48,17 +75,27 @@ router.post('/login', function (req, res) {
       var User           = Parse.Object.extend("UserC");
       var query          = new Parse.Query(User);
       var userAttributes = ["username","password","accessToken"];
-      query.equalTo( "username", data.username )//.select(userAttributes);
+      query.equalTo( "email", data.email )//.select(userAttributes);
         query.first({
           success: function(object) {
             console.log("Successfully retrieved " + object);
-            //console.log("encrypted password from Parse: " + object.get('password'));
-            //var parsePwd = object.get('password').toString();
-            //console.log("decrypted: " + aesDcrypt(parsePwd,key));
+
             parsePwd        = object.get('pwd');
             var accessToken = object.get('accessToken');
             parsePwd        = aesDcrypt(parsePwd,accessToken);
             status          = (data.password == parsePwd );
+            /////////////////////////////////////////////////////
+            //setting the session to the logged in user
+            if(status){
+              //console.log(req);
+              var user         = {};
+              user.accessToken = accessToken;
+              user.username    = object.get('username');
+              user.email       = object.get('email');
+              //req.session.user = user;
+            }
+            //end session if-statement
+            /////////////////////////////////////////////////////
             var response    = {};
 
             response[requestType]   = status;
@@ -75,32 +112,7 @@ router.post('/login', function (req, res) {
             res.send(response);
           }
         });
-        // Parse.User.logIn(data.username, data.password, {
-        //     success: function(results)
-        //     {
-        //         //response.success(true);
-        //       console.log(results);
-        //       status = true;
-        //       var response = {};
-        //       response[requestType] = status;
-        //       response = JSON.stringify(response)
-        //       res.send(response);
-        //     },
-        //     error: function(user,error) {
-        //         //response.success(false);
-        //       //the user in the scope of the error function is a (new User) that is created temorarily - instantiated
-        //       status = false;
-        //       console.log("Error: ");
-        //       console.log(error + ", " +error.message);
-        //       console.log("user retrieved: ");
-        //       console.log("password: "+user.get("password"), "username: "+user.get("username"));
-        //       console.log("credentials: "+data.username + " " + data.password);
-        //       var response = {};
-        //       response[requestType] = status;
-        //       response = JSON.stringify(response)
-        //       res.send(response);
-        //     }
-        // });
+
       requestType = "login";
     }//end if - login
     else{ //code to register a user
@@ -137,3 +149,4 @@ router.post('/login', function (req, res) {
 });//end router post anon-function
 
 module.exports = router;
+module.exports.queryParseUser = queryParseUser;

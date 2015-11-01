@@ -34,4 +34,5 @@ module.exports = router;
 //module.exports = yieldKey;
 module.exports.currentMin = new Date().getMinutes();
 module.exports.gateKey = randomString(77,"aA#!");
+module.exports.randomString = randomString;
 

@@ -43,9 +43,12 @@ function formSubmitListener(){
   $("#logIn-button").on("click",function(event){
     event.preventDefault();
     console.log("form submitted");
-    var username = $('.login-form input[name="form-email"]').val();
+    //var username = $('.login-form input[name="form-email"]').val();
+    var email = $('.login-form input[name="form-email"]').val();
     var password = $('.login-form input[name="form-password"]').val();
-    var data = { username: username, password: password, confirmation: confirmation, login:true};
+    //var data = { username: username, password: password, confirmation: confirmation, login:true};
+    var data = { email: email, password: password, confirmation: confirmation, login:true};
+
     ajaxLoginRouter(data,decrypt(gateKeeperURL,confirmation));
   });
 
@@ -60,7 +63,6 @@ function formSubmitListener(){
 
     ajaxLoginRouter(data,decrypt(gateKeeperURL,confirmation));
   });
-
 }
 
 function ajaxLoginRouter(data,url){
