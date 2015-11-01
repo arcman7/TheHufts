@@ -1,9 +1,11 @@
+//module.exports = (function(){
+
 Parse.initialize(parseSecret1, parseSecret2);
 
 var Algo = Parse.Object.extend("Algo");
 var algo = new Algo();
 var yousuck = " Please refresh the page and try again.";
-var algoFunction1;3
+var algoFunction1;
 function testAlgoOutput(algoString){
   algoFunction1 = new Function('return ' + algoString);
   algoFunction1 = algoFunction1();
@@ -79,6 +81,7 @@ function uploadFileListener(){
         var algoKey = JSON.stringify(algoPair[1]);
         algo.set("algoFile",algoFile);
         algo.set("algoKey",algoKey);
+        algo.set("user_id",'1');
         algo.save(null, {
               success: function(algo) {
           //     // Execute any logic that should take place after the object is saved.
@@ -185,9 +188,12 @@ function generateSignals(symbol){
   // })
 
   return series //contains regular stock data in addition to the newly generated signals
-}//end generateSignals
-
+ }//end generateSignals
 $(document).on('ready',function(){
   uploadFileListener();//Note: when this event is fired it has the effect of producing addtional listeners
-})
+});
+
+//})//end anon global function
+
+
 
