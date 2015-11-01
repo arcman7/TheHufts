@@ -21,7 +21,7 @@ var session = require('client-sessions');//mozilla
 // var session = require('express-session');
 // var MongoStore = require('connect-mongo')(session);
 
-var winston = require('winston');
+// var winston = require('winston');
 
 //var query = require('./public/javascript/query');
 var public_path = __dirname + "/public";
