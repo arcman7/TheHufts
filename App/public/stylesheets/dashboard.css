@@ -8335,20 +8335,6 @@ a,
   transition: all 0.3s ease-in-out;
 }
 
-@media screen and (max-width: 768px) {
-    .yamm .wps-half .dropdown-menu ul,
-    .dropdown-submenu>.dropdown-menu ul,
-    .yamm .dropdown-menu ul {
-      padding:0 20px !important;
-    }
-    .yamm .wps-half .dropdown-menu {
-      right: 0 !important;
-      width: 100%;
-    }
-    .yamm .yamm-content {
-        padding:20px 0;
-    }
-
 
 
 /* Only demo */
