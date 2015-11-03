@@ -104,7 +104,7 @@ function uploadFileListener(){
     };
     // "<button id='algo1'>Test algo-1</button>"
     reader.readAsText(file);
-    $("#uploaded-algos-container").append('<tr><td>Algo</td><td><a href="#"><i id="algo1"class="fa fa-check text-navy"></i></a></td><td><a href="#" class="killRow"><i class="fa fa-times"></i></a></td></tr>'
+    $("#uploaded-algos-container").append('<tr><td>Algo</td><td></td><td><a href="#"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>'
       );
     algoTesterListener();
   };//end .onchange function
