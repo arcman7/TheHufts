@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var Parse      = require('parse/node');
+
 //insterted code
 
 var monk = require('monk');
@@ -30,7 +32,6 @@ var winston = require('winston');
 var public_path = __dirname + "/public";
 
 var app = express();
-var sess;
 app.use(session({
   cookieName: 'session',
   secret: "aaa",//gateKeeper.randomString(77,"aA#!"),
@@ -49,6 +50,35 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//Storing user-sessions
+//console.log(gateKeeper.randomString(77,"aA#!"));
+app.use(function(req, res, next) {
+  console.log("hi from global middleware");
+  console.log(req.session.user)
+  if (req.session && req.session.user) {
+    //Parse initialization
+    var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
+    var parseSecret2 = "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm";
+    Parse.initialize(parseSecret1, parseSecret2);
+    //Parse initalization END
+    login.queryParseUser({email: req.session.user.email},req,res,next);
+  } else {
+    next();
+  }
+});
+
+// app.use(function(err, req, res, next) {
+//     console.log("hi from global middleware");
+
+//   res.status(err.status || 500);
+//   res.render('error', {
+//     message: err.message,
+//     error: {}
+//   });
+//   next();
+// });
+
 app.use('/', index);
 //Front-end assets
 app.use('/query.js', obuscateJS('/query.js'));
@@ -59,38 +89,13 @@ app.use('/loginFront.js', obuscateJS('/loginFront.js'));
 app.use('/gateKeeper',gateKeeper);
 app.use('/login',login);
 app.use('/users', users);
-//Storing user-sessions
-
-//console.log(gateKeeper.randomString(77,"aA#!"));
+//if no matching route is found this is the default server response
 app.use(function(req, res, next) {
-  //console.log(req);
-  if (req.session && req.session.user) {
-    //console.log(req.session);
-    //Parse initialization
-    var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
-    var parseSecret2 = "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm";
-    Parse.initialize(parseSecret1, parseSecret2);
-    //Parse initalization END
-    login.queryParseUser({email: req.session.user.email});
-  } else {
-    next();
-  }
-});
+    console.log("hi from global middleware");
 
-app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-
-
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
-
 
 module.exports = app;

@@ -29,8 +29,10 @@ function aesEncrypt(string,key){
 //Encryption-Decryption END
 
 //this function is made for use in context of middle where with access to the next parameter in app.use(function(req, res, next) { }
-function queryParseUser(options) {
-
+function queryParseUser(options,req,res,next) {
+  console.log("hi from queryParseUser")
+   var User           = Parse.Object.extend("UserC");
+   var query          = new Parse.Query(User);
    query.equalTo( "email", options.email );
     query.first({
       success: function(object) {
@@ -39,9 +41,9 @@ function queryParseUser(options) {
         user.email = object.get('email');
         user.username = object.get('username');
         user.accessToken = object.get('accessToken');
-        // req.user = user;
-        // req.session.user = user;  //refresh the session value
-        // res.locals.user = user;
+        req.user = user;
+        req.session.user = user;  //refresh the session value
+        res.locals.user = user;
         // finishing processing the middleware and run the route
         next();
       },
@@ -87,12 +89,14 @@ router.post('/login', function (req, res) {
             /////////////////////////////////////////////////////
             //setting the session to the logged in user
             if(status){
-              //console.log(req);
               var user         = {};
               user.accessToken = accessToken;
               user.username    = object.get('username');
               user.email       = object.get('email');
-              //req.session.user = user;
+              req.session.user = user;
+               console.log("inside login post route")
+               console.log(req.session);
+               console.log(req.cookies)
             }
             //end session if-statement
             /////////////////////////////////////////////////////
