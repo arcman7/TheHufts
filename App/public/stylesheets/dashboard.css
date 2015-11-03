@@ -474,7 +474,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 }
 .top-navigation .nav > li > a {
   padding: 15px 20px;
-  color: #676a6c;
+  color: #18e2ba;
 }
 .top-navigation .nav > li a:hover,
 .top-navigation .nav > li a:focus {
@@ -1569,7 +1569,7 @@ div.DTTT_button,
 a.DTTT_button {
   border: 1px solid #e7eaec;
   background: #fff;
-  color: #676a6c;
+  color: #18e2ba;
   box-shadow: none;
   padding: 6px 8px;
 }
@@ -1578,7 +1578,7 @@ div.DTTT_button:hover,
 a.DTTT_button:hover {
   border: 1px solid #d2d2d2;
   background: #fff;
-  color: #676a6c;
+  color: #18e2ba;
   box-shadow: none;
   padding: 6px 8px;
 }
@@ -3526,7 +3526,7 @@ body.body-small .footer.fixed {
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:focus {
   background-color: #e6e6e6;
-  color: #676a6c;
+  color: #18e2ba;
 }
 .ui-tab .tab-content {
   padding: 20px 0px;
@@ -8148,7 +8148,7 @@ a,
 #header-one .navbar-nav > li > a:active,
 #header-one .navbar-nav > li > a.active,
 #header-one .navbar-nav > li > a:hover  {
-    color: rgba(3,172,220,1);
+    color: #18e2ba;
 }
 
 .dark-header {
@@ -8280,6 +8280,74 @@ a,
   width: 100%;
 
 }
+
+.yamm .nav,
+.yamm .collapse,
+.yamm .dropup,
+.yamm .dropdown {
+  position: static;
+}
+
+.yamm .container {
+  position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu,
+.yamm .dropdown-menu {
+  left: auto;
+  right: auto;
+  border-radius: 0;
+  border:0;
+  box-shadow: none !important;
+  padding:0;
+  color:#fff;
+  background: #282828 !important;
+  margin-top:31px;
+  padding: 20px;
+  min-width: 240px;
+}
+
+.navbar-nav > li > .dropdown-menu {
+  margin-top:31px;
+}
+.navbar-brand {
+  height: auto;
+  padding:0;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.dropdown-menu li a,
+.right-menu a,
+.navbar-nav > li > a {
+  font-weight: bold;
+  font-size:14px;
+  padding:13px 25px;
+  color:#282828;
+  text-transform: uppercase;
+  font-family: "Montserrat",sans-serif;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+    .yamm .wps-half .dropdown-menu ul,
+    .dropdown-submenu>.dropdown-menu ul,
+    .yamm .dropdown-menu ul {
+      padding:0 20px !important;
+    }
+    .yamm .wps-half .dropdown-menu {
+      right: 0 !important;
+      width: 100%;
+    }
+    .yamm .yamm-content {
+        padding:20px 0;
+    }
 
 
 
