@@ -104,8 +104,9 @@ function uploadFileListener(){
     };
     // "<button id='algo1'>Test algo-1</button>"
     reader.readAsText(file);
-    $("#uploaded-algos-container").append('<tr><td>Algo</td><td></td><td><a href="#"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>'
-      );
+    //var html_string = '<tr class="3"><td>Algo</td><td></td><td><a href="#"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow" id="'+3+'"'+  '><i class="fa fa-times"></i></a></td></tr>'
+    $("#uploaded-algos-container").append('<tr><td>Algo</td><td></td><td><a href="#"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+    //$("#uploaded-algos-container").append(html_string);
     algoTesterListener();
   };//end .onchange function
 }
@@ -195,13 +196,13 @@ function generateSignals(symbol){
 
 
 var deleteRow = function() {
-    $(".killRow").on("click",function(event) {
+  $("#uploaded-algos-container").on("click",".killRow",function(event) {
       event.preventDefault();
       console.log("hello");
       var td = $(this).parent();
       var tr = td.parent();
       tr.remove();
-    })
+    });
 };
 $(document).on('ready',function(){
   deleteRow();
