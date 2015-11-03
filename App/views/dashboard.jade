@@ -59,182 +59,110 @@ html.
             </div><!-- menu wrapper -->
         </div>
     </header><!-- end header -->
-    <div class="wrapper wrapper-content" style="background: #f5f5f5">
+    <div class="wrapper wrapper-content" style="background: #f5f5f5; text-align: center">
       <h2> Welcome, Huft <h2>
       <h3> Feel free to begin looking up the stocks you're interested in.</h3>
-            <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Profit</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">386,200</h1>
-                            <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
-                            <small>Total views</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <span class="label label-info pull-right">Annual</span>
-                            <h5>Orders</h5>
-                        </div>
-                        <div class="ibox-content">
-                                    <h1 class="no-margins">80,800</h1>
-                                    <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-                                    <small>New orders</small>
+      <div class="container">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                      <div>
+                        <h2 class="font-bold no-margins">
+                            Stock Data
+                        </h3>
+                      </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                       <div id="stock-form-container">
+                          <input type="text"   id="stockSymbol" placeholder="stock symbol">
+                          <input type="submit" class="submit" value="submit">
                         </div>
                     </div>
+                    <div class="col-lg-offset-8">
+                        <input type="file" name="file" id="file-upload">
+                    </div>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <span class="label label-primary pull-right">Today</span>
-                            <h5>Vistits</h5>
-                        </div>
-                        <div class="ibox-content">
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h1 class="no-margins">$ 406,420</h1>
-                                    <div class="font-bold text-navy">44% <i class="fa fa-level-up"></i> <small>Rapid pace</small></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h1 class="no-margins">206,120</h1>
-                                    <div class="font-bold text-navy">22% <i class="fa fa-level-up"></i> <small>Slow pace</small></div>
-                                </div>
-                            </div>
-
-
-                        </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                         <div class="graph">
+                         </div>
+                      </div>
+                        <div class="col-lg-offset-6">
+                          <h3>Current Algorithms:</h3>
+                        <div id="uploaded-algos-container"></div>
+                      </div>
+                   </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Profit</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">$80,800</h1>
+                            <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+                        <small>Total profit</small>
                     </div>
                 </div>
             </div>
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-content">
-                                <div>
-                                        <span class="pull-right text-right">
-                                        <small>Average value of sales in the past month in: <strong>United states</strong></small>
-                                            <br/>
-                                            All sales: 162,862
-                                        </span>
-                                    <h3 class="font-bold no-margins">
-                                        Half-year revenue margin
-                                    </h3>
-                                    <small>Sales marketing.</small>
-                                </div>
-
-                                <div class="m-t-sm">
-
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div>
-                                            <canvas id="lineChart" height="114"></canvas>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <ul class="stat-list m-t-lg">
-                                                <li>
-                                                    <h2 class="no-margins">2,346</h2>
-                                                    <small>Total orders in period</small>
-                                                    <div class="progress progress-mini">
-                                                        <div class="progress-bar" style="width: 48%;"></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h2 class="no-margins ">4,422</h2>
-                                                    <small>Orders in last month</small>
-                                                    <div class="progress progress-mini">
-                                                        <div class="progress-bar" style="width: 60%;"></div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="m-t-md">
-                                    <small class="pull-right">
-                                        <i class="fa fa-clock-o"> </i>
-                                        Update on 16.07.2015
-                                    </small>
-                                    <small>
-                                        <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
-                                    </small>
-                                </div>
-
-                            </div>
-                        </div>
+            <div class="col-md-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Balance</h5>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <span class="label label-warning pull-right">Data has changed</span>
-                                <h5>User activity</h5>
-                            </div>
-                            <div class="ibox-content">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">Pages / Visit</small>
-                                        <h4>236 321.80</h4>
-                                    </div>
-
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">% New Visits</small>
-                                        <h4>46.11%</h4>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">Last week</small>
-                                        <h4>432.021</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ibox-content">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">Pages / Visit</small>
-                                        <h4>643 321.10</h4>
-                                    </div>
-
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">% New Visits</small>
-                                        <h4>92.43%</h4>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">Last week</small>
-                                        <h4>564.554</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ibox-content">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">Pages / Visit</small>
-                                        <h4>436 547.20</h4>
-                                    </div>
-
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">% New Visits</small>
-                                        <h4>150.23%</h4>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <small class="stats-label">Last week</small>
-                                        <h4>124.990</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">$223,000</h1>
+                        <small>Current Balance</small>
                     </div>
                 </div>
-          </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>New data for the report</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content ibox-heading">
+                <h3>Stock price up
+                    <div class="stat-percent text-navy">34% <i class="fa fa-level-up"></i></div>
+                </h3>
+                <small><i class="fa fa-stack-exchange"></i> New economic data from the previous quarter.</small>
+            </div>
+                <div class="ibox-content">
+                    <div>
 
+                        <div class="pull-right text-right">
+
+                            <span class="bar_dashboard" style="display: none;">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span><svg class="peity" height="16" width="100"><rect fill="#1ab394" x="0" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#d7d7d7" x="3.2580645161290325" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#1ab394" x="6.516129032258065" y="0" width="2.2580645161290325" height="16"></rect><rect fill="#d7d7d7" x="9.774193548387098" y="5.333333333333334" width="2.2580645161290325" height="10.666666666666666"></rect><rect fill="#1ab394" x="13.03225806451613" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#d7d7d7" x="16.290322580645164" y="0" width="2.2580645161290325" height="16"></rect><rect fill="#1ab394" x="19.548387096774196" y="3.555555555555557" width="2.2580645161290325" height="12.444444444444443"></rect><rect fill="#d7d7d7" x="22.806451612903228" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#1ab394" x="26.06451612903226" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#d7d7d7" x="29.322580645161292" y="12.444444444444445" width="2.2580645161290325" height="3.5555555555555554"></rect><rect fill="#1ab394" x="32.58064516129033" y="8.88888888888889" width="2.2580645161290325" height="7.111111111111111"></rect><rect fill="#d7d7d7" x="35.83870967741936" y="3.555555555555557" width="2.2580645161290325" height="12.444444444444443"></rect><rect fill="#1ab394" x="39.09677419354839" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#d7d7d7" x="42.35483870967742" y="12.444444444444445" width="2.2580645161290325" height="3.5555555555555554"></rect><rect fill="#1ab394" x="45.612903225806456" y="3.555555555555557" width="2.2580645161290325" height="12.444444444444443"></rect><rect fill="#d7d7d7" x="48.87096774193549" y="0" width="2.2580645161290325" height="16"></rect><rect fill="#1ab394" x="52.12903225806452" y="5.333333333333334" width="2.2580645161290325" height="10.666666666666666"></rect><rect fill="#d7d7d7" x="55.38709677419355" y="8.88888888888889" width="2.2580645161290325" height="7.111111111111111"></rect><rect fill="#1ab394" x="58.645161290322584" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#d7d7d7" x="61.903225806451616" y="3.555555555555557" width="2.2580645161290325" height="12.444444444444443"></rect><rect fill="#1ab394" x="65.16129032258065" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#d7d7d7" x="68.41935483870968" y="12.444444444444445" width="2.2580645161290325" height="3.5555555555555554"></rect><rect fill="#1ab394" x="71.67741935483872" y="14.222222222222221" width="2.2580645161290325" height="1.7777777777777777"></rect><rect fill="#d7d7d7" x="74.93548387096774" y="15" width="2.2580645161290325" height="1"></rect><rect fill="#1ab394" x="78.19354838709678" y="0" width="2.2580645161290325" height="16"></rect><rect fill="#d7d7d7" x="81.45161290322581" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#1ab394" x="84.70967741935485" y="5.333333333333334" width="2.2580645161290325" height="10.666666666666666"></rect><rect fill="#d7d7d7" x="87.96774193548387" y="1.7777777777777786" width="2.2580645161290325" height="14.222222222222221"></rect><rect fill="#1ab394" x="91.22580645161291" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#d7d7d7" x="94.48387096774194" y="12.444444444444445" width="2.2580645161290325" height="3.5555555555555554"></rect><rect fill="#1ab394" x="97.74193548387098" y="14.222222222222221" width="2.2580645161290325" height="1.7777777777777777"></rect></svg>
+                            <br>
+                            <small class="font-bold">$ 20 054.43</small>
+                        </div>
+                        <h4>NYS report new data!
+                            <br>
+                            <small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+          </div>
     <!-- Art's scripts -->
     <!-- jQuery -->
     <script src="creativ/default/js/jquery.js"></script>
