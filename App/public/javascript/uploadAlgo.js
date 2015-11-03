@@ -102,8 +102,10 @@ function uploadFileListener(){
       //eventually we'll have:
       //algo.set("user_id",num)
     };
+    // "<button id='algo1'>Test algo-1</button>"
     reader.readAsText(file);
-    $("#uploaded-algos-container").append("<button id='algo1'>Test algo-1</button>");
+    $("#uploaded-algos-container").append('<tr><td>Algo</td><td><a href="#"><i id="algo1"class="fa fa-check text-navy"></i></a></td><td><a href="#" class="killRow"><i class="fa fa-times"></i></a></td></tr>'
+      );
     algoTesterListener();
   };//end .onchange function
 }
@@ -189,9 +191,24 @@ function generateSignals(symbol){
 
   return series //contains regular stock data in addition to the newly generated signals
  }//end generateSignals
+
+
+
+var deleteRow = function() {
+    $(".killRow").on("click",function(event) {
+      event.preventDefault();
+      console.log("hello");
+      var td = $(this).parent();
+      var tr = td.parent();
+      tr.remove();
+    })
+};
 $(document).on('ready',function(){
+  deleteRow();
   uploadFileListener();//Note: when this event is fired it has the effect of producing addtional listeners
 });
+
+
 
 //})//end anon global function
 
