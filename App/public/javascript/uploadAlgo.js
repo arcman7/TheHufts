@@ -61,7 +61,6 @@ function blockEval(string){
 
 function uploadFileListener(){
   document.getElementById('file-upload').onchange = function(){
-
     var file = this.files[0];
 
     var reader = new FileReader();
