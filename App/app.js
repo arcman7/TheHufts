@@ -34,7 +34,7 @@ var public_path = __dirname + "/public";
 var app = express();
 app.use(session({
   cookieName: 'session',
-  secret: "aaa",//gateKeeper.randomString(77,"aA#!"),
+  secret: gateKeeper.randomString(77,"aA#!"),
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000,
 }));
@@ -54,8 +54,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Storing user-sessions
 //console.log(gateKeeper.randomString(77,"aA#!"));
 app.use(function(req, res, next) {
-  console.log("hi from global middleware");
-  console.log(req.session.user)
+  console.log("hi from app.use global middleware");
+
+  //console.log(req.session.user)
   if (req.session && req.session.user) {
     //Parse initialization
     var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
@@ -63,6 +64,8 @@ app.use(function(req, res, next) {
     Parse.initialize(parseSecret1, parseSecret2);
     //Parse initalization END
     login.queryParseUser({email: req.session.user.email},req,res,next);
+    console.log("req.session: ", JSON.stringify(req.session));
+    console.log("req.cookies: ", JSON.stringify(req.cookies));
   } else {
     next();
   }

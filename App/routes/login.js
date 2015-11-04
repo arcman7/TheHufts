@@ -57,8 +57,6 @@ function queryParseUser(options,req,res,next) {
 
 
 router.post('/login', function (req, res) {
-  //sess = req.session;
-  //console.log(req.body);
   var key          = gateKeeper.gateKey;
   var confirmation = "TheHufts";
   var data         = aesDcrypt(req.body.data, key);
@@ -94,9 +92,9 @@ router.post('/login', function (req, res) {
               user.username    = object.get('username');
               user.email       = object.get('email');
               req.session.user = user;
-               console.log("inside login post route")
-               console.log(req.session);
-               console.log(req.cookies)
+               console.log("inside login post route");
+               console.log("req.session: ", JSON.stringify(req.session));
+               console.log("req.cookies: ", JSON.stringify(req.cookies));
             }
             //end session if-statement
             /////////////////////////////////////////////////////
@@ -137,7 +135,16 @@ router.post('/login', function (req, res) {
           console.log(" user successfully saved")
           status                = true;
           response[requestType] = status;
-          response              = JSON.stringify(response)
+          response              = JSON.stringify(response);
+
+          user.email = object.get('email');
+          user.username = object.get('username');
+          user.accessToken = object.get('accessToken');
+
+          req.user = user;
+          req.session.user = user;  //refresh the session value
+          res.locals.user = user;
+        // finishing processing the middleware and run the route
           res.send(response);
         },
         error: function(user, error) {
