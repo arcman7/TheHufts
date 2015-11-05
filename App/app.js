@@ -11,21 +11,17 @@ var Parse      = require('parse/node');
 var monk = require('monk');
 var fs = require('fs');
 var http = require('http');
-var Options = require('obfuscator').Options;
-var obfuscator = require('obfuscator').obfuscator;
+//routes
 var index = require('./routes/index');
 var users = require('./routes/users');
 var gateKeeper = require('./routes/gateKeeper');
 var obuscateJS = require('./routes/obuscateJS');
 var login = require('./routes/login');
+var checkLogin = require('./routes/checkLogin');
 //mozilla session manager
 var session = require('client-sessions');//mozilla
-var connect = require('connect')
-//secondary session management options
-//package.json: "express-session": "^1.7.6"
-// var session = require('express-session');
-// var MongoStore = require('connect-mongo')(session);
 
+//error logger for node
 var winston = require('winston');
 
 //var query = require('./public/javascript/query');
@@ -52,7 +48,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Storing user-sessions
-//console.log(gateKeeper.randomString(77,"aA#!"));
 app.use(function(req, res, next) {
   console.log("hi from app.use global middleware");
 
@@ -92,6 +87,8 @@ app.use('/loginFront.js', obuscateJS('/loginFront.js'));
 app.use('/gateKeeper',gateKeeper);
 app.use('/login',login);
 app.use('/users', users);
+app.use('/checkLogin', checkLogin);
+//app.use('/register', login); //uses the same router and route file
 //if no matching route is found this is the default server response
 app.use(function(req, res, next) {
     console.log("hi from global middleware");

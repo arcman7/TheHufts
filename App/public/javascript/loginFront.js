@@ -44,23 +44,27 @@ function formSubmitListener(){
     event.preventDefault();
     console.log("form submitted");
     //var username = $('.login-form input[name="form-email"]').val();
-    var email = $('.login-form input[name="form-email"]').val();
+    var email    = $('.login-form input[name="form-email"]').val();
     var password = $('.login-form input[name="form-password"]').val();
+        password =  CryptoJS.SHA3(password).toString();
+    console.log(password);
+
     //var data = { username: username, password: password, confirmation: confirmation, login:true};
     var data = { email: email, password: password, confirmation: confirmation, login:true};
 
     ajaxLoginRouter(data,decrypt(gateKeeperURL,confirmation));
   });
 
-   $(".register-form").on("submit",function(event){
+   $("#register-button").on("click",function(event){
     event.preventDefault();
     console.log("form submitted");
-    var username = $('.register-form input[name="username"]').val();
-    var password = $('.register-form input[name="password"]').val();
-    var email = $('.register-form input[name="email"]').val();
+    var username = $('.login-form input[name="form-name"]').val();
+    var password = $('.login-form input[name="password"]').val();
+        password =  CryptoJS.SHA3(password).toString();
+
+    var email    = $('.login-form input[name="form-email"]').val();
 
     var data = { username: username, password: password, email: email, confirmation: confirmation, login:false};
-
     ajaxLoginRouter(data,decrypt(gateKeeperURL,confirmation));
   });
 }
@@ -82,8 +86,11 @@ function ajaxLoginRouter(data,url){
         data: {data: data}
     })
     .done(function(response){
-      //response = JSON.parse(response);
-      console.log(response);
+      response = JSON.parse(response);
+      if(response["redirect"]){
+        window.location.href = response["redirect"];
+      }
+
       if(response == "{error-code:k}"){
         var retryURL = this.url;
         var retryData = this.data;

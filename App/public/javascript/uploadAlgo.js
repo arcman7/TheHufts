@@ -59,9 +59,26 @@ function blockEval(string){
   return [stringCopy,key];
 }
 
+function checkLogin(){
+   var request = $.ajax({
+      url: "http://localhost:3000/checkLogin",
+      type: "get",
+      success: function(data, textStatus) {
+        if (data.redirect) {
+            // data.redirect contains the string URL to redirect to
+            window.location.href = data.redirect;
+        }
+        else{
+          //continue with uploading the algorithm
+        }
+      }
+    });
+}
+
+
 function uploadFileListener(){
   document.getElementById('file-upload').onchange = function(){
-
+    checkLogin();
     var file = this.files[0];
 
     var reader = new FileReader();
@@ -74,8 +91,9 @@ function uploadFileListener(){
 
       var algoScript = this.result;
       //console.log(algoScript);
-      var results = testAlgoOutput(algoScript);
+      var results = testAlgoOutput(algoScript); //returns [true], if the algo passed
       if(results[0]){
+
         var algoPair = blockEval(algoScript);
         var algoFile = algoPair[0].join('');
         var algoKey = JSON.stringify(algoPair[1]);
@@ -84,18 +102,14 @@ function uploadFileListener(){
         algo.set("user_id",'1');
         algo.save(null, {
               success: function(algo) {
-          //     // Execute any logic that should take place after the object is saved.
-          //     //alert('New object created with objectId: ' + algo.id);
-          //     //console.log('New object created with objectId: ' + algo.id);
-                 alert("You have successfully saved an encripted version of your algorithm in your account.");
+                alert("You have successfully saved an encripted version of your algorithm in your account.");
               },
               error: function(algo, error) {
-          //     // Execute any logic that should take place if the save fails.
-          //     // error is a Parse.Error with an error code and message.
                alert('Failed to create new object, with error code: ' + error.message);
              }
            });//end save function
-      }else{
+      }//end if results[0]
+      else{
         alert(results[1]);
       }
 
