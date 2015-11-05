@@ -86,7 +86,7 @@ function uploadFileListener(){
           //     // Execute any logic that should take place after the object is saved.
           //     //alert('New object created with objectId: ' + algo.id);
           //     //console.log('New object created with objectId: ' + algo.id);
-                 alert("You have successfully saved an encripted version of your algorithm in your account.");
+                 swal("Uploaded!", "You have successfully saved an encripted version of your algorithm in your account", "success");
               },
               error: function(algo, error) {
           //     // Execute any logic that should take place if the save fails.
