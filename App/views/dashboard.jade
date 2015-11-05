@@ -68,7 +68,7 @@ html.
                       <div>
                         <h2 class="font-bold no-margins">
                             Stock Data
-                        </h3>
+                        </h2>
                       </div>
                 <div class="row">
                     <div class="col-lg-4">
@@ -84,7 +84,9 @@ html.
                         <!-- <form id="file-upload" class="dropzone dz-clickable" action="#">
                             <button type="submit" class="btn btn-primary pull-right">Submit this form!</button>
                             <div class="dz-default dz-message"><span><h4>Drag files or click here to upload</h4></span></div></form>-->
-                        <input type="file" name="file" id="file-upload">
+                        <form >
+                          <input type="file" name="file" id="file-upload" class="filestyle" data-input="false" data-badge="false" data-buttonName="btn-primary" data-buttonText="Upload Algorithm" >
+                        </form>
                     </div>
                 </div>
                   <div class="row">
@@ -196,7 +198,7 @@ html.
                 </div>
             </div>
         </div>
-          </div>
+    </div>
     <!-- Art's scripts -->
     <!-- jQuery -->
     <script src="creativ/default/js/jquery.js"></script>
@@ -208,7 +210,7 @@ html.
     <script src="admin/js-plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- Custom and plugin javascript -->
     <script src="admin/inspinia.js"></script>
-    <script src="admin/js-plugins/dropzone/dropzone.js"></script>
+    <script src="admin/js-plugins/filestyle/src/bootstrap-filestyle.min.js"></script>
 
 
     <!--[if lt IE 10]>
