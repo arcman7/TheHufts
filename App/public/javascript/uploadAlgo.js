@@ -104,14 +104,17 @@ function uploadFileListener(){
     // "<button id='algo1'>Test algo-1</button>"
     reader.readAsText(file);
     //var html_string = '<tr class="3"><td>Algo</td><td></td><td><a href="#"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow" id="'+3+'"'+  '><i class="fa fa-times"></i></a></td></tr>'
-    $("#uploaded-algos-container").append('<tr><td>Algo</td><td></td><td><a href="#"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+    var filename = file.name.split('.')[0]
+    $("#uploaded-algos-container").append('<tr><td> '+ filename +' </td><td></td><td><a id="'+ filename +'"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
     //$("#uploaded-algos-container").append(html_string);
-    algoTesterListener();
+    algoTesterListener('#'+filename);
   };//end .onchange function
 }
 
 function algoTesterListener(algoId){
-  $("#algo1").on('click',function(){
+  $("#uploaded-algos-container").on('click',algoId,function(e){
+    e.preventDefault();
+    console.log('worked');
       var series = generateSignals(globalSymbol);
       graphHome([],$(".graph"),"Day",series,globalSymbol);
       //clearing mysterious 'A' text value from markers
@@ -197,11 +200,12 @@ function generateSignals(symbol){
 var deleteRow = function() {
   $("#uploaded-algos-container").on("click",".killRow",function(event) {
       event.preventDefault();
-      console.log("hello");
       var td = $(this).parent();
       var tr = td.parent();
       tr.remove();
     });
+
+
 };
 $(document).on('ready',function(){
   deleteRow();
