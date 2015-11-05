@@ -105,7 +105,7 @@ function uploadFileListener(){
     reader.readAsText(file);
     //var html_string = '<tr class="3"><td>Algo</td><td></td><td><a href="#"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow" id="'+3+'"'+  '><i class="fa fa-times"></i></a></td></tr>'
     var filename = file.name.split('.')[0]
-    $("#uploaded-algos-container").append('<tr><td> '+ filename +' </td><td></td><td><a id="'+ filename +'"><i class="fa fa-line-chart text-navy"></i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+    $("#uploaded-algos-container").append('<tr><td> '+ filename +' </td><td></td><td><a id="'+ filename +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
     //$("#uploaded-algos-container").append(html_string);
     algoTesterListener('#'+filename);
   };//end .onchange function
@@ -115,11 +115,16 @@ function algoTesterListener(algoId){
   $("#uploaded-algos-container").on('click',algoId,function(e){
     e.preventDefault();
     console.log('worked');
+    if(globalSymbol){
       var series = generateSignals(globalSymbol);
       graphHome([],$(".graph"),"Day",series,globalSymbol);
       //clearing mysterious 'A' text value from markers
       // $("#highcharts-6 > svg > g.highcharts-series-group > g > g > text").text('');
       //edit: The 'A' still fucking comes back anytime you adjust the graph!?
+    }
+    else{
+      swal("Wait!", "Shouldn't you search a stock first so your algorithm will run against something?", "error");
+    }
   });
 }
 
