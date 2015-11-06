@@ -1,0 +1,254 @@
+doctype html
+html.
+  <head>
+    <meta charset="utf-8">
+
+    <title>TheHufts</title>
+    <meta name="description" content="test page">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Art's-->
+   <!-- Bootstrap Core CSS -->
+    <link href="creativ/default/css/bootstrap.min.css" rel="stylesheet">
+    <link href="creativ/default/css/font-awesome.css" rel="stylesheet">
+    <link href="stylesheets/animate.css" rel="stylesheet">
+    <link href="stylesheets/dashboard.css" rel="stylesheet">
+
+    <!-- Plugins CSS -->
+    <link href="admin/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div id="loader">
+      <div class="loader-container">
+        <div id="preloader_1">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+      </div>
+    </div>
+
+    <header id="header-one" class="dark-header header">
+        <div class="container-fluid">
+            <div class="menu-wrapper">
+                <nav id="navigation" class="navbar yamm" role="navigation">
+                    <div class="navbar-inner">
+                        <div class="navbar-header">
+                            <a id="brand" class="clearfix navbar-brand" href="/landingPage"><img src="" alt="TheHufts" data-selector="img"></a>
+                        </div><!-- end navbar-header -->
+                        <div id="navbar-collapse" class="navbar-right navbar-collapse collapse clearfix">
+                            <ul class="nav navbar-nav">
+                                <li class="wps-half"><a href="/landingPage">Home</a>
+                                    </li><!-- end mega menu -->
+                                    <li class="wps-full"><a href="/logIn">Log In</a>
+                                    <li class="wps-full"><a href="/register">Sign Up</a>
+                            </ul><!-- end navbar-right -->
+                            <div class="pull-right clearfix">
+                                <div class="right-menu">
+                                    <span></span>
+                                </div><!-- end custom-menu -->
+                            </div><!-- end widget -->
+                        </div><!-- end navbar-callopse -->
+                    </div><!-- end navbar-inner -->
+                </nav><!-- end navigation -->
+            </div><!-- menu wrapper -->
+        </div>
+    </header><!-- end header -->
+    <div class="wrapper wrapper-content" style="background: #f5f5f5; text-align: center">
+      <h2> Welcome, Huft <h2>
+      <h3> Feel free to begin looking up the stocks you're interested in.</h3>
+      <div class="container">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                      <div>
+                        <h2 class="font-bold no-margins">
+                            Stock Data
+                        </h2>
+                      </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                       <div id="stock-form-container">
+                          <label> Enter Stock Symbol </label>
+                       <form>
+                          <input type="text" id="stockSymbol" placeholder="stock symbol">
+                          <input type="submit" class="submit" value="Submit">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="col-lg-offset-8">
+                        <!-- <form id="file-upload" class="dropzone dz-clickable" action="#">
+                            <button type="submit" class="btn btn-primary pull-right">Submit this form!</button>
+                            <div class="dz-default dz-message"><span><h4>Drag files or click here to upload</h4></span></div></form>-->
+                        <form >
+                          <input type="file" name="file" id="file-upload" class="filestyle"  data-badge="false" data-input="false" data-buttonName="btn-primary" data-buttonText="Upload Algorithm" >
+                        </form>
+                    </div>
+                </div>
+                  <div class="row">
+                      <div class="col-lg-7">
+                         <div class="graph">
+                         </div>
+                      </div>
+                        <div class="col-lg-5">
+                          <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Current Algorithms: </h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tbody id="uploaded-algos-container">
+                                        <tr>
+                                            <td>Demo</td>
+                                            <td><input type="integer" value="dollar amount"></td>
+                                            <td><a href="#"><i class="fa fa-line-chart text-navy"></i> Run</a></td>
+                                            <td><a class="killRow" id="1"><i class="fa fa-times"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Demo</td>
+                                            <td></td>
+                                            <td><a href="#"><i class="fa fa-line-chart text-navy"></i> Run</a></td>
+                                            <td><a class="killRow" id="2"><i class="fa fa-times"></i></a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Return</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">$80,800</h1>
+                            <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+                        <small>Total profit</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Return</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">$-30,800</h1>
+                            <div class="stat-percent font-bold text-danger">12% <i class="fa fa-level-down"></i></div>
+                        <small>Total profit</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Balance</h5>
+                    </div>
+                      <div class="ibox-content">
+                          <h1 class="no-margins">$223,000</h1>
+                          <small>Current Balance</small>
+                      </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>New data for the report</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content ibox-heading">
+                  <h3>Stock price up
+                      <div class="stat-percent text-navy">34% <i class="fa fa-level-up"></i></div>
+                  </h3>
+                  <small><i class="fa fa-stack-exchange"></i> New economic data from the previous quarter.</small>
+                </div>
+                <div class="ibox-content">
+                    <div>
+
+                        <div class="pull-right text-right">
+                            <span class="bar_dashboard" style="display: none;">5,3,9,6,5,9,7,3,5,2,4,7,3,2,7,9,6,4,5,7,3,2,1,0,9,5,6,8,3,2,1</span><svg class="peity" height="16" width="100"><rect fill="#1ab394" x="0" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#d7d7d7" x="3.2580645161290325" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#1ab394" x="6.516129032258065" y="0" width="2.2580645161290325" height="16"></rect><rect fill="#d7d7d7" x="9.774193548387098" y="5.333333333333334" width="2.2580645161290325" height="10.666666666666666"></rect><rect fill="#1ab394" x="13.03225806451613" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#d7d7d7" x="16.290322580645164" y="0" width="2.2580645161290325" height="16"></rect><rect fill="#1ab394" x="19.548387096774196" y="3.555555555555557" width="2.2580645161290325" height="12.444444444444443"></rect><rect fill="#d7d7d7" x="22.806451612903228" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#1ab394" x="26.06451612903226" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#d7d7d7" x="29.322580645161292" y="12.444444444444445" width="2.2580645161290325" height="3.5555555555555554"></rect><rect fill="#1ab394" x="32.58064516129033" y="8.88888888888889" width="2.2580645161290325" height="7.111111111111111"></rect><rect fill="#d7d7d7" x="35.83870967741936" y="3.555555555555557" width="2.2580645161290325" height="12.444444444444443"></rect><rect fill="#1ab394" x="39.09677419354839" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#d7d7d7" x="42.35483870967742" y="12.444444444444445" width="2.2580645161290325" height="3.5555555555555554"></rect><rect fill="#1ab394" x="45.612903225806456" y="3.555555555555557" width="2.2580645161290325" height="12.444444444444443"></rect><rect fill="#d7d7d7" x="48.87096774193549" y="0" width="2.2580645161290325" height="16"></rect><rect fill="#1ab394" x="52.12903225806452" y="5.333333333333334" width="2.2580645161290325" height="10.666666666666666"></rect><rect fill="#d7d7d7" x="55.38709677419355" y="8.88888888888889" width="2.2580645161290325" height="7.111111111111111"></rect><rect fill="#1ab394" x="58.645161290322584" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#d7d7d7" x="61.903225806451616" y="3.555555555555557" width="2.2580645161290325" height="12.444444444444443"></rect><rect fill="#1ab394" x="65.16129032258065" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#d7d7d7" x="68.41935483870968" y="12.444444444444445" width="2.2580645161290325" height="3.5555555555555554"></rect><rect fill="#1ab394" x="71.67741935483872" y="14.222222222222221" width="2.2580645161290325" height="1.7777777777777777"></rect><rect fill="#d7d7d7" x="74.93548387096774" y="15" width="2.2580645161290325" height="1"></rect><rect fill="#1ab394" x="78.19354838709678" y="0" width="2.2580645161290325" height="16"></rect><rect fill="#d7d7d7" x="81.45161290322581" y="7.111111111111111" width="2.2580645161290325" height="8.88888888888889"></rect><rect fill="#1ab394" x="84.70967741935485" y="5.333333333333334" width="2.2580645161290325" height="10.666666666666666"></rect><rect fill="#d7d7d7" x="87.96774193548387" y="1.7777777777777786" width="2.2580645161290325" height="14.222222222222221"></rect><rect fill="#1ab394" x="91.22580645161291" y="10.666666666666668" width="2.2580645161290325" height="5.333333333333333"></rect><rect fill="#d7d7d7" x="94.48387096774194" y="12.444444444444445" width="2.2580645161290325" height="3.5555555555555554"></rect><rect fill="#1ab394" x="97.74193548387098" y="14.222222222222221" width="2.2580645161290325" height="1.7777777777777777"></rect></svg>
+                            <br>
+                            <small class="font-bold">$ 20 054.43</small>
+                        </div>
+                        <h4>NYS report new data!
+                            <br>
+                            <small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>
+                        </h4>
+                      </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Art's scripts -->
+    <!-- jQuery -->
+    <script src="creativ/default/js/jquery.js"></script>
+    <script src="creativ/default/js/bootstrap.min.js"></script>
+    <script src="creativ/default/js/retina.js"></script>
+    <script src="creativ/default/js/home-scripts.js"></script>
+    <!-- Mainly scripts -->
+    <script src="admin/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="admin/inspinia.js"></script>
+    <script src="admin/plugins/filestyle/src/bootstrap-filestyle.min.js"></script>
+    <script src="admin/plugins/sweetalert/sweetalert.min.js" type="text/javascript" ></script>
+
+
+
+
+    <!--[if lt IE 10]>
+          <script src="assets/js/placeholder.js"></script>
+      <![endif]-->
+
+
+    <!-- Art's end -->
+    <!-- Graph's scripts -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/stock/highcharts-more.js"></script>
+    <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="/javascript/query.js"></script>
+    <script type="text/javascript" src="/javascript/keys/parseSecrets.js"></script>
+    <script type="text/javascript" src="/javascript/uploadAlgo.js"></script>
+    <!-- Graph's end -->
+
+  </body>
+
