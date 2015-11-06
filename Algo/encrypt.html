@@ -8,6 +8,8 @@
 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+   <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
+
 </head>
 
 <body>
@@ -16,5 +18,11 @@
 
   var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
  console.log(encrypted,decrypted.toString(CryptoJS.enc.Utf8));
+
+ var hashingTest = CryptoJS.SHA3("huffer").toString(CryptoJS.enc.Base64);
+ console.log(typeof(hashingTest));
+ console.log(hashingTest);
+ //console.log(hashingTest == "15705da0fea7d51cce61d6d2923aa7c9988eaa0d552932b3e3aa360b76ff0846c866c72035b60c4b089f8653d9e121f72d5f36ce255c8829f985231307a252e1");
+
 </script>
 </body>

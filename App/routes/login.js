@@ -4,6 +4,7 @@ var CryptoJS   = require("crypto-js");
 var gateKeeper = require('./gateKeeper');
 var Parse      = require('parse/node');
 var AES        = require("crypto-js/aes");
+var SHA256     = require("crypto-js/sha256");
 var session = require('client-sessions');
 
 
@@ -29,19 +30,22 @@ function aesEncrypt(string,key){
 //Encryption-Decryption END
 
 //this function is made for use in context of middle where with access to the next parameter in app.use(function(req, res, next) { }
-function queryParseUser(options) {
-
+function queryParseUser(options,req,res,next) {
+  console.log("hi from queryParseUser")
+   var User           = Parse.Object.extend("UserC");
+   var query          = new Parse.Query(User);
    query.equalTo( "email", options.email );
     query.first({
       success: function(object) {
         console.log("Successfully retrieved " + object);
+        console.log(object.get('pwd'));
         var user ={};
         user.email = object.get('email');
         user.username = object.get('username');
         user.accessToken = object.get('accessToken');
-        // req.user = user;
-        // req.session.user = user;  //refresh the session value
-        // res.locals.user = user;
+        req.user = user;
+        req.session.user = user;  //refresh the session value
+        res.locals.user = user;
         // finishing processing the middleware and run the route
         next();
       },
@@ -55,12 +59,12 @@ function queryParseUser(options) {
 
 
 router.post('/login', function (req, res) {
-  //sess = req.session;
-  //console.log(req.body);
   var key          = gateKeeper.gateKey;
   var confirmation = "TheHufts";
   var data         = aesDcrypt(req.body.data, key);
   data             = JSON.parse(data);
+  var response     = {};
+
   //switching to custom user class, since parse has it's own user class already defined - problems wich are covered later.
   //use custom fclass name: UserC
 
@@ -71,6 +75,7 @@ router.post('/login', function (req, res) {
     var requestType;
     var status;
     if(data.login){ //code to log a user in
+      requestType = "login";
 
       var User           = Parse.Object.extend("UserC");
       var query          = new Parse.Query(User);
@@ -81,26 +86,30 @@ router.post('/login', function (req, res) {
             console.log("Successfully retrieved " + object);
 
             parsePwd        = object.get('pwd');
+            console.log("parsePwd: "+parsePwd);
+            console.log("data Pwd: "+data.password);
             var accessToken = object.get('accessToken');
-            parsePwd        = aesDcrypt(parsePwd,accessToken);
+            //deprecated from old security scheme
+            //parsePwd        = aesDcrypt(parsePwd,accessToken);
             status          = (data.password == parsePwd );
             /////////////////////////////////////////////////////
             //setting the session to the logged in user
             if(status){
-              //console.log(req);
               var user         = {};
               user.accessToken = accessToken;
               user.username    = object.get('username');
               user.email       = object.get('email');
-              //req.session.user = user;
+              req.session.user = user;
+               console.log("inside login post route");
+               console.log("req.session: ", JSON.stringify(req.session));
+               console.log("req.cookies: ", JSON.stringify(req.cookies));
+              response["redirect"]  = "http://localhost:3000/dashboard";
             }
             //end session if-statement
             /////////////////////////////////////////////////////
-            var response    = {};
-
             response[requestType]   = status;
             response["accessToken"] = aesEncrypt(object.get('accessToken'),key);
-            response                = JSON.stringify(response)
+            response                = JSON.stringify(response);
             res.send(response);
           },
           error: function(error) {
@@ -113,27 +122,38 @@ router.post('/login', function (req, res) {
           }
         });
 
-      requestType = "login";
     }//end if - login
     else{ //code to register a user
       requestType  = "register";
       var User     = Parse.Object.extend("UserC");
       var user     = new User();
-      var password = aesEncrypt(data.password,"TheHufts");
-      console.log("password: " + password);
+      console.log("data :"+JSON.stringify(data));
+      var password = data.password; //aesEncrypt(data.password,"TheHufts");
+      //console.log("password: " + password);
       user.set("username", data.username);
       user.set("email", data.email);
       //user.set("password",password);  parse wont let us access passwords or use the User class to login
       //using pwd as alias for password
       user.set("accessToken","TheHufts");
-      user.set("pwd",aesEncrypt(data.password,"TheHufts"));
-      var response = {};
+      //deprecated password storage scheme:
+      //user.set("pwd",aesEncrypt(data.password,"TheHufts"));
+      user.set("pwd",password);
       user.save(null, {
         success: function(user) {
           console.log(" user successfully saved")
           status                = true;
           response[requestType] = status;
-          response              = JSON.stringify(response)
+          respones["redirect"]  = "http://localhost:3000/dashboard";
+          response              = JSON.stringify(response);
+
+          user.email       = user.get('email');
+          user.username    = user.get('username');
+          user.accessToken = user.get('accessToken');
+
+          req.user         = user;
+          req.session.user = user;  //refresh the session value
+          res.locals.user  = user;
+        // finishing processing the middleware and run the route
           res.send(response);
         },
         error: function(user, error) {
