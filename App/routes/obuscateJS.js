@@ -10,7 +10,7 @@ function wrapper(assetName){
     //  if (module.exports.storedData == "DrunkenZebra"){
     //   console.log("shit works");
     // }
-  var public_path = "/Users/Jedi_scholar/Desktop/phase-4/hiring_mixers/TheHufts/App" + '/public/javascript';//+assetName;
+  var public_path = "/Users/Art/Desktop/TheHufts/App" + '/public/javascript';//+assetName;
   //console.log(public_path+assetName);
   return router.get('/',function(req,res,next){
         // console.log(req.path);
