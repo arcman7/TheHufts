@@ -47,7 +47,6 @@ function formSubmitListener(){
     var email    = $('.login-form input[name="form-email"]').val();
     var password = $('.login-form input[name="form-password"]').val();
         password =  CryptoJS.SHA3(password).toString();
-    console.log(password);
 
     //var data = { username: username, password: password, confirmation: confirmation, login:true};
     var data = { email: email, password: password, confirmation: confirmation, login:true};

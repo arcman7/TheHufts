@@ -12,18 +12,17 @@ var monk = require('monk');
 var fs = require('fs');
 var http = require('http');
 //routes
-var index = require('./routes/index');
-var users = require('./routes/users');
+var index      = require('./routes/index');
+var users      = require('./routes/users');
 var gateKeeper = require('./routes/gateKeeper');
 var obuscateJS = require('./routes/obuscateJS');
-var login = require('./routes/login');
+var login      = require('./routes/login');
 var checkLogin = require('./routes/checkLogin');
+var saveAlgo   = require('./routes/saveAlgo');
 //mozilla session manager
-var session = require('client-sessions');//mozilla
-
+var session    = require('client-sessions');//mozilla
 //error logger for node
-var winston = require('winston');
-
+var winston    = require('winston');
 //var query = require('./public/javascript/query');
 var public_path = __dirname + "/public";
 
@@ -88,6 +87,7 @@ app.use('/gateKeeper',gateKeeper);
 app.use('/login',login);
 app.use('/users', users);
 app.use('/checkLogin', checkLogin);
+app.use('/saveAlgo',saveAlgo);
 //app.use('/register', login); //uses the same router and route file
 //if no matching route is found this is the default server response
 app.use(function(req, res, next) {

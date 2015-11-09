@@ -1,11 +1,21 @@
 //module.exports = (function(){
+function encrypt(string,key){
+  var encrypted = CryptoJS.AES.encrypt(string,key).toString();
+  return encrypted;
+}
 
-Parse.initialize(parseSecret1, parseSecret2);
+function decrypt(string,key){
+  var decrypted = CryptoJS.AES.decrypt(string, key);
+  return decrypted.toString(CryptoJS.enc.Utf8);
+}
 
-var Algo = Parse.Object.extend("Algo");
-var algo = new Algo();
+//Parse.initialize(parseSecret1, parseSecret2);
+
+//var Algo = Parse.Object.extend("Algo");
+//var algo = new Algo();
 var yousuck = " Please refresh the page and try again.";
-var algoFunction1;
+var userAlgoFunctions = {};
+
 function testAlgoOutput(algoString){
   algoFunction1 = new Function('return ' + algoString);
   algoFunction1 = algoFunction1();
@@ -78,37 +88,53 @@ function checkLogin(){
 
 function uploadFileListener(){
   document.getElementById('file-upload').onchange = function(){
-    checkLogin();
+    checkLogin(); //checks if the users session is active
     var file = this.files[0];
 
     var reader = new FileReader();
     reader.onload = function(progressEvent){
       // Entire file
       //console.log(this.result);
-
       // By lines
      // var lines = this.result.split('\n');
-
       var algoScript = this.result;
-      //console.log(algoScript);
-      var results = testAlgoOutput(algoScript); //returns [true], if the algo passed
+      var results    = testAlgoOutput(algoScript); //returns [true], if the algo passed
       if(results[0]){
+        //switching to backend saving;////////////////////////////////////
+        var filename = file.name.split('.')[0];
+        var password = prompt("Password confirmation: ", "password");
+        console.log(password);
+        var encryptedAlgoString = encrypt(algoScript,password);
+        //userAlgoFunctions[filename] = encryptedAlgoString;
+        var data = {algo: encryptedAlgoString, name: filename};
+        var request = $.ajax({
+          url: "http://localhost:3000/saveAlgo",
+          type:"post",
+          data: data
+        });
+        request.done(function(response){
+          console.log(response);
+        });
+        //////////////////////////////////////////////////////////////////
+        // var algoPair = blockEval(algoScript);
+        // var algoFile = algoPair[0].join('');
+        // var algoKey = JSON.stringify(algoPair[1]);
 
-        var algoPair = blockEval(algoScript);
-        var algoFile = algoPair[0].join('');
-        var algoKey = JSON.stringify(algoPair[1]);
-        algo.set("algoFile",algoFile);
-        algo.set("algoKey",algoKey);
-        algo.set("user_id",'1');
-        algo.save(null, {
-              success: function(algo) {
-                alert("You have successfully saved an encripted version of your algorithm in your account.");
-              },
-              error: function(algo, error) {
-               alert('Failed to create new object, with error code: ' + error.message);
-             }
-           });//end save function
-      }//end if results[0]
+        // algo.set("algoFile",algoFile);
+        // algo.set("algoKey",algoKey);
+        // algo.set("user_id",'1');
+
+        // algo.save(null, {
+        //       success: function(algo) {
+        //         alert("You have successfully saved an encripted version of your algorithm in your account.");
+        //       },
+        //       error: function(algo, error) {
+        //        alert('Failed to create new object, with error code: ' + error.message);
+        //      }
+        //    });//end save function
+
+
+        }//end if results[0]
       else{
         alert(results[1]);
       }
@@ -117,6 +143,7 @@ function uploadFileListener(){
       //algo.set("user_id",num)
     };
     reader.readAsText(file);
+
     $("#uploaded-algos-container").append("<button id='algo1'>Test algo-1</button>");
     algoTesterListener();
   };//end .onchange function
