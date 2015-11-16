@@ -6,7 +6,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'TheHufts' });
 });
 
-
 router.get('/landingPage', function(req, res, next) {
   res.render('landingPage', { title: 'TheHufts' });
 });
@@ -17,6 +16,10 @@ router.get('/logIn', function(req, res, next) {
 
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'TheHufts' });
+});
+
+router.get('/dashboard', function(req, res, next) {
+  res.render('dashboard', { title: 'TheHufts' });
 });
 
 module.exports = router;

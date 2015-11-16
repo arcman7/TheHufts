@@ -17,10 +17,10 @@ html.
       <link href="creativ/default/css/animate.min.css" rel="stylesheet">
       <link href="creativ/default/css/owl-carousel.css" rel="stylesheet">
       <link href="creativ/default/css/font-awesome.css" rel="stylesheet">
-      <link href="creativ/medical/css/et-icons.css" rel="stylesheet">
+      <link href="creativ/default/css/et-icons.css" rel="stylesheet">
       <link href="creativ/default/css/bootstrap.min.css" rel="stylesheet">
       <link href="creativ/default/css/flexslider.css" rel="stylesheet">
-      <link href="creativ/default/style.css" rel="stylesheet">
+      <link href="stylesheets/default-style.css" rel="stylesheet">
       <link href="stylesheets/landing-page.css" rel="stylesheet">
 
       <!-- Custom Fonts -->
@@ -76,20 +76,20 @@ html.
             </div>
         </header><!-- end header -->
 
-        <section class="meta-wrapper section-parallax" style="background-image: url('http://www.todayonline.com/sites/default/files/styles/photo_gallery_image_lightbox/public/16780028.JPG?itok=uHIy2m0P');" data-stellar-background-ratio="0.4" data-stellar-vertical-offset="0">
+        <section class="meta-wrapper section-parallax" style="background-image: url('http://www.todayonline.com/sites/default/files/styles/photo_gallery_image_lightbox/public/16780028.JPG?itok=uHIy2m0P');" data-stellar-background-ratio="0.6" data-stellar-vertical-offset="0">
             <div id="page_header">
                 <div class="container text-left">
                 <br>
-                    <h2 style="color:black">Beat the Market</h2>
+                    <h2 style="color:black; font-family: Georgia, 'Times New Roman', Times, serif"> Beat the Market</h2>
                     <p style="color:black">Code your own algorithm today!</p>
-                    <a id="readMore" href="#" title="" class="btn btn-primary btn-lg border-radius">Read More</a>
-                    <a href="/" title="" class="btn btn-primary btn-lg border-radius btn-transparent" style="color:">Get in now</a>
+                    <a id="readMore" href="#" title="" class="btn btn-primary border-radius">Read More</a>
+                    <a href="/dashboard" title="" class="btn btn-primary border-radius btn-transparent">Get in now</a>
                 </div>
             </div><!-- end page_header -->
         </section><!-- end section -->
 
 
-        <section id="about" class="section-gray clearfix">
+        <section id="about" class="section-gray clearfix" style:"background:#D0D3D0">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -103,11 +103,18 @@ html.
 
                             <p>Maecenas eros mi, lacinia eu ultricies vel, elementum et justo. Ut at tortor a odio vestibulum suscipit non sit amet dolor. Morbi molestie magna nec metus facilisis, at iaculis mi adipiscing. Praesent ac diam velit. Curabitur lacinia tristique velit ut laoreet. Nam pretium id risus vitae fermentum. Aenean eu euismod justo. Aliquam sodales tortor elit, non tristique sit ametac...</p><br>
                         </div><!-- end col -->
+
                     </div><!-- end col -->
+                      <div class="col-lg-6">
+                        <img src="imgs/thehufts.png" style="width:100%;height:100%">
+                      </div>
                 </div><!-- end row -->
             </div><!-- end container -->
         </section><!-- end section gray -->
 
+        <section class="meta-wrapper section-parallax" style="background-image: url(imgs/new-york-city-skyscrapers-hd-wallpaper-47446.jpg);" data-stellar-background-ratio="0.7" data-stellar-vertical-offset="0">
+
+        </section><!-- end section -->
 
 
         <section id="services" class="section-white clearfix">
@@ -166,13 +173,13 @@ html.
 
 
 
-        <footer id="footer-second" class="footer clearfix">
+        <footer id="footer-second" class="footer clearfix" style="background: black">
             <div id="contact" class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
                         <div class="widget text-center wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
                             <div class="about-widget">
-                                <img src="" alt="TheHufts" data-selector="img">
+                                <img src="imgs/thehufts2.png" style="width:200px; heigh: 200px" alt="TheHufts" data-selector="img">
                                 <p>633 Folsom St. San Francisco, Ca<br>
                                     Email:<br></p>
                                 <div class="social-icons clearfix">
@@ -210,6 +217,7 @@ html.
       <script src="creativ/default/js/jquery.flexslider.js"></script>
 
 
+
       <!-- Portfolio -->
       <script src="creativ/default/js/jquery.isotope.min.js"></script>
       <script src="creativ/default/js/portfolio_01.js"></script>
@@ -224,12 +232,6 @@ html.
     <script type="text/javascript" src="creativ/default/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-          $('.flexslider').flexslider({
-              animation: 'fade',
-              slideshow: false,
-              controlNav: true,
-              animationLoop: true,
-          });
           $('#readMore').on('click', function(e){
             e.preventDefault();
             $('html, body').animate({
@@ -238,6 +240,5 @@ html.
           });
         });
     </script>
-
   </body>
   </html>

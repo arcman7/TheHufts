@@ -47,7 +47,6 @@ var userAlgoSave = function (options,response) {
         //relation.add(userAlgo);
         userAlgo.set("Parent",user);
         userAlgo.set("user_id",user_id);
-        //user.save().then(
         var response2 = userAlgo.save().then(
           function (algo){
             console.log("Successfully saved user " + user.get("username") + " with algo: "+ algo.get("name"));

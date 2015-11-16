@@ -1,0 +1,36 @@
+
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title> Hufter 30 sec query </title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.4.1/moment-timezone.min.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+  <script>
+  function hitHufterApiSaveRoute(url){
+    moment.tz.add('America/New_York|EST EDT|50 40|0101|1Lz50 1zb0 Op0');
+    var currentTime = moment().tz('America/New_York');
+    var openTime = moment('09:30', 'HH:MM');
+    var closeTime = moment('16:00', 'HH:MM');
+
+    //if (currentTime.isBetween(openTime, closeTime)){
+      $.ajax({
+        url: url,
+        type: "get"
+      })
+      .done(function(response){
+        console.log(response);
+      });
+    //}
+
+  }
+
+  setInterval(hitHufterApiSaveRoute("http://c5b45c7c.ngrok.io/quotes/save"), 3000);
+  </script>
+</body>

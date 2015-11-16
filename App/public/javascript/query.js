@@ -60,6 +60,7 @@ function graphHome(array,container,scale,series,symbol) {
        credits: {
            enabled: false
        },
+
     });
 }
 
@@ -105,7 +106,7 @@ function symbolListener(){
     $(".graph").html("");
     $(".graph").css("display",'block');
     $(".graph").css("height","30em");
-    $(".graph").css("width","60%");
+    $(".graph").css("width","100%");
     $(".graph").css("background","url('http://3.bp.blogspot.com/-FjddXJJsIv8/VeaoXmv8HQI/AAAAAAAAGww/PlCl0uSR_9g/s1600/loading.gif')");
   });
 }

@@ -25,7 +25,7 @@ function randomString(length, chars) {
       return (module.exports.gateKey);
    }
  }
-   router.get('/knockKnock', function(req, res, next) {
+  router.get('/knockKnock', function(req, res, next) {
     var currentMin = new Date().getMinutes();
     res.send(determineKey());
   });
