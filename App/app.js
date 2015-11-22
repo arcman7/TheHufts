@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Storing user-sessions
 app.use(session({
   cookieName: 'session',
-  secret: gateKeeper.randomString(77,"aA#!"),
+  secret: "TheHuftsMotherFucker",//gateKeeper.randomString(77,"aA#!"),
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000,
   cookie: {
@@ -58,29 +58,39 @@ app.use(function(req, res, next) {
   //console.log("hi from app.use session-checker global-middleware, req.path: " + req.path);
   // console.log("req.session: " + JSON.stringify(req.session));
   // console.log("req.cookies: ", JSON.stringify(req.cookies));
-  //console.log(req.session.user)
-  //
-  if(req.path == "/dashboard"){
-      //console.log(res);
-    //console.log(req);
-    //req.session.user = {username: "hufty", email: "thehufts@gmail.com"};
-  }
-  if (req.session && req.session.user) {
-    //Parse initialization
-    var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
-    var parseSecret2 = "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm";
-    Parse.initialize(parseSecret1, parseSecret2);
-    //Parse initalization END
-    console.log("*****************req.path: "+req.path);
+  console.log("app.use req.session: "+JSON.stringify(req.session));
 
-    login.queryParseUser({email: req.session.user.email, algos: req.session.user.algos },req,res,next);
-    console.log("req.session: ", JSON.stringify(req.session));
-    console.log("req.cookies: ", req.cookies);
+  // if( req.path == "/getAlgoNames" ){
+  //   //async function call
+  //   //resetSessionAlgos(req.body.username,req,res);
+  //    new Promise(function(resolve, reject){
+  //       // resetSessionAlgos(req.body.username,req,res);
+  //       resolve(resetSessionAlgos(req.body.username,req,res,next));
+  //     })
+  //     // .then(function(){
+  //     //    console.log("/getAlgoNames app.use req.session: "+JSON.stringify(req.session));
+  //     //    next();
+  //     // });
+  //   //req.session.user = {username: "hufty", email: "thehufts@gmail.com"};
 
-  }
-  else {
-    next();
-  }
+  // }
+  // else{
+    if (req.session && req.session.user) {
+      //Parse initialization
+      var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
+      var parseSecret2 = "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm";
+      Parse.initialize(parseSecret1, parseSecret2);
+      //Parse initalization END
+      console.log("*****************req.path: "+req.path);
+
+      login.queryParseUser({email: req.session.user.email, algos: req.session.user.algos },req,res,next);
+      //console.log("req.session: ", JSON.stringify(req.session));
+      //console.log("req.cookies: ", req.cookies);
+    }
+    else {
+      next();
+    }
+  // }//end else-77
 });
 
 //allow cors
@@ -121,7 +131,5 @@ app.use('/getAlgoNames',getAlgoNames);
 //   err.status = 404;
 //   next(err);
 // });
-
-
 
 module.exports = app;

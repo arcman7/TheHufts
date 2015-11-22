@@ -145,20 +145,22 @@ function uploadFileListener(){
 
 
 function getUsersAlgoNames (){
+  var accessKey = prompt("Please confirm with your access key: ", "access-key");
   var domain = window.location.href.split('/')[2];
-  //recreating session as well in this route
+  //re-creating session as well in this route
   //thanks Mozilla
   var username = String(window.location).split('=')[1];
   $.ajax({
     url: "http://" + domain + "/getAlgoNames",
     type: "post",
-    data: {username: username}
+    data: {username: username, accessKey: accessKey}
   })
   .done(function(response){
-    console.log(response,typeof(response));
+    //console.log(response,typeof(response));
+    response = JSON.parse(response);
      response.names.forEach(function (algoName){
-      $("#uploaded-algos-container").append('<tr><td> '+ algoName +' </td><td></td><td><a id="'+ algoName +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-      algoTesterListener('#'+filename);
+      $("#uploaded-algos-container").append('<tr><td> '+ algoName +' </td><td><input type="integer" value="dollar amount"></td><td></td><td><a id="'+ algoName +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+      algoTesterListener('#'+algoName);
     });
   }).fail(function (error){
    console.log("failed to get algo names from server, " + JSON.stringify(error));
@@ -232,20 +234,6 @@ function generateSignals(symbol){
     showInLegend: true,
     color       : "#f20000",
     name        : "Sell"
-
-     // radius: 6,
-     // fillColor: '#f20000',
-     // lineWidth: 2,
-     // lineColor: null, // inherit from series
-     // symbol   :'circle',
-     // shape    :"circle",
-     // states: {
-     //     hover: {
-     //         fillColor: null,
-     //         lineWidth: 2,
-     //       radius:6
-     //     }
-     // }
    });
 
   // series.push({
@@ -268,7 +256,6 @@ $(document).on('ready',function(){
   deleteRow();
   uploadFileListener();//Note: when this event is fired it has the effect of producing addtional listeners
   getUsersAlgoNames();
-  recreateSession();
 });//end document ready
 
 

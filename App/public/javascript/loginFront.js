@@ -38,10 +38,8 @@ function formSubmitListener(){
     var username = $('.login-form input[name="form-name"]').val();
     var password = $('.login-form input[name="password"]').val();
         password =  CryptoJS.SHA3(password).toString();
-
     var    email = $('.login-form input[name="form-email"]').val();
-
-    var     data = { username: username, password: password, email: email, confirmation: confirmation, login:false};
+    var     data = { username: username, password: password, email: email, confirmation: confirmation, login:false };
     ajaxLoginRouter(data,gateKeeperURL,confirmation);//decrypt(gateKeeperURL,confirmation));
   });
 }

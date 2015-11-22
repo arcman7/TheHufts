@@ -44,9 +44,9 @@ function queryParseUser(options,req,res,next) {
         user.username    = object.get('username');
         user.accessToken = object.get('accessToken');
         user.algos       = options.algos;
-        req.user = user;
+        req.user         = user;
         req.session.user = user;  //refresh the session value
-        res.locals.user = user;
+        res.locals.user  = user;
         console.log("req.session: ", JSON.stringify(req.session));
         console.log("req.cookies: ", JSON.stringify(req.cookies));
         // finishing processing the middleware and run the route
@@ -85,8 +85,8 @@ router.post('/', function (req, res) {
     if(data.login){ //code to log a user in
       requestType = "login";
 
-      var User           = Parse.Object.extend("UserC");
-      var query          = new Parse.Query(User);
+      var User    = Parse.Object.extend("UserC");
+      var query   = new Parse.Query(User);
       //var userAttributes = ["username","password","accessToken"];
       query.equalTo( "email", data.email )//.select(userAttributes);
         query.first().then(
@@ -116,7 +116,7 @@ router.post('/', function (req, res) {
                       list = list.map(function(algo){
                         var encryptedAlgo = algo.get("encryptedString");
                         var algoFile      = aesDcrypt(encryptedAlgo,data.password);
-                        return {algo: algoFile, name: algo.get("name") }
+                        return { name: algo.get("name") }
                       });
                       user.algos = list;
                     }
