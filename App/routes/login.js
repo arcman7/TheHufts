@@ -177,7 +177,7 @@ router.post('/', function (req, res) {
             console.log(" user successfully saved")
             status                = true;
             response[requestType] = status;
-            respones["redirect"]  = "http://localhost:3000/dashboard";
+            response["redirect"]  = "http://localhost:3000/dashboard";
             response              = JSON.stringify(response);
 
             user.email       = user.get('email');
