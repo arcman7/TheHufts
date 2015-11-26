@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
+var express    = require('express');
+var router     = express.Router();
 var CryptoJS   = require("crypto-js");
 var gateKeeper = require('./gateKeeper');
 var Parse      = require('parse/node');
 var AES        = require("crypto-js/aes");
 var SHA256     = require("crypto-js/sha256");
-var session = require('client-sessions');
+var session    = require('client-sessions');
 
 
 function aesDcrypt(string,key){
@@ -21,9 +21,9 @@ function aesEncrypt(string,key){
   return encryptedString;
 }
 
-function resetSessionAlgos(username,req,res,next){
+function getUserAlgo(username,req,res,next){
    //console.log("resetSessionAlgos req.body: " + JSON.stringify(req.body));
-   var requestType = "getAlgoNames";
+   var requestType = "getAlgoFiles";
    var User  = Parse.Object.extend("UserC");
    var query = new Parse.Query(User);
     query.equalTo( "username", username )//.select(userAttributes);
@@ -47,7 +47,8 @@ function resetSessionAlgos(username,req,res,next){
                 list = list.map(function(algo){
                   var encryptedAlgo = algo.get("encryptedString");
                   var algoFile      = aesDcrypt(encryptedAlgo,req.body.accessKey);
-                  return {algo: algoFile, name: algo.get("name") }
+                  //return {algo: algoFile, name: algo.get("name") }
+                  return {name: algo.get("name")}
                 });
                 user.algos = list;
               }
@@ -109,7 +110,7 @@ function roughSizeOfObject( object ) {
     return recurse( object );
 }
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
   //has the effect of setting the session again, including assignment of the users algorithms
   //console.log("getAlgoNames req.body:" + JSON.stringify(req.body));
       // new Promise(function(resolve, reject){
@@ -136,4 +137,4 @@ router.post('/', function(req, res, next) {
 });
 
 module.exports = router;
-module.exports.resetSessionAlgos = resetSessionAlgos;
+module.exports.roughSizeOfObject = roughSizeOfObject;

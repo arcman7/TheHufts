@@ -95,6 +95,14 @@ function yahooJson2HighchartsDATA(arrayOfJson){
   return mappedData;
 }
 
+function hufter2HighchartsDATA(array){
+  mappedData = [];
+  array.forEach(function (tupleArray){
+  mappedData.unshift([Number(new Date(tupleArray[0])),Number(tupleArray[1])]);
+  });
+  return mappedData;
+}
+
 
 
 function symbolListener(){

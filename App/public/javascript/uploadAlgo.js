@@ -1,4 +1,3 @@
-//module.exports = (function(){
 function encrypt(string,key){
   var encrypted = CryptoJS.AES.encrypt(string,key).toString();
   return encrypted;
@@ -171,9 +170,31 @@ function algoTesterListener(algoId){
   $("#uploaded-algos-container").on('click',algoId,function(e){
     e.preventDefault();
     console.log('worked');
+    var username = String(window.location).split('=')[1];
+    var domain = window.location.href.split('/')[2];
+
     if(globalSymbol){
-      var series = generateSignals(globalSymbol);
-      graphHome([],$(".graph"),"Day",series,globalSymbol);
+      //new Promise(resolve,reject){
+        var filename = algoId.slice(1);
+        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] )}
+        //console.log(data);
+        //console.log(globalSymbol);
+        var request = $.ajax({
+              url: "http://" + domain + "/hufterAPI",
+              type: "post",
+              data: data
+            }).done(function (response){
+              //console.log(response);
+               var hufterData = response[globalSymbol]["signals"];
+               console.log(hufterData);
+               var series = formatSeries(globalSymbol,algoId,hufterData);
+               console.log(series);
+               graphHome([],$(".graph"),"Day",series,globalSymbol);
+            });
+        //resolve(request)
+      //}).then(function(response))
+      // graphHome([],$(".graph"),"Day",series,globalSymbol);
+
       //clearing mysterious 'A' text value from markers
       // $("#highcharts-6 > svg > g.highcharts-series-group > g > g > text").text('');
       //edit: The 'A' still fucking comes back anytime you adjust the graph!?
@@ -184,9 +205,19 @@ function algoTesterListener(algoId){
   });
 }
 
-function generateSignals(symbol){
+function hufter2HighchartsDATA(array){
+  mappedData = [];
+  array.forEach(function (tupleArray){
+  mappedData.unshift([Number(new Date(tupleArray[0])),Number(tupleArray[1])]);
+  });
+  return mappedData;
+}
+
+function formatSeries(symbol,filename,buySellSignals){
   var series = [];
   var scale = "Day"
+  buySellSignals.buy = hufter2HighchartsDATA(buySellSignals.buy);
+  buySellSignals.sell = hufter2HighchartsDATA(buySellSignals.sell);
 
   series.push({
            id  : scale + "price",
@@ -194,7 +225,8 @@ function generateSignals(symbol){
            data: processedStockData[symbol],
        });
   //call algoFunction on stock data:
-  var buySellSignals = algoFunction1(processedStockData[symbol]);
+  //var buySellSignals = algoFunction1(processedStockData[symbol]);
+
   var buyFlagSeries = buySellSignals.buy.map(function(signal,index){
     return {
               "x"   : signal[0],
@@ -236,8 +268,6 @@ function generateSignals(symbol){
     name        : "Sell"
    });
 
-  // series.push({
-  // })
 
   return series //contains regular stock data in addition to the newly generated signals
  }//end generateSignals

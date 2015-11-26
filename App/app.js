@@ -1,14 +1,38 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+//express generated
+var express      = require('express');
+var path         = require('path');
+var favicon      = require('serve-favicon');
+var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var Parse      = require('parse/node');
+var bodyParser   = require('body-parser');
 
-//insterted code
+//Parse
+var Parse        = require('parse/node');
+//run unix-commands
+var sys          = require('util');
+var exec         = require('child_process').exec;
+//console.log(process.argv);
 
-var monk = require('monk');
+function puts(error, stdout, stderr) { console.log(stdout) };
+//exec("pwd", puts);
+//PORT=3000 nodemon thehufts 3000 localhost:
+function initialization(argv){
+  if(argv[4]){
+    module.exports.domain = argv[4]; //dynamically set domain with arguments
+  }
+  var hufterPath = " nodemon /Users/Jedi_scholar/Desktop/phase-4/hiring_mixers/hufter/bin/www hufter";
+  var hufterPort;
+  var command;
+  if(argv[3]){
+    hufterPort = Number(argv[3]) + 1;
+    command = "PORT="+hufterPort+hufterPath;
+    console.log(command);
+    exec(command,puts);
+    //exec('ls',puts);
+  }
+}
+
+//var monk = require('monk');
 var fs   = require('fs');
 var http = require('http');
 
@@ -21,7 +45,7 @@ var login         = require('./routes/login');
 var checkLogin    = require('./routes/checkLogin');
 var saveAlgo      = require('./routes/saveAlgo');
 var getAlgoNames  = require('./routes/getAlgoNames');
-var resetSessionAlgos = getAlgoNames.resetSessionAlgos;
+var hufterAPI     = require('./routes/hufterAPI');
 //mozilla session manager
 var session = require('client-sessions');//mozilla
 //error logger for node
@@ -54,62 +78,30 @@ app.use(session({
 }));
 
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   //console.log("hi from app.use session-checker global-middleware, req.path: " + req.path);
-  // console.log("req.session: " + JSON.stringify(req.session));
-  // console.log("req.cookies: ", JSON.stringify(req.cookies));
-  console.log("app.use req.session: "+JSON.stringify(req.session));
 
-  // if( req.path == "/getAlgoNames" ){
-  //   //async function call
-  //   //resetSessionAlgos(req.body.username,req,res);
-  //    new Promise(function(resolve, reject){
-  //       // resetSessionAlgos(req.body.username,req,res);
-  //       resolve(resetSessionAlgos(req.body.username,req,res,next));
-  //     })
-  //     // .then(function(){
-  //     //    console.log("/getAlgoNames app.use req.session: "+JSON.stringify(req.session));
-  //     //    next();
-  //     // });
-  //   //req.session.user = {username: "hufty", email: "thehufts@gmail.com"};
-
-  // }
-  // else{
+  //console.log("app.use req.session: "+JSON.stringify(req.session));
     if (req.session && req.session.user) {
       //Parse initialization
       var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
       var parseSecret2 = "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm";
       Parse.initialize(parseSecret1, parseSecret2);
       //Parse initalization END
-      console.log("*****************req.path: "+req.path);
-
+      //console.log("*****************req.path: "+req.path);
       login.queryParseUser({email: req.session.user.email, algos: req.session.user.algos },req,res,next);
-      //console.log("req.session: ", JSON.stringify(req.session));
-      //console.log("req.cookies: ", req.cookies);
     }
     else {
       next();
     }
-  // }//end else-77
 });
 
 //allow cors
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
-// app.use(function(err, req, res, next) {
-//     console.log("hi from global middleware");
-
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: {}
-//   });
-//   next();
-// });
 
 app.use('/', index);
 //Front-end assets
@@ -118,12 +110,13 @@ app.use('/uploadAlgo.js', obuscateJS('/uploadAlgo.js'));
 app.use('/bundle.js', obuscateJS('/bundle.js'));
 app.use('/loginFront.js', obuscateJS('/loginFront.js'));
 //Routes
-app.use('/gateKeeper',gateKeeper);
-app.use('/login',login);
+app.use('/gateKeeper', gateKeeper);
+app.use('/login', login);
 app.use('/users', users);
 app.use('/checkLogin', checkLogin);
-app.use('/saveAlgo',saveAlgo);
-app.use('/getAlgoNames',getAlgoNames);
+app.use('/saveAlgo', saveAlgo);
+app.use('/getAlgoNames', getAlgoNames);
+app.use('/hufterAPI', hufterAPI);
 //if no matching route is found this is the default server response
 // app.use(function(req, res, next) {
 //   console.log("error middle ware, requested resource path: "+ req.path);
@@ -133,3 +126,5 @@ app.use('/getAlgoNames',getAlgoNames);
 // });
 
 module.exports = app;
+initialization(process.argv);
+

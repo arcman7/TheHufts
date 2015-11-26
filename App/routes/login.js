@@ -5,8 +5,7 @@ var gateKeeper = require('./gateKeeper');
 var Parse      = require('parse/node');
 var AES        = require("crypto-js/aes");
 var SHA256     = require("crypto-js/sha256");
-var session = require('client-sessions');
-
+var session    = require('client-sessions');
 
 //Parse initialization
 var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
@@ -87,16 +86,11 @@ router.post('/', function (req, res) {
 
       var User    = Parse.Object.extend("UserC");
       var query   = new Parse.Query(User);
-      //var userAttributes = ["username","password","accessToken"];
       query.equalTo( "email", data.email )//.select(userAttributes);
         query.first().then(
           function (object) {
             console.log("LOGIN: Successfully retrieved user" + object.get("username"));
             parsePwd        = object.get('pwd');
-            //console.log("parsePwd: "+parsePwd);
-            //console.log("data Pwd: "+data.password);
-            //deprecated from old security scheme
-            //parsePwd        = aesDcrypt(parsePwd,accessToken);
             var accessToken = object.get('accessToken');
             status          = (data.passwordhash == parsePwd );
             /////////////////////////////////////////////////////
