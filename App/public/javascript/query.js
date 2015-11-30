@@ -103,6 +103,7 @@ function queryYahooAPI(symbol,callback,container,options){
         result = callback(response["query"]["results"]["quote"]);
         processedStockData[symbol] = result;
         graphHome(result,container,"Day",undefined,symbol);
+        $(".graph").css("border","1px solid black");
       }
       else{
         alert("The stock "+ symbol + " does not exsist. Please find the correct ticker symbol.");

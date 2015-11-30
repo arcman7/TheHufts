@@ -100,13 +100,14 @@ function uploadFileListener(){
       var algoScript = this.result;
       var results    = testAlgoOutput(algoScript); //returns [true], if the algo passed
       if(results[0]){
-
+        var fileType =  file.name.split('.').pop();
         var filename = file.name.split('.')[0];
         var password = prompt("Password confirmation: ", "password");
-        console.log(password);
+        //console.log(password);
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
-        var data = {algo: encryptedAlgoString, name: filename};
+        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType};
+        console.log(fileType)
         var domain = window.location.href.split('/')[2];
         var request = $.ajax({
           url: "http://"+ domain+"/saveAlgo",
@@ -115,19 +116,23 @@ function uploadFileListener(){
         });
         request.done(function(response){
           console.log(response);
-        });
+          var filename = file.name.split('.')[0]
+          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td><input type="integer" name="principal" class="'+filename+'" value="dollar amount"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+          algoTesterListener('#'+filename);
+        });//end done function
 
         }//end if results[0]
       else{
         alert(results[1]);
+        return;
       }
     };
     reader.readAsText(file);
 
-    var filename = file.name.split('.')[0]
-    $("#uploaded-algos-container").append('<tr><td> '+ filename +' </td><td></td><td><a id="'+ filename +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-    //$("#uploaded-algos-container").append(html_string);
-    algoTesterListener('#'+filename);
+    // var filename = file.name.split('.')[0]
+    // $("#uploaded-algos-container").append('<tr><td> '+ filename +' </td><td></td><td><a id="'+ filename +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+    // //$("#uploaded-algos-container").append(html_string);
+    // algoTesterListener('#'+filename);
   };//end .onchange function
 }
 
@@ -148,7 +153,7 @@ function getUsersAlgoNames (){
     //console.log(response,typeof(response));
     response = JSON.parse(response);
      response.names.forEach(function (algoName){
-      $("#uploaded-algos-container").append('<tr><td> '+ algoName +' </td><td><input type="integer" name="principal" value="dollar amount"></td><td></td><td><a id="'+ algoName +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+      $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td><input type="integer" name="principal" class="'+algoName+'" value="dollar amount"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
       algoTesterListener('#'+algoName);
     });
   }).fail(function (error){
@@ -186,7 +191,8 @@ function algoTesterListener(algoId){
                var series = formatSeries(globalSymbol,algoId,hufterData);
                //console.log(series);
                graphHome([],$(".graph"),"Day ",series,globalSymbol);
-               var dollarAmount = $('#uploaded-algos-container input[name="principal"]').val();
+               var dollarAmount = $('#uploaded-algos-container input.'+filename+'[name="principal"]').val();
+
                hufterData.buy = hufter2HighchartsDATA(hufterData.buy);
                hufterData.sell = hufter2HighchartsDATA(hufterData.sell);
                var options = {
@@ -198,6 +204,9 @@ function algoTesterListener(algoId){
                results = applyCash(options);
                console.log(results)
                graphHome(results.netValue, $(".results"),"Day ", undefined,globalSymbol);
+               $(".results").css("padding","1px");
+               $(".results").css("border","1px solid black");
+
             });
         //resolve(request)
       //}).then(function(response))
@@ -317,9 +326,8 @@ var deleteRow = function() {
 
 function applyCash(options){
   //options = {principal,percentage,buySellSignals,fee}
-  if(!options.percentage){
-    options.percentage = 100;
-  }
+
+  options.percentage ||= 100;
   var netCash = options.principal;
   var per = options.percentage / 100; //easier syntax
   var signals = options.signals; //easier syntax

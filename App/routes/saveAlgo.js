@@ -43,8 +43,8 @@ var userAlgoSave = function (options,response) {
         console.log("user_id: " + user_id);
         console.log("Successfully retrieved user " + user.get("username"));
         response["userFound"] = true;
-        //var relation = user.relation("algos");
-        //relation.add(userAlgo);
+        var relation = user.relation("algos");
+        relation.add(userAlgo);
         userAlgo.set("Parent",user);
         userAlgo.set("user_id",user_id);
         var response2 = userAlgo.save().then(
@@ -79,7 +79,7 @@ var requestType = "saveAlgoCloud";
 console.log(req.body.name);
 userAlgo.set("name", req.body.name);
 userAlgo.set("encryptedString", req.body.algo);
-
+userAlgo.set("fileType",req.body.fileType);
 
   userAlgo.save().then(
       function (algo){
