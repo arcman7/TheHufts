@@ -101,7 +101,6 @@ function uploadFileListener(){
       var results    = testAlgoOutput(algoScript); //returns [true], if the algo passed
       if(results[0]){
 
-        //switching to backend saving;////////////////////////////////////
         var filename = file.name.split('.')[0];
         var password = prompt("Password confirmation: ", "password");
         console.log(password);
@@ -117,16 +116,7 @@ function uploadFileListener(){
         request.done(function(response){
           console.log(response);
         });
-        //////////////////////////////////////////////////////////////////
 
-        // algo.save(null, {
-        //       success: function(algo) {
-        //         alert("You have successfully saved an encrypted version of your algorithm in your account.");
-        //       },
-        //       error: function(algo, error) {
-        //        alert('Failed to create new object, with error code: ' + error.message);
-        //      }
-        //    });//end save function
         }//end if results[0]
       else{
         alert(results[1]);
@@ -144,11 +134,11 @@ function uploadFileListener(){
 
 
 function getUsersAlgoNames (){
-  var accessKey = prompt("Please confirm with your access key: ", "access-key");
+  //var accessKey = prompt("Please confirm with your access key: ", "access-key");
+  var accessKey = "huffer";
   var domain = window.location.href.split('/')[2];
-  //re-creating session as well in this route
-  //thanks Mozilla
   var username = String(window.location).split('=')[1];
+
   $.ajax({
     url: "http://" + domain + "/getAlgoNames",
     type: "post",
@@ -158,13 +148,15 @@ function getUsersAlgoNames (){
     //console.log(response,typeof(response));
     response = JSON.parse(response);
      response.names.forEach(function (algoName){
-      $("#uploaded-algos-container").append('<tr><td> '+ algoName +' </td><td><input type="integer" value="dollar amount"></td><td></td><td><a id="'+ algoName +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+      $("#uploaded-algos-container").append('<tr><td> '+ algoName +' </td><td><input type="integer" name="principal" value="dollar amount"></td><td></td><td><a id="'+ algoName +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
       algoTesterListener('#'+algoName);
     });
   }).fail(function (error){
    console.log("failed to get algo names from server, " + JSON.stringify(error));
   });
 }
+
+
 
 function algoTesterListener(algoId){
   $("#uploaded-algos-container").on('click',algoId,function(e){
@@ -175,10 +167,13 @@ function algoTesterListener(algoId){
 
     if(globalSymbol){
       //new Promise(resolve,reject){
+        var endDate = yahooDateString();
+        var d = new Date();
+        var d300ago = new Date(d - 300*3600*1000*24);
+        var startDate = yahooDateString(d300ago);
         var filename = algoId.slice(1);
         var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] )}
-        //console.log(data);
-        //console.log(globalSymbol);
+
         var request = $.ajax({
               url: "http://" + domain + "/hufterAPI",
               type: "post",
@@ -186,14 +181,26 @@ function algoTesterListener(algoId){
             }).done(function (response){
               //console.log(response);
                var hufterData = response[globalSymbol]["signals"];
-               console.log(hufterData);
+               // console.log(hufterData);
+
                var series = formatSeries(globalSymbol,algoId,hufterData);
-               console.log(series);
-               graphHome([],$(".graph"),"Day",series,globalSymbol);
+               //console.log(series);
+               graphHome([],$(".graph"),"Day ",series,globalSymbol);
+               var dollarAmount = $('#uploaded-algos-container input[name="principal"]').val();
+               hufterData.buy = hufter2HighchartsDATA(hufterData.buy);
+               hufterData.sell = hufter2HighchartsDATA(hufterData.sell);
+               var options = {
+                  principal: ( Number(dollarAmount) || 100 ),
+                  percentage: 100,
+                  signals: {buy: hufterData.buy, sell: hufterData.sell},
+                }
+               console.log(options.signals);
+               results = applyCash(options);
+               console.log(results)
+               graphHome(results.netValue, $(".results"),"Day ", undefined,globalSymbol);
             });
         //resolve(request)
       //}).then(function(response))
-      // graphHome([],$(".graph"),"Day",series,globalSymbol);
 
       //clearing mysterious 'A' text value from markers
       // $("#highcharts-6 > svg > g.highcharts-series-group > g > g > text").text('');
@@ -205,12 +212,37 @@ function algoTesterListener(algoId){
   });
 }
 
+function yahooDateString(date){
+  if(!date){
+    var year  = (new Date()).getFullYear();
+    var day   = (new Date()).getDate();
+    var month = (new Date()).getMonth()+1;
+  }
+  else{
+    var year  = date.getFullYear();
+    var day   = date.getDate();
+    var month = date.getMonth()+1;
+  }
+  if (String(month).length < 2){ month = "0" + month;}
+  if (String(day).length   < 2){ day   = "0" + day;  }
+  //console.log(month,month.length,day,day.length);
+  return year+"-"+month+"-"+day;
+}
+
+function sort(a,b){ //sorts buy / sell signals
+  if (a[0] < b[0])
+    return -1;
+  if (a[0] > b[0])
+    return 1;
+  return 0;
+}
+
 function hufter2HighchartsDATA(array){
   mappedData = [];
   array.forEach(function (tupleArray){
-  mappedData.unshift([Number(new Date(tupleArray[0])),Number(tupleArray[1])]);
+  mappedData.unshift( [Number(new Date(tupleArray[0])), Number(tupleArray[1])] );
   });
-  return mappedData;
+  return mappedData.sort(sort);
 }
 
 function formatSeries(symbol,filename,buySellSignals){
@@ -218,7 +250,7 @@ function formatSeries(symbol,filename,buySellSignals){
   var scale = "Day"
   buySellSignals.buy = hufter2HighchartsDATA(buySellSignals.buy);
   buySellSignals.sell = hufter2HighchartsDATA(buySellSignals.sell);
-
+  console.log("format series: ",buySellSignals)
   series.push({
            id  : scale + "price",
            name: scale + "price",
@@ -268,7 +300,6 @@ function formatSeries(symbol,filename,buySellSignals){
     name        : "Sell"
    });
 
-
   return series //contains regular stock data in addition to the newly generated signals
  }//end generateSignals
 
@@ -282,6 +313,70 @@ var deleteRow = function() {
       tr.remove();
   });
 };
+
+
+function applyCash(options){
+  //options = {principal,percentage,buySellSignals,fee}
+  if(!options.percentage){
+    options.percentage = 100;
+  }
+  var netCash = options.principal;
+  var per = options.percentage / 100; //easier syntax
+  var signals = options.signals; //easier syntax
+  var length = signals.buy.length;
+  var shares = 0;
+  var netValue = netCash;
+  var fee = 0;
+  if(options.transactionFee){
+    fee = options.transactionFee;
+  }
+
+  //3 arrays for tracking netCash,netValue, shares
+  var historicalValues = {};
+  historicalValues.netCash  = [];
+  historicalValues.netValue = [];
+  historicalValues.shares   = [];
+
+  var possiblyPurchased;//how many stocks can be purchased at given moment
+
+  for(var i = 0; i<length; i++){
+    var currentTime = signals.buy[i][0];
+
+    if(i < length-1){
+      var nextBuyTime = signals.buy[i+1][0];
+      signals.sell.forEach(function (sell,j){
+        if( currentTime <= sell[0] && sell[0] <= nextBuyTime ){
+          netCash += sell[1]*shares - fee;
+          shares  -= shares;
+          historicalValues.netCash.push([sell[0],netCash]);
+          historicalValues.shares.push([sell[0],shares]);
+          netValue = netCash + shares*sell[1];
+          historicalValues.netValue.push([sell[0],netValue]);
+        }
+       //console.log(j,sell[0]);
+      });
+    }
+    if(netCash > 0){
+      possiblyPurchased = Math.floor( (netCash-fee)*per / signals.buy[i][1]);
+      if(possiblyPurchased >= 1){
+        netCash -= possiblyPurchased*signals.buy[i][1] - fee;
+        shares  += possiblyPurchased;
+      }
+    }//end if-netCash > 0
+    netValue = netCash + shares*signals.buy[i][1];
+    historicalValues.netCash.push([currentTime,netCash]);
+    historicalValues.netValue.push([currentTime,netValue]);
+    historicalValues.shares.push([currentTime,shares]);
+
+    //sort the results
+    historicalValues.netCash.sort(sort);
+    historicalValues.netValue.sort(sort);
+    historicalValues.shares.sort(sort);
+  }//end i - for loop;
+  return historicalValues;
+}//end applyCash function
+
+
 $(document).on('ready',function(){
   deleteRow();
   uploadFileListener();//Note: when this event is fired it has the effect of producing addtional listeners

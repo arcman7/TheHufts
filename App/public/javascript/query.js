@@ -64,8 +64,32 @@ function graphHome(array,container,scale,series,symbol) {
     });
 }
 
-function queryYahooAPI(symbol,callback,container){
-    var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+ symbol + "%22%20and%20startDate%20%3D%20%222014-06-11%22%20and%20endDate%20%3D%20%222015-09-14%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+function yahooDateString(date){
+  if(!date){
+    var year  = (new Date()).getFullYear();
+    var day   = (new Date()).getDate();
+    var month = (new Date()).getMonth()+1;
+  }
+  else{
+    var year  = date.getFullYear();
+    var day   = date.getDate();
+    var month = date.getMonth()+1;
+  }
+  if (String(month).length < 2){ month = "0" + month;}
+  if (String(day).length   < 2){ day   = "0" + day;  }
+  //console.log(month,month.length,day,day.length);
+  return year+"-"+month+"-"+day;
+}
+function queryYahooAPI(symbol,callback,container,options){
+
+    if(!options){
+      var options ={};
+      options.end   = yahooDateString();
+      var d = new Date();
+      var d300ago = new Date(d - 300*3600*1000*24);
+      options.start = yahooDateString(d300ago);
+    }
+    var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+ symbol + "%22%20and%20startDate%20%3D%20%22"+options.start+"%22%20and%20endDate%20%3D%20%22"+options.end+"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
     var request = $.ajax({
       url: query,
       method: 'get'

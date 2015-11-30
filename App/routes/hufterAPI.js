@@ -67,7 +67,7 @@ function getUserAlgo(req,res,next){
                var domain = 'localhost:3001/';
                var backtest = 'backtest';
                var algo = req.body.algo;
-               var data = {algo: algo,"startDate":"2015-03-14","endDate":"2015-09-14", "symbols": req.body.symbols };
+               var data = {algo: algo,"startDate": req.body.startDate,"endDate": req.body.endDate, "symbols": req.body.symbols };
                console.log(data);
                data = JSON.stringify(data);
                algo = aesEncrypt(data,"yolocity");
