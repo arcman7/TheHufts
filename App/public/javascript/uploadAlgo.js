@@ -326,8 +326,7 @@ var deleteRow = function() {
 
 function applyCash(options){
   //options = {principal,percentage,buySellSignals,fee}
-
-  options.percentage ||= 100;
+  options.percentage = options.percentage || 100;
   var netCash = options.principal;
   var per = options.percentage / 100; //easier syntax
   var signals = options.signals; //easier syntax
