@@ -13,7 +13,11 @@ var sys          = require('util');
 var exec         = require('child_process').exec;
 //console.log(process.argv);
 
-function puts(error, stdout, stderr) { console.log(stdout) };
+function puts(error, stdout, stderr) {
+  var captured = stdout;
+  console.log(stdout);
+  console.log(captured);
+};
 //exec("pwd", puts);
 //PORT=3000 nodemon thehufts 3000 localhost:
 function initialization(argv){
@@ -32,6 +36,7 @@ function initialization(argv){
   }
 }
 
+exec("pwd",puts);
 //var monk = require('monk');
 var fs   = require('fs');
 var http = require('http');
