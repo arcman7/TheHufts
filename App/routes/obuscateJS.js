@@ -7,19 +7,17 @@ function wrapper(assetName){
   var fs = require('fs');
   var http = require('http');
   var uglifyJS = require("uglify-js");
-    //  if (module.exports.storedData == "DrunkenZebra"){
-    //   console.log("shit works");
-    // }
-  var public_path = "/Users/Art/Desktop/TheHufts/App" + '/public/javascript';//+assetName;
-  //console.log(public_path+assetName);
+
+  var dynamicPATH = __dirname;
+  dynamicPATH = dynamicPATH.slice(0,-7);
+  dynamicPATH += '/public/javascript';
+  //console.log(dynamicPATH+assetName);
+
   return router.get('/',function(req,res,next){
-        // console.log(req.path);
-    console.log("full path: ",public_path+assetName);
-        //next();
-      // res.send(UglifyJS.minify(public_path+req.path));
-    fs.readFile(public_path+assetName, function(err,data)
+
+    fs.readFile(dynamicPATH+assetName, function(err,data)
         {
-          var result = uglifyJS.minify(public_path+assetName,{mangle: {toplevel: true, except:["globalSymbol", "processedStockData", "graphHome"]}});
+          var result = uglifyJS.minify(dynamicPATH+assetName,{mangle: {toplevel: true, except:["globalSymbol", "processedStockData", "graphHome"]}});
           //console.log(result.code); // minified output
           res.send(result.code);
           //res.send(data.toString());
@@ -31,6 +29,4 @@ function wrapper(assetName){
 }//end wrapper function
 
 module.exports = wrapper;
-// module.exports.storedData = "DrunkenZebra";
-// console.log(module.exports);
 //module.exports = router;

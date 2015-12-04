@@ -1,0 +1,3 @@
+req.body.data = {algo: encryptedAlgoString, symbols: sybols,startDate: startDate,endDate: endDate}
+var data = aesDcrypt(req.body.data,"yolocity");
+data = JSON.parse(data);

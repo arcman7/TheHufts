@@ -5,7 +5,7 @@ var gateKeeper = require('./gateKeeper');
 var Parse      = require('parse/node');
 var AES        = require("crypto-js/aes");
 var SHA256     = require("crypto-js/sha256");
-var session = require('client-sessions');
+var session    = require('client-sessions');
 
 router.get('/', function (req, res) {
   var data = {};

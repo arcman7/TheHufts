@@ -64,8 +64,32 @@ function graphHome(array,container,scale,series,symbol) {
     });
 }
 
-function queryYahooAPI(symbol,callback,container){
-    var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+ symbol + "%22%20and%20startDate%20%3D%20%222014-06-11%22%20and%20endDate%20%3D%20%222015-09-14%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+function yahooDateString(date){
+  if(!date){
+    var year  = (new Date()).getFullYear();
+    var day   = (new Date()).getDate();
+    var month = (new Date()).getMonth()+1;
+  }
+  else{
+    var year  = date.getFullYear();
+    var day   = date.getDate();
+    var month = date.getMonth()+1;
+  }
+  if (String(month).length < 2){ month = "0" + month;}
+  if (String(day).length   < 2){ day   = "0" + day;  }
+  //console.log(month,month.length,day,day.length);
+  return year+"-"+month+"-"+day;
+}
+function queryYahooAPI(symbol,callback,container,options){
+
+    if(!options){
+      var options ={};
+      options.end   = yahooDateString();
+      var d = new Date();
+      var d300ago = new Date(d - 300*3600*1000*24);
+      options.start = yahooDateString(d300ago);
+    }
+    var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+ symbol + "%22%20and%20startDate%20%3D%20%22"+options.start+"%22%20and%20endDate%20%3D%20%22"+options.end+"%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
     var request = $.ajax({
       url: query,
       method: 'get'
@@ -79,6 +103,7 @@ function queryYahooAPI(symbol,callback,container){
         result = callback(response["query"]["results"]["quote"]);
         processedStockData[symbol] = result;
         graphHome(result,container,"Day",undefined,symbol);
+        $(".graph").css("border","1px solid black");
       }
       else{
         alert("The stock "+ symbol + " does not exsist. Please find the correct ticker symbol.");
@@ -91,6 +116,14 @@ function yahooJson2HighchartsDATA(arrayOfJson){
   mappedData = [];
   arrayOfJson.forEach(function(qouteObject){ //1st - make date time object from string, 2nd - convert it to decimal form
     mappedData.unshift([Number(new Date(qouteObject["Date"])),Number(qouteObject["Close"])]);
+  });
+  return mappedData;
+}
+
+function hufter2HighchartsDATA(array){
+  mappedData = [];
+  array.forEach(function (tupleArray){
+  mappedData.unshift([Number(new Date(tupleArray[0])),Number(tupleArray[1])]);
   });
   return mappedData;
 }
