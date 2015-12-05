@@ -22,4 +22,8 @@ router.get('/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'TheHufts' });
 });
 
+router.get('/subscription', function(req, res, next) {
+  res.render('subscription', { title: 'TheHufts' });
+});
+
 module.exports = router;
