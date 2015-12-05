@@ -2529,5 +2529,6 @@ body.mobile .tab-content>.active {
 }
 
 .image-6{
-	 background-image: url(/imgs/stock.jpg)
+	 background-image: url(/imgs/stock.jpg);
+	 opacity: .7;
 }
