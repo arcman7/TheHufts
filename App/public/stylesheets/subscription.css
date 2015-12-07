@@ -781,6 +781,17 @@ textarea::-webkit-input-placeholder {
 	padding-top: 30px;
 }
 
+.site-logo-right {
+	position: absolute;
+	right: 10%;
+	padding: 10px;
+	position: fixed;
+	top: 0;
+	z-index: 9999;
+	padding-left: 30px;
+	padding-top: 30px;
+}
+
 .site-logo a,
 .site-logo img {
 	display: block;
