@@ -54,7 +54,7 @@ var hufterAPI     = require('./routes/hufterAPI');
 //mozilla session manager
 var session = require('client-sessions');//mozilla
 //error logger for node
-var winston = require('winston');
+// var winston = require('winston');
 
 //var query = require('./public/javascript/query');
 var public_path = __dirname + "/public";
