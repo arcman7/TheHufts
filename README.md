@@ -13,7 +13,7 @@ Services:
 Security means a lot to us and we have ensured that everything from web-communications down to the data stored in the database is encrypted in such a way that not even we can look at it - your files are only accessible by you. 
 
 Supported lanaguages:
--JavaScript
--C++
--Ruby
--Python
+- JavaScript
+- C++
+- Ruby
+- Python
