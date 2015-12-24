@@ -5,7 +5,7 @@ var gateKeeper = require('./gateKeeper');
 var Parse      = require('parse/node');
 var AES        = require("crypto-js/aes");
 var SHA256     = require("crypto-js/sha256");
-var session = require('client-sessions');
+var session    = require('client-sessions');
 
 
 //Encryption-Decryption functions
@@ -44,7 +44,7 @@ var userAlgoSave = function (options,response) {
         console.log("Successfully retrieved user " + user.get("username"));
         response["userFound"] = true;
         var relation = user.relation("algos");
-        relation.add(userAlgo);
+        relation.add(userAlgo);  //assumes the objet must be saved first before adding relationships
         userAlgo.set("Parent",user);
         userAlgo.set("user_id",user_id);
         var response2 = userAlgo.save().then(

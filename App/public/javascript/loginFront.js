@@ -64,7 +64,7 @@ function ajaxLoginRouter(data,url){
         type: "post",
         data: {data: data}
     })
-    .done(function(response){
+    .done(function (response){
       console.log(response);
       response = JSON.parse(response);
       if(response["redirect"]){
@@ -77,7 +77,7 @@ function ajaxLoginRouter(data,url){
         var retryData = this.data;
         ajaxLoginRouter(retryData,retryURL);
       }
-            //console.log(userAlgos)
+      //console.log(userAlgos)
     });
   });
 }

@@ -47,6 +47,7 @@ var users         = require('./routes/users');
 var gateKeeper    = require('./routes/gateKeeper');
 var obuscateJS    = require('./routes/obuscateJS');
 var login         = require('./routes/login');
+var logout        = require('./routes/logout');
 var checkLogin    = require('./routes/checkLogin');
 var saveAlgo      = require('./routes/saveAlgo');
 var getAlgoNames  = require('./routes/getAlgoNames');
@@ -117,6 +118,7 @@ app.use('/loginFront.js', obuscateJS('/loginFront.js'));
 //Routes
 app.use('/gateKeeper', gateKeeper);
 app.use('/login', login);
+app.use('/logout',logout);
 app.use('/users', users);
 app.use('/checkLogin', checkLogin);
 app.use('/saveAlgo', saveAlgo);

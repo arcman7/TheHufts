@@ -5,7 +5,10 @@ var gateKeeper = require('./gateKeeper');
 var Parse      = require('parse/node');
 var AES        = require("crypto-js/aes");
 var SHA256     = require("crypto-js/sha256");
+var SHA3       = require("crypto-js/sha3");
 var session    = require('client-sessions');
+
+var randomString = gateKeeper.randomString;
 
 //Parse initialization
 var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
@@ -25,6 +28,11 @@ function aesEncrypt(string,key){
   //var encryptedString = CryptoJS.enc.Utf8.stringify(encrypted);
   var encryptedString = encrypted.toString();
   return encryptedString;
+}
+
+function sha3(string){
+  var hashedString = SHA3(string).toString();
+  return hashedString;
 }
 //Encryption-Decryption END
 
@@ -46,8 +54,8 @@ function queryParseUser(options,req,res,next) {
         req.user         = user;
         req.session.user = user;  //refresh the session value
         res.locals.user  = user;
-        console.log("req.session: ", JSON.stringify(req.session));
-        console.log("req.cookies: ", JSON.stringify(req.cookies));
+        //console.log("req.session: ", JSON.stringify(req.session));
+        //console.log("req.cookies: ", JSON.stringify(req.cookies));
         // finishing processing the middleware and run the route
         next();
       },
@@ -84,8 +92,9 @@ router.post('/', function (req, res) {
     if(data.login){ //code to log a user in
       requestType = "login";
 
-      var User    = Parse.Object.extend("UserC");
-      var query   = new Parse.Query(User);
+      var TempAlgo = Parse.Object.extend("TempAlgo");
+      var User     = Parse.Object.extend("UserC");
+      var query    = new Parse.Query(User);
       query.equalTo( "email", data.email )//.select(userAttributes);
         query.first().then(
           function (object) {
@@ -93,26 +102,55 @@ router.post('/', function (req, res) {
             parsePwd        = object.get('pwd');
             var accessToken = object.get('accessToken');
             status          = (data.passwordhash == parsePwd );
-            /////////////////////////////////////////////////////
+
             //setting the session to the logged in user
             if(status){
-              var user         = {};
-              user.accessToken = accessToken;
-              user.username    = object.get('username');
-              user.email       = object.get('email');
-              var relation     = object.relation("algos");
+              var user          = {};
+              user.accessToken  = accessToken;
+              user.username     = object.get('username');
+              user.email        = object.get('email');
+              var relation      = object.relation("algos");
+              var tempRelation  = object.relation("tempAlgos");
+              var tempAlgoArray = [];//used to save temp algos
               relation.query().find().then(
                   function (list){
                     if (list.length == 0){  //the user has no uploaded algos
                       user.algos = false;
                     }
                     else{ //storing users algos in user object
-                      list = list.map(function(algo){
+                      nameList = list.map(function (algo){
                         var encryptedAlgo = algo.get("encryptedString");
                         var algoFile      = aesDcrypt(encryptedAlgo,data.password);
+                        var temp          = new TempAlgo();
+                        temp.set("Parent",object); //object is the returned user object
+                        temp.set("user_id",object.id);
+                        temp.set("name", algo.get("name"));
+                        //accessToken to decrypt algorithms = sha3(username) -> sha3 a one way hashing algo
+                        var key = sha3(user.username+"TheHufts");
+                        temp.set("encryptedString", aesEncrypt(algoFile, key) );
+                        temp.set("fileType",algo.get("fileType"));
+                        tempAlgoArray.push(temp);
                         return { name: algo.get("name") }
                       });
-                      user.algos = list;
+                      user.algos = nameList;
+                      Parse.Object.saveAll(tempAlgoArray).then(
+                        //after saving tempAlgos update their relationships with user
+                        function (success){
+                          tempAlgoArray.forEach(function (tempAlgo){
+                            tempRelation.add(tempAlgo)
+                            tempAlgo.save(
+                              function (sucess){
+                                console.log("save updated algo success");
+                              },
+                              function (error){
+                                console.log("error: " + error.message + " "+error.code);
+                              });//end templAlgo.save()
+                          });//end for each
+                        },
+                        function (error){
+                          console.log("error: " + error.message + " "+error.code)
+                        }
+                      );
                     }
                     req.user = user;
                     req.session.user = user;  //refresh the session value
@@ -122,13 +160,8 @@ router.post('/', function (req, res) {
                     response[requestType]   = status;
                     response["accessToken"] = aesEncrypt(object.get('accessToken'),key);
                     response = JSON.stringify(response);
-                    console.log("req.session: ", JSON.stringify(req.session));
-                    console.log("req.cookies: ", req.cookies);
-                    console.log(response);
                     //console.log(res)
                     res.send(response)
-                    //res.redirect('/dashboard');
-                    //res.render('dashboard', { title: 'TheHufts' });
                   },
                   function (error){
                     console.log( "users-algos error: "+error);
