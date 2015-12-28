@@ -17,10 +17,12 @@ Parse.initialize(parseSecret1, parseSecret2);
 router.post('/', function (req, res) {
   console.log("lougout route:")
   console.log(req.body.user);
+  console.log(req.body);
+  var data     = req.body;
   var TempAlgo = Parse.Object.extend("TempAlgo");
   var User     = Parse.Object.extend("UserC");
   var query    = new Parse.Query(User);
-  query.equalTo( "email", data.email )//.select(userAttributes);
+  query.equalTo( "username", data.username )//.select(userAttributes);
   query.first().then(
     function (object) {
       //var relation      = object.relation("algos");
@@ -28,10 +30,12 @@ router.post('/', function (req, res) {
       var tempRelation  = object.relation("tempAlgos");
       tempRelation.query().find().then(
         function (list){
+          //console.log("list: ",list);
           if(list.length > 0){
-            Parse.Object.destroyAll([object1, object2, object3]).then(
+            Parse.Object.destroyAll(list).then(
               function (success) {
               // All the objects were deleted
+              console.log("temp algos destroyed");
               req.user = req.session.user = res.locals.user = null;
               var response = {redirect: "http://"+req.body.domain+"/landingPage"};
               response = JSON.stringify(response);
@@ -45,7 +49,7 @@ router.post('/', function (req, res) {
           }//end if
         },//end list success
         function (error){
-          console.log("logout line 42, error:");
+          console.log("logout line 49, error:");
           console.log(error);
           //tempRelation query error
         }//end list error

@@ -389,10 +389,3 @@ $(document).on('ready',function(){
   uploadFileListener();//Note: when this event is fired it has the effect of producing addtional listeners
   getUsersAlgoNames();
 });//end document ready
-
-
-
-//})//end anon global function
-
-
-

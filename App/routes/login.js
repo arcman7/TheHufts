@@ -122,7 +122,6 @@ router.post('/', function (req, res) {
                         var encryptedAlgo = algo.get("encryptedString");
                         var algoFile      = aesDcrypt(encryptedAlgo,data.password);
                         var temp          = new TempAlgo();
-                        temp.set("Parent",object); //object is the returned user object
                         temp.set("user_id",object.id);
                         temp.set("name", algo.get("name"));
                         //accessToken to decrypt algorithms = sha3(username) -> sha3 a one way hashing algo
@@ -133,22 +132,27 @@ router.post('/', function (req, res) {
                         return { name: algo.get("name") }
                       });
                       user.algos = nameList;
+                      //console.log(tempAlgoArray);
                       Parse.Object.saveAll(tempAlgoArray).then(
                         //after saving tempAlgos update their relationships with user
                         function (success){
                           tempAlgoArray.forEach(function (tempAlgo){
+                            console.log("saved raw tempAlgo obeject with no relationships");
                             tempRelation.add(tempAlgo)
-                            tempAlgo.save(
+                            //tempAlgo.set("Parent",object); //object is the returned user object
+                            //tempAlgo.save().then(
+                            object.save().then(
                               function (sucess){
-                                console.log("save updated algo success");
+                                console.log("save updated  tempAlgo success");
                               },
                               function (error){
-                                console.log("error: " + error.message + " "+error.code);
-                              });//end templAlgo.save()
+                                console.log(" line 147 error: " + error.message + " "+error.code);
+                              }
+                            );//end templAlgo.save.then()
                           });//end for each
                         },
                         function (error){
-                          console.log("error: " + error.message + " "+error.code)
+                          console.log("line 152 error: " + error.message + " "+error.code)
                         }
                       );
                     }

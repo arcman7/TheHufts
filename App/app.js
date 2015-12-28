@@ -36,7 +36,7 @@ function initialization(argv){
   }
 }
 
-exec("pwd",puts);
+//exec("pwd",puts);
 //var monk = require('monk');
 var fs   = require('fs');
 var http = require('http');
@@ -115,6 +115,7 @@ app.use('/query.js', obuscateJS('/query.js'));
 app.use('/uploadAlgo.js', obuscateJS('/uploadAlgo.js'));
 app.use('/bundle.js', obuscateJS('/bundle.js'));
 app.use('/loginFront.js', obuscateJS('/loginFront.js'));
+app.use('/logoutFront.js', obuscateJS('/logoutFront.js'));
 //Routes
 app.use('/gateKeeper', gateKeeper);
 app.use('/login', login);
