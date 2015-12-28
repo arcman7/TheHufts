@@ -5,6 +5,7 @@ var gateKeeper = require('./gateKeeper');
 var Parse      = require('parse/node');
 var AES        = require("crypto-js/aes");
 var SHA256     = require("crypto-js/sha256");
+var SHA3       = require("crypto-js/sha3");
 var session    = require('client-sessions');
 var needle     = require('needle');
 var roughSizeOfObject = require('./getAlgoNames').roughSizeOfObject
@@ -19,6 +20,11 @@ function aesEncrypt(string,key){
   //var encryptedString = CryptoJS.enc.Utf8.stringify(encrypted);
   var encryptedString = encrypted.toString();
   return encryptedString;
+}
+
+function sha3(string){
+  var hashedString = SHA3(string).toString();
+  return hashedString;
 }
 
 function getUserAlgo(req,res,next){
@@ -38,8 +44,9 @@ function getUserAlgo(req,res,next){
         user.accessToken = accessToken;
         user.username    = object.get('username');
         user.email       = object.get('email');
-        var relation     = object.relation("algos");
-        relation.query().find().then(
+        //var relation     = object.relation("algos");
+        var tempRelation = object.relation("tempAlgos");
+        tempRelation.query().find().then(
             function (list){
               if (list.length == 0){  //the user has no uploaded algos
                 req.algo = false
@@ -47,8 +54,8 @@ function getUserAlgo(req,res,next){
               else{ //storing users algos in user object
                 list.forEach(function(algo){
                   var encryptedAlgo = algo.get("encryptedString");
-                  //console.log("encryptedAlgo: "+encryptedAlgo)
-                  var algoFile = aesDecrypt(encryptedAlgo,req.body.accessKey);
+                  var key = sha3(user.username+"TheHufts");
+                  var algoFile = aesDecrypt(encryptedAlgo,key);
                   //console.log(algoFile);
 
                   if(req.body.filename == algo.get("name")){
@@ -97,7 +104,7 @@ function getUserAlgo(req,res,next){
           );//end relation-then function
       },//end query user success function
       function (error) {
-        console.log(" (line 96 hufterAPI.js) LOGIN-Error: " + error.code + " " + error.message);
+        console.log(" line 100 hufterAPI.js LOGIN-Error: " + error.code + " " + error.message);
         next();
       }
     ); //end query-first user
