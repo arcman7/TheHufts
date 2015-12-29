@@ -97,16 +97,25 @@ function uploadFileListener(){
       //console.log(this.result);
       // By lines
      // var lines = this.result.split('\n');
+      var fileType =  file.name.split('.').pop();
+      if(fileType == "js"){
+        var results    = testAlgoOutput(algoScript); //returns [true], if the algo passed
+      }
+      else{
+        var results = [ true ];
+      }
+      //console.log(fileType);
       var algoScript = this.result;
-      var results    = testAlgoOutput(algoScript); //returns [true], if the algo passed
+
       if(results[0]){
-        var fileType =  file.name.split('.').pop();
+        // var fileType =  file.name.split('.').pop();
         var filename = file.name.split('.')[0];
         var password = prompt("Password confirmation: ", "password");
         //console.log(password);
+        console.log(algoScript);
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
-        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType};
+        var data = {algo: encryptedAlgoString, name: filename, lang: fileType};
         console.log(fileType)
         var domain = window.location.href.split('/')[2];
         var request = $.ajax({
@@ -389,3 +398,4 @@ $(document).on('ready',function(){
   uploadFileListener();//Note: when this event is fired it has the effect of producing addtional listeners
   getUsersAlgoNames();
 });//end document ready
+
