@@ -52,15 +52,13 @@ function getUserAlgo(req,res,next){
                 req.algo = false
               }
               else{ //storing users algos in user object
-                list.forEach(function(algo){
-                  var encryptedAlgo = algo.get("encryptedString");
-                  var key = sha3(user.username+"TheHufts");
-                  var algoFile = aesDecrypt(encryptedAlgo,key);
-                  //console.log(algoFile);
-
+                list.forEach(function (algo){
                   if(req.body.filename == algo.get("name")){
-                    //console.log(algoFile);
+                    var encryptedAlgo = algo.get("encryptedString");
+                    var key = sha3(user.username+"TheHufts");
+                    var algoFile = aesDecrypt(encryptedAlgo,key);
                     req.body.algo = algoFile;
+                    req.body.lang = algo.get("fileType");
                     return;
                   }
                 });
@@ -74,14 +72,15 @@ function getUserAlgo(req,res,next){
                var domain = 'localhost:3001/';
                var backtest = 'backtest';
                var algo = req.body.algo;
-               var data = {algo: algo,"startDate": req.body.startDate,"endDate": req.body.endDate, "symbols": req.body.symbols, "lang":req.body.lang };
+               var data = {algo: algo,"startDate": req.body.startDate,"endDate": req.body.endDate, "symbols": req.body.symbols, "lang": req.body.lang };
                console.log(data);
                data = JSON.stringify(data);
-               algo = aesEncrypt(data,"yolocity");
-               algo = encodeURIComponent(algo);
-               var fullQuery = "http://"+ domain + backtest + "?data="+algo;
+               console.log(data);
+               data = aesEncrypt(data,"yolocity");
+               data = encodeURIComponent(data);
+               var fullQuery = "http://"+ domain + backtest + "?data="+data;
                console.log("hufter API query: "+fullQuery);
-              new Promise(function (resolve, reject){
+               new Promise(function (resolve, reject){
                   var request = needle.get(fullQuery,
                     function(err, response, body){
                       //console.log(resp);

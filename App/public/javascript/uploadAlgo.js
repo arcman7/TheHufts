@@ -115,7 +115,7 @@ function uploadFileListener(){
         console.log(algoScript);
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
-        var data = {algo: encryptedAlgoString, name: filename, lang: fileType};
+        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType};
         console.log(fileType)
         var domain = window.location.href.split('/')[2];
         var request = $.ajax({
@@ -171,6 +171,37 @@ function getUsersAlgoNames (){
 }
 
 
+function pluginAlgoResults(calculations){
+  var returnValue = calculations.netValue[calculations.netValue.length-1][1] - calculations.netValue[0][1];
+  var previousReturn = calculations.netValue[calculations.netValue.length-1][1] - calculations.netValue[calculations.netValue.length-2][1];
+  var directionR = returnValue > 0 ? "up" : "down";
+  var colorR     = returnValue > 0 ? "info" : "danger";
+  returnValue = returnValue.toFixed(2); previousReturn = previousReturn.toFixed(2);
+
+  var return1 = '<div class="ibox float-e-margins"><div class="ibox-title"><h5>Return</h5></div><div class="ibox-content"><h1 class="no-margins">$'+returnValue;
+  var return2 = '</h1><div class="stat-percent font-bold text-'+ colorR +'">$'+ previousReturn + '<i class="fa fa-level-'+ directionR +'"></i></div><small>Last Trade</small></div></div>';
+
+  $("#return").html(return1 + return2);
+
+
+  var percentageValue = calculations.netValue[calculations.netValue.length-1][1] / calculations.netValue[0][1] - 1;
+  var previousPercentage = calculations.netValue[calculations.netValue.length-1][1] / calculations.netValue[calculations.netValue.length - 2][1] - 1;
+  var directionP = previousPercentage > 0 ? "up" : "down";
+  var colorP     = previousPercentage > 0 ? "info" : "danger";
+  percentageValue *= 100; previousPercentage *= 100;
+  percentageValue = percentageValue.toFixed(0); previousPercentage = previousPercentage.toFixed(0);
+  var percentage1 = '<div class="ibox float-e-margins"><div class="ibox-title"><h5>Percentage Gain</h5></div><div class="ibox-content"><h1 class="no-margins">' + percentageValue;
+  var percentage2 ='%</h1><div class="stat-percent font-bold text-' + colorP +'">'+ previousPercentage +'%<i class="fa fa-level-'+ directionP +'"></i></div><small>Previous Position</small></div></div>';
+
+
+  $("#percentage").html(percentage1 + percentage2);
+
+  var balance1 = '<div class="ibox float-e-margins"><div class="ibox-title"><h5>Balance</h5></div><div class="ibox-content"><h1 class="no-margins">$';
+  var balance2 ='</h1><small>Current Balance</small></div></div>';
+  var balanceValue  = calculations.netCash[calculations.netCash.length-1][1].toFixed(2);
+  $("#balance").html(balance1 + balanceValue + balance2);
+}
+
 
 function algoTesterListener(algoId){
   $("#uploaded-algos-container").on('click',algoId,function(e){
@@ -213,6 +244,7 @@ function algoTesterListener(algoId){
                results = applyCash(options);
                console.log(results)
                graphHome(results.netValue, $(".results"),"Day ", undefined,globalSymbol);
+               pluginAlgoResults(results);
                $(".results").css("padding","1px");
                $(".results").css("border","1px solid black");
 
@@ -298,11 +330,16 @@ function formatSeries(symbol,filename,buySellSignals){
     "onSeries"  : scale + "price",
     "shadow"    : false,
     "width"     : 7,
-    "shape"     : "url(https://mt.google.com/vt/icon?psize=20&font=fonts/Roboto-Regular.ttf&color=ff330000&name=icons/spotlight/spotlight-waypoint-a.png&ax=44&ay=48&scale=1&text=%E2%80%B2)",
+    //"shape"     : "url(https://mt.google.com/vt/icon?psize=20&font=fonts/Roboto-Regular.ttf&color=ff330000&name=icons/spotlight/spotlight-waypoint-a.png&ax=44&ay=48&scale=1&text=%E2%80%B2)",
+    shape       : "circlepin",
     "data"      : buyFlagSeries,
     showInLegend: true,
-    color       : "#1eaa56",
-    name        : "Buy"
+    //color       : "#1eaa56",
+    color       : Highcharts.getOptions().colors[0],
+    name        : "Buy",
+    title       : "B",
+    style       : { color: 'white'},
+    fillColor   : "#2884e0"
    });
 
   series.push(
@@ -311,11 +348,16 @@ function formatSeries(symbol,filename,buySellSignals){
     "onSeries"  : scale + "price",
     "shadow"    : false,
     "width"     : 7,
-    "shape"     : "url(https://camo.githubusercontent.com/b4f21ebe4ad7c00f459e8ed115e6efb37fe69348/687474703a2f2f63686172742e676f6f676c65617069732e636f6d2f63686172743f636873743d645f6d61705f70696e5f6c65747465722663686c643d7c464630303030)",
+    //"shape"     : "url(https://camo.githubusercontent.com/b4f21ebe4ad7c00f459e8ed115e6efb37fe69348/687474703a2f2f63686172742e676f6f676c65617069732e636f6d2f63686172743f636873743d645f6d61705f70696e5f6c65747465722663686c643d7c464630303030)",
+    shape       : "circlepin",
     "data"      : sellFlagSeries,
     showInLegend: true,
-    color       : "#f20000",
-    name        : "Sell"
+    //color       : "#f20000",
+    color       : "#326d23",
+    name        : "Sell",
+    title       : "S",
+    style       : { color: 'black'},
+    fillColor   : "#18a689"
    });
 
   return series //contains regular stock data in addition to the newly generated signals
