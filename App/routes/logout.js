@@ -46,7 +46,13 @@ router.post('/', function (req, res) {
                 res.send("logout error");
               }
             );//end Parse.object.destoryALL
-          }//end if
+         }//end if
+         else{
+            req.user = req.session.user = res.locals.user = null;
+            var response = {redirect: "http://"+req.body.domain+"/landingPage"};
+            response = JSON.stringify(response);
+            res.send(response);
+         }
         },//end list success
         function (error){
           console.log("logout line 49, error:");

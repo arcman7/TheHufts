@@ -19,28 +19,28 @@ function formSubmitListener(){
   //var gateKeeperURL = "U2FsdGVkX1/TgCOk5cMhFLg/9AnetMh2IYRno+wQGk78aKwkRS39/rop2c/Cm3SpOtrz2UQHSNgZOie01+kZQg==";
   var gateKeeperURL = "http://" + domain +"/gateKeeper/knockKnock"
   $("#logIn-button").on("click",function(event){
-    event.preventDefault();
-    console.log("form submitted");
-    //var username = $('.login-form input[name="form-email"]').val();
-    var email        = $('.login-form input[name="form-email"]').val();
-    var password     = $('.login-form input[name="form-password"]').val();
-    var passwordhash =  CryptoJS.SHA3(password).toString();
+     event.preventDefault();
+     console.log("form submitted");
+     //var username = $('.login-form input[name="form-email"]').val();
+     var email        = $('.login-form input[name="form-email"]').val();
+     var password     = $('.login-form input[name="form-password"]').val();
+     var passwordhash =  CryptoJS.SHA3(password).toString();
 
-    //var data = { username: username, password: password, confirmation: confirmation, login:true};
-    var data = { email: email, password: password, passwordhash: passwordhash, confirmation: confirmation, login:true, domain: domain};
+     //var data = { username: username, password: password, confirmation: confirmation, login:true};
+     var data = { email: email, password: password, passwordhash: passwordhash, confirmation: confirmation, login:true, domain: domain};
 
-    ajaxLoginRouter(data,gateKeeperURL,confirmation);//decrypt(gateKeeperURL,confirmation));
+     ajaxLoginRouter(data,gateKeeperURL,confirmation);//decrypt(gateKeeperURL,confirmation));
   });
 
    $("#register-button").on("click",function(event){
-    event.preventDefault();
-    console.log("form submitted");
-    var username = $('.login-form input[name="form-name"]').val();
-    var password = $('.login-form input[name="password"]').val();
-        password =  CryptoJS.SHA3(password).toString();
-    var    email = $('.login-form input[name="form-email"]').val();
-    var     data = { username: username, password: password, email: email, confirmation: confirmation, login:false };
-    ajaxLoginRouter(data,gateKeeperURL,confirmation);//decrypt(gateKeeperURL,confirmation));
+     event.preventDefault();
+     console.log("form submitted");
+     var username = $('.login-form input[name="form-name"]').val();
+     var password = $('.login-form input[name="password"]').val();
+         password =  CryptoJS.SHA3(password).toString();
+     var    email = $('.login-form input[name="form-email"]').val();
+     var     data = { username: username, password: password, email: email, confirmation: confirmation, login:false, domain: domain };
+     ajaxLoginRouter(data,gateKeeperURL,confirmation);//decrypt(gateKeeperURL,confirmation));
   });
 }
 
