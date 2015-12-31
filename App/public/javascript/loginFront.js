@@ -28,7 +28,6 @@ function formSubmitListener(){
 
      //var data = { username: username, password: password, confirmation: confirmation, login:true};
      var data = { email: email, password: password, passwordhash: passwordhash, confirmation: confirmation, login:true, domain: domain};
-
      ajaxLoginRouter(data,gateKeeperURL,confirmation);//decrypt(gateKeeperURL,confirmation));
   });
 
@@ -36,7 +35,7 @@ function formSubmitListener(){
      event.preventDefault();
      console.log("form submitted");
      var username = $('.login-form input[name="form-name"]').val();
-     var password = $('.login-form input[name="password"]').val();
+     var password = $('.login-form input[name="form-password"]').val();
          password =  CryptoJS.SHA3(password).toString();
      var    email = $('.login-form input[name="form-email"]').val();
      var     data = { username: username, password: password, email: email, confirmation: confirmation, login:false, domain: domain };

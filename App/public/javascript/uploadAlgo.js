@@ -13,6 +13,7 @@ var yousuck = " Please refresh the page and try again.";
 var userAlgoFunctions = {};
 
 function testAlgoOutput(algoString){
+  console.log(algoString);
   algoFunction1 = new Function('return ' + algoString);
   algoFunction1 = algoFunction1();
   //var output = eval(algoString);
@@ -98,6 +99,7 @@ function uploadFileListener(){
       // By lines
      // var lines = this.result.split('\n');
       var fileType =  file.name.split('.').pop();
+      var algoScript = this.result;
       if(fileType == "js"){
         var results    = testAlgoOutput(algoScript); //returns [true], if the algo passed
       }
@@ -105,7 +107,7 @@ function uploadFileListener(){
         var results = [ true ];
       }
       //console.log(fileType);
-      var algoScript = this.result;
+
 
       if(results[0]){
         // var fileType =  file.name.split('.').pop();
@@ -115,7 +117,7 @@ function uploadFileListener(){
         console.log(algoScript);
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
-        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType};
+        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password};
         console.log(fileType)
         var domain = window.location.href.split('/')[2];
         var request = $.ajax({
@@ -128,6 +130,7 @@ function uploadFileListener(){
           var filename = file.name.split('.')[0]
           $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td><input type="integer" name="principal" class="'+filename+'" value="dollar amount"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
           algoTesterListener('#'+filename);
+
         });//end done function
 
         }//end if results[0]
@@ -161,10 +164,14 @@ function getUsersAlgoNames (){
   .done(function(response){
     //console.log(response,typeof(response));
     response = JSON.parse(response);
-     response.names.forEach(function (algoName){
-      $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td><input type="integer" name="principal" class="'+algoName+'" value="dollar amount"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-      algoTesterListener('#'+algoName);
-    });
+    console.log(response);
+    if(response.names){
+       response.names.forEach(function (algoName){
+        $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td><input type="integer" name="principal" class="'+algoName+'" value="dollar amount"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+        algoTesterListener('#'+algoName);
+       });
+    }
+
   }).fail(function (error){
    console.log("failed to get algo names from server, " + JSON.stringify(error));
   });

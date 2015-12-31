@@ -15,9 +15,9 @@ Parse.initialize(parseSecret1, parseSecret2);
 //Parse initalization END
 
 router.post('/', function (req, res) {
-  console.log("lougout route:")
-  console.log(req.body.user);
-  console.log(req.body);
+  //console.log("lougout route:")
+  //console.log(req.body.user);
+  //console.log(req.body);
   var data     = req.body;
   var TempAlgo = Parse.Object.extend("TempAlgo");
   var User     = Parse.Object.extend("UserC");
@@ -55,14 +55,14 @@ router.post('/', function (req, res) {
          }
         },//end list success
         function (error){
-          console.log("logout line 49, error:");
+          console.log("logout line 58, error:");
           console.log(error);
           //tempRelation query error
         }//end list error
       )//end tempRelation.query().then()
     },
     function (error)  {
-      console.log("lout line 47, error:");
+      console.log("lout line 65, error:");
       console.log(error)
       //object user query error
      }

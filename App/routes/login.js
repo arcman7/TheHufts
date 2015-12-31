@@ -69,10 +69,8 @@ function queryParseUser(options,req,res,next) {
 
 
 router.post('/', function (req, res) {
-  //console.log(req.body);
   var key          = gateKeeper.gateKey;
   var confirmation = "TheHufts";
-  //console.log("key: " + key);
   var dataCopy     = req.body.data;
   var data         = aesDcrypt(req.body.data, key);
   data             = JSON.parse(data);
@@ -91,7 +89,6 @@ router.post('/', function (req, res) {
 
     if(data.login){ //code to log a user in
       requestType = "login";
-
       var TempAlgo = Parse.Object.extend("TempAlgo");
       var User     = Parse.Object.extend("UserC");
       var query    = new Parse.Query(User);
@@ -132,7 +129,6 @@ router.post('/', function (req, res) {
                         return { name: algo.get("name") }
                       });
                       user.algos = nameList;
-                      //console.log(tempAlgoArray);
                       Parse.Object.saveAll(tempAlgoArray).then(
                         //after saving tempAlgos update their relationships with user
                         function (success){
@@ -160,11 +156,9 @@ router.post('/', function (req, res) {
                     req.session.user = user;  //refresh the session value
                     res.locals.user  = user;
                     response["redirect"]    = "http://"+data.domain+"/dashboard"+ "?username="+user.username;
-                    console.log(response["redirect"]);
                     response[requestType]   = status;
                     response["accessToken"] = aesEncrypt(object.get('accessToken'),key);
                     response = JSON.stringify(response);
-                    //console.log(res)
                     res.send(response)
                   },
                   function (error){
@@ -192,7 +186,7 @@ router.post('/', function (req, res) {
         requestType  = "register";
         var User     = Parse.Object.extend("UserC");
         var user     = new User();
-        console.log("data :"+JSON.stringify(data));
+        console.log("register data :"+JSON.stringify(data));
         var password = data.password; //aesEncrypt(data.password,"TheHufts");
         //console.log("password: " + password);
         user.set("username", data.username);

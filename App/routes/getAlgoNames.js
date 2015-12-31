@@ -118,22 +118,26 @@ router.post('/', function (req, res, next) {
       //   resolve(reset);
       // })
       // .then(function(){
-        var response = {};
-        response["names"] = [];
-        //console.log("req.session: " + JSON.stringify(req.session));
-
-        var list = req.session.user.algos;
-        if (list.length == 0){  //the user has no uploaded algos
-          response["names"] = false;
-        }
-        else{
-          list.forEach(function(algo){
-             response["names"].push(algo.name);
-          });
-        }
-        response = JSON.stringify(response);
-        res.send(response);
-     // })
+  var response = {};
+  response["names"] = [];
+  console.log("req.session: " + JSON.stringify(req.session));
+  if(req.session.user){
+    // if user is logged in
+    var list = req.session.user.algos;
+    if (!list){  //the user has no uploaded algos
+      response["names"] = false;
+    }
+    else{
+      list.forEach(function(algo){
+         response["names"].push(algo.name);
+      });
+    }
+    response = JSON.stringify(response);
+  }
+  else{
+    response["names"] = false;
+  }
+  res.send(response);
 });
 
 module.exports = router;

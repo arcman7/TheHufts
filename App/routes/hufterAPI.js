@@ -67,15 +67,15 @@ function getUserAlgo(req,res,next){
               req.user = user;
               req.session.user = user;  //refresh the session value
               res.locals.user  = user;
-               //console.log("req.session resetSessionAlgos: ", JSON.stringify(req.session));
+
                console.log("req.session size: "+ roughSizeOfObject(req.session));
                var domain = 'localhost:3001/';
                var backtest = 'backtest';
                var algo = req.body.algo;
                var data = {algo: algo,"startDate": req.body.startDate,"endDate": req.body.endDate, "symbols": req.body.symbols, "lang": req.body.lang };
-               console.log(data);
+               //console.log(data);
                data = JSON.stringify(data);
-               console.log(data);
+               //console.log(data);
                data = aesEncrypt(data,"yolocity");
                data = encodeURIComponent(data);
                var fullQuery = "http://"+ domain + backtest + "?data="+data;
@@ -83,7 +83,6 @@ function getUserAlgo(req,res,next){
                new Promise(function (resolve, reject){
                   var request = needle.get(fullQuery,
                     function(err, response, body){
-                      //console.log(resp);
                       res.send(response.body)
                     }
                   );
@@ -94,7 +93,6 @@ function getUserAlgo(req,res,next){
                 });
 
                //next();
-              // console.log("req.cookies: resetSessionAlgos: ", req.cookies);
             },
             function (error){
               console.log( "line 90 hufterAPI users-algos error: "+error);
