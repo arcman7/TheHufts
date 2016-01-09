@@ -96,7 +96,7 @@ vector<vector<data>> entropy_algo(vector<data>& data_set){
     while( index < data_set.size() ){
       ent = entropy(window, pCount, nCount);
       mapped_ent = mapped_entropy(ent);
-      //0.7 is an arbitrary constant, and in general will be a paramter to be varierd and optimized
+      //0.7 is an arbitrary constant, and in general will be a paramter to be varied and optimized
       //mapped_entropy uses powers of 2 (symetric with undervalued and overvalued stock state), and thus we must make sure nCount > pCount is true
       if( mapped_ent > 0.7 && nCount > pCount){
         buy.push_back(data_set[index]);
