@@ -1,4 +1,5 @@
 //module.exports = (function(){
+  // console.log("coming from public/assets/javascript");
 
 //GLOBAL VARIABLES
     //GLOBAL::Variables to be used by algorithms
