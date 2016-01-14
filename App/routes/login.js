@@ -17,7 +17,7 @@ Parse.initialize(parseSecret1, parseSecret2);
 //Parse initalization END
 
 //Encryption-Decryption functions
-function aesDcrypt(string,key){
+function aesDecrypt(string,key){
   var decrypted       = AES.decrypt(string, key);
   var decryptedString = CryptoJS.enc.Utf8.stringify(decrypted);
   return decryptedString;
@@ -46,17 +46,21 @@ function queryParseUser(options,req,res,next) {
       success: function(object) {
         console.log("queryParseUser: Successfully retrieved " + object.get("username"));
         //console.log(object.get('pwd'));
-        var user         ={};
+        var user         = {};
         user.email       = object.get('email');
         user.username    = object.get('username');
         user.accessToken = object.get('accessToken');
         user.algos       = options.algos;
         req.user         = user;
         req.session.user = user;  //refresh the session value
+
+        var session_id = aesEncrypt(user.username, "TheHufts");
+        req.session.user.session_id = session_id;
+
         res.locals.user  = user;
         //console.log("req.session: ", JSON.stringify(req.session));
         //console.log("req.cookies: ", JSON.stringify(req.cookies));
-        // finishing processing the middleware and run the route
+        // finish processing the middleware and run the route
         next();
       },
       error: function(error) {
@@ -72,12 +76,12 @@ router.post('/', function (req, res) {
   var key          = gateKeeper.gateKey;
   var confirmation = "TheHufts";
   var dataCopy     = req.body.data;
-  var data         = aesDcrypt(req.body.data, key);
+  var data         = aesDecrypt(req.body.data, key);
   data             = JSON.parse(data);
   var response     = {};
 
   //switching to custom user class, since parse has it's own user class already defined - problems wich are covered later.
-  //use custom fclass name: UserC
+  //use custom class name: UserC
 
   if(confirmation != data.confirmation){
     res.send("{error-code:k}"); //error k = key miss-match
@@ -117,7 +121,7 @@ router.post('/', function (req, res) {
                     else{ //storing users algos in user object
                       nameList = list.map(function (algo){
                         var encryptedAlgo = algo.get("encryptedString");
-                        var algoFile      = aesDcrypt(encryptedAlgo,data.password);
+                        var algoFile      = aesDecrypt(encryptedAlgo,data.password);
                         var temp          = new TempAlgo();
                         temp.set("user_id",object.id);
                         temp.set("name", algo.get("name"));
@@ -136,7 +140,6 @@ router.post('/', function (req, res) {
                             console.log("saved raw tempAlgo obeject with no relationships");
                             tempRelation.add(tempAlgo)
                             //tempAlgo.set("Parent",object); //object is the returned user object
-                            //tempAlgo.save().then(
                             object.save().then(
                               function (sucess){
                                 console.log("save updated  tempAlgo success");
@@ -155,7 +158,9 @@ router.post('/', function (req, res) {
                     req.user = user;
                     req.session.user = user;  //refresh the session value
                     res.locals.user  = user;
-                    response["redirect"]    = "http://"+data.domain+"/dashboard"+ "?username="+user.username;
+                    var session_id = aesEncrypt(user.username, "TheHufts");
+                    req.session.user.session_id = session_id;
+                    response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
                     response[requestType]   = status;
                     response["accessToken"] = aesEncrypt(object.get('accessToken'),key);
                     response = JSON.stringify(response);
@@ -187,22 +192,20 @@ router.post('/', function (req, res) {
         var User     = Parse.Object.extend("UserC");
         var user     = new User();
         console.log("register data :"+JSON.stringify(data));
-        var password = data.password; //aesEncrypt(data.password,"TheHufts");
-        //console.log("password: " + password);
+        var password = data.password;
         user.set("username", data.username);
+        var session_id = aesEncrypt(user.username, "TheHufts");
         user.set("email", data.email);
-        //user.set("password",password);  parse wont let us access passwords or use the User class to login
         //using pwd as alias for password
         user.set("accessToken","TheHufts");
-        //deprecated password storage scheme:
-        //user.set("pwd",aesEncrypt(data.password,"TheHufts"));
         user.set("pwd",password);
         user.save(null, {
           success: function(user) {
-            console.log(" user successfully saved")
+            console.log(" user successfully saved");
+            var session_id = aesEncrypt(user.get("username"), "TheHufts");
             status                = true;
             response[requestType] = status;
-            response["redirect"]    = "http://"+data.domain+"/dashboard"+ "?username="+user.get("username");
+            response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
             response              = JSON.stringify(response);
 
             user.email       = user.get('email');
@@ -211,6 +214,8 @@ router.post('/', function (req, res) {
 
             req.user         = user;
             req.session.user = user;  //refresh the session value
+            req.session.user.session_id = session_id;
+
             res.locals.user  = user;
           // finishing processing the middleware and run the route
             res.send(response);

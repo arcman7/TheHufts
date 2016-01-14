@@ -14,7 +14,9 @@ router.get('/', function (req, res) {
     res.send(data);
   }
   else{
-    data.redirect = "http://localhost:3000/logIn";
+    var protocol = req.body.protocol;
+    var domain   = req.body.domain;
+    data.redirect = protocol + "//" + domain + "/logIn";//"https://localhost:3000/logIn";
     res.send(data);
   }
 });//end router-get

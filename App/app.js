@@ -20,21 +20,7 @@ function puts(error, stdout, stderr) {
 };
 //exec("pwd", puts);
 //PORT=3000 nodemon thehufts 3000 localhost:
-function initialization(argv){
-  if(argv[4]){
-    module.exports.domain = argv[4]; //dynamically set domain with arguments
-  }
-  var hufterPath = " nodemon /Users/Jedi_scholar/Desktop/phase-4/hiring_mixers/hufter/bin/www hufter";
-  var hufterPort;
-  var command;
-  if(argv[3]){
-    hufterPort = Number(argv[3]) + 1;
-    command = "PORT="+hufterPort+hufterPath;
-    console.log(command);
-    exec(command,puts);
-    //exec('ls',puts);
-  }
-}
+
 
 //exec("pwd",puts);
 //var monk = require('monk');
@@ -95,7 +81,7 @@ app.use(function (req, res, next) {
       Parse.initialize(parseSecret1, parseSecret2);
       //Parse initalization END
       //console.log("*****************req.path: "+req.path);
-      login.queryParseUser({email: req.session.user.email, algos: req.session.user.algos },req,res,next);
+      login.queryParseUser({email: req.session.user.email, algos: req.session.user.algos, session_id: req.session.user.session_id },req,res,next);
     }
     else {
       next();
@@ -118,6 +104,7 @@ app.use('/loginFront.js', obuscateJS('/loginFront.js'));
 app.use('/logoutFront.js', obuscateJS('/logoutFront.js'));
 //Note about Front-end javascript assets:
 //line 73 allows src refs to take the form /javascript/file_name.js - express looks in the javascript folder under public, and will serve up the static files un obuscated, allows shows them as coming from the javascript folder, the obuscated assets will show up as being in the root level directory since their src refs all start with '/' , however all the front-end js files, obuscated or not actually exist in the same directory.
+
 //Routes
 app.use('/gateKeeper', gateKeeper);
 app.use('/login', login);
@@ -136,5 +123,4 @@ app.use('/hufterAPI', hufterAPI);
 // });
 
 module.exports = app;
-initialization(process.argv);
 

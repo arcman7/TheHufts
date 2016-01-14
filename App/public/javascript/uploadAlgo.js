@@ -24,17 +24,16 @@ function testAlgoOutput(algoString){
   var errorMessage = "";
 
     if (typeof(output) == "object"){
-      console.log(output);
       if(output["buy"] && output["sell"]){
         if ( (output["buy"].constructor == Array) && (output["sell"].constructor == Array) ){
           var buy0 = output["buy"][0];
           var sell0 = output["sell"][0];
           if ((buy0.constructor == Array) && (sell0.constructor == Array) ){
             if (Number(buy0[1]) > 0 && Number(sell0[1]) > 0){
+
               if (buy0[0] && sell0[0]){
                 return [true];
-              }
-              else{
+              }else{
                 errorMessage ="The first value (index 0) inside of your nested arrays must be valid time stamp values.";
               }//end fith-nested if
             }else{
@@ -69,11 +68,11 @@ function blockEval(string){
 }
 
 function checkLogin(){
-   var domain = window.location.href.split('/')[2];
 
    var request = $.ajax({
-      url: "http://"+domain+"/checkLogin",
+      url: protocol + "//" + domain + "/checkLogin",
       type: "get",
+      data: {domain: domain, protocol: protocol},
       success: function(data, textStatus) {
         if (data.redirect) {
             // data.redirect contains the string URL to redirect to
@@ -116,14 +115,13 @@ function uploadFileListener(){
         var filename = file.name.split('.')[0];
         var password = prompt("Password confirmation: ", "password");
         //console.log(password);
-        console.log(algoScript);
+        //console.log(algoScript);
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
         var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password};
-        console.log(fileType)
-        var domain = window.location.href.split('/')[2];
+        //console.log(fileType)
         var request = $.ajax({
-          url: "http://"+ domain+"/saveAlgo",
+          url: protocol + "//" + domain+"/saveAlgo",
           type:"post",
           data: data
         });
@@ -155,11 +153,10 @@ function uploadFileListener(){
 function getUsersAlgoNames (){
   //var accessKey = prompt("Please confirm with your access key: ", "access-key");
   var accessKey = "huffer";
-  var domain = window.location.href.split('/')[2];
   var username = String(window.location).split('=')[1];
 
   $.ajax({
-    url: "http://" + domain + "/getAlgoNames",
+    url: protocol + "//" + domain + "/getAlgoNames",
     type: "post",
     data: {username: username, accessKey: accessKey}
   })
@@ -169,7 +166,7 @@ function getUsersAlgoNames (){
     console.log(response);
     if(response.names){
        response.names.forEach(function (algoName){
-        $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td><input type="integer" name="principal" class="'+algoName+'" value="dollar amount"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+        $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td>$</td><td><input type="integer" name="principal" class="'+algoName+'" value="100.00"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
         algoTesterListener('#'+algoName);
        });
     }
@@ -217,7 +214,6 @@ function algoTesterListener(algoId){
     e.preventDefault();
     console.log('worked');
     var username = String(window.location).split('=')[1];
-    var domain = window.location.href.split('/')[2];
 
     if(globalSymbol){
       //new Promise(resolve,reject){
@@ -226,10 +222,11 @@ function algoTesterListener(algoId){
         var d300ago = new Date(d - 300*3600*1000*24);
         var startDate = yahooDateString(d300ago);
         var filename = algoId.slice(1);
-        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate};
-        //console.log(data);
+        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain, protocol: protocol};
+        console.log(data);
+        $(algoId).html('<i class="fa fa-cog fa-spin"></i>');
         var request = $.ajax({
-              url: "http://" + domain + "/hufterAPI",
+              url: protocol + "//" + domain + "/hufterAPI",
               type: "post",
               data: data
             }).done(function (response){
@@ -256,7 +253,7 @@ function algoTesterListener(algoId){
                pluginAlgoResults(results);
                $(".results").css("padding","1px");
                $(".results").css("border","1px solid black");
-
+               $(algoId).html('<i class="fa fa-line-chart text-navy"> Run</i>')
             });
         //resolve(request)
       //}).then(function(response))

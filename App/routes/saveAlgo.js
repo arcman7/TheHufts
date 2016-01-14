@@ -128,23 +128,6 @@ Parse.Object.saveAll([userAlgo,temp]).then(
         response[requestType] = status;
         res.send(response);
       }
-);//end parese.object.saveAll().then()
-  // userAlgo.save().then(
-  //     function (algo){
-  //       console.log(" algo successfully saved")
-  //       status                = true;
-  //       response[requestType] = status;
-  //       var userC = req.session.user;
-  //       console.log("userC: " + userC.email);
-  //       userAlgoSave(userC,response)
-  //     },
-  //     function (error) {
-  //       console.log("failed to save algo" + error.message)
-  //       status                = false;
-  //       response[requestType] = status;
-  //       res.send(response);
-  //     }
-  // );//end userAlgo.save().then()
-
+  );
 }); //end router post anon-function
 module.exports = router;

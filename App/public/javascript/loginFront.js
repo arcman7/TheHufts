@@ -13,11 +13,12 @@ function decrypt(string,key){
 
 
 function formSubmitListener(){
-  var confirmation = "TheHufts";
-  var domain = window.location.href.split('/')[2];
+  var confirmation  = "TheHufts";
+
 
   //var gateKeeperURL = "U2FsdGVkX1/TgCOk5cMhFLg/9AnetMh2IYRno+wQGk78aKwkRS39/rop2c/Cm3SpOtrz2UQHSNgZOie01+kZQg==";
-  var gateKeeperURL = "http://" + domain +"/gateKeeper/knockKnock"
+  //var gateKeeperURL = "https://" + domain +"/gateKeeper/knockKnock"
+  var gateKeeperURL = protocol + "//" + domain + "/gateKeeper/knockKnock";
   $("#logIn-button").on("click",function(event){
      event.preventDefault();
      console.log("form submitted");
@@ -27,7 +28,7 @@ function formSubmitListener(){
      var passwordhash =  CryptoJS.SHA3(password).toString();
 
      //var data = { username: username, password: password, confirmation: confirmation, login:true};
-     var data = { email: email, password: password, passwordhash: passwordhash, confirmation: confirmation, login:true, domain: domain};
+     var data = { email: email, password: password, passwordhash: passwordhash, confirmation: confirmation, login:true, domain: domain, protocol: protocol};
      ajaxLoginRouter(data,gateKeeperURL,confirmation);//decrypt(gateKeeperURL,confirmation));
   });
 
@@ -38,15 +39,13 @@ function formSubmitListener(){
      var password = $('.login-form input[name="form-password"]').val();
          password =  CryptoJS.SHA3(password).toString();
      var    email = $('.login-form input[name="form-email"]').val();
-     var     data = { username: username, password: password, email: email, confirmation: confirmation, login:false, domain: domain };
+     var     data = { username: username, password: password, email: email, confirmation: confirmation, login:false, domain: domain, protocol: protocol };
      ajaxLoginRouter(data,gateKeeperURL,confirmation);//decrypt(gateKeeperURL,confirmation));
   });
 }
 
 function ajaxLoginRouter(data,url){
   data = JSON.stringify(data);
-  var domain = window.location.href.split('/')[2];
-
   $.ajax({
           url: url,
           type: "get"
@@ -56,7 +55,7 @@ function ajaxLoginRouter(data,url){
     //console.log(key);
     data = encrypt(data, key);
     //var loginURL = "U2FsdGVkX18QPZdMyeLqAkP32qAdsz5D1W4iRNrujhzK7jsbsxqL4Fur1NrXDNfk34cDezQ52BUvIP7WBT71sg==";
-    var loginURL = "http://" + domain + '/login';
+    var loginURL = protocol+ '//' + domain + '/login';
     var confirmation = encrypt("TheHufts",key);
     $.ajax({
         url: loginURL,//decrypt(loginURL,"TheHufts"),
