@@ -128,6 +128,8 @@ router.post('/', function (req, res, next) {
   if(req.session.user){
     // if user is logged in
     var list = req.session.user.algos;
+    console.log("getAlgoNames req.session.user.algos: ",req.session.user.algos);
+
     if (!list){  //the user has no uploaded algos
       response["names"] = false;
     }

@@ -65,6 +65,7 @@ double entropy(vector<data>& window, int& pCount, int& nCount){
   double pU,pN;
   pCount = nCount = 0;
   double entropy;
+  int total = 0;
   for(int i = 0; i < window.size()-1; i++){
     if(window[i].price < window[i+1].price){
       pCount += 1;
@@ -72,8 +73,9 @@ double entropy(vector<data>& window, int& pCount, int& nCount){
     if(window[i].price > window[i+1].price){
       nCount += 1;
     }
-    pU = pCount*1.0 / window.size()*1.0;
-    pN = nCount*1.0 / window.size()*1.0;
+    total = pCount + nCount;
+    pU = pCount*1.0 / total*1.0//window.size()*1.0;
+    pN = nCount*1.0 / total*1.0//window.size()*1.0;
   }
   entropy = -1*pU*log(pU) + -1*pN*log(pN);
   return entropy;
@@ -99,7 +101,7 @@ vector<vector<data>> entropy_algo(vector<data>& data_set){
       mapped_ent = mapped_entropy(ent);
       //0.7 is an arbitrary constant, and in general will be a paramter to be varierd and optimized
       //mapped_entropy uses powers of 2 (symetric with undervalued and overvalued stock state), and thus we must make sure nCount > pCount is true
-      if( mapped_ent > 0.7 && nCount > pCount){
+      if( mapped_ent > 0.6 && nCount > pCount){
         buy.push_back(data_set[index]);
       }
       int last_index = sell.size() -1;

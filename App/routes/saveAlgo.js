@@ -39,7 +39,7 @@ var TempAlgo = Parse.Object.extend("TempAlgo");
 
 var response = {};
 
-var userAlgoSave = function (options,response) {
+var userAlgoSave = function (options,response) {//this function assumes userAlgo is an already existing global variable
   console.log("hi from userAlgoSave");
    var User           = Parse.Object.extend("UserC");
    var query          = new Parse.Query(User);
@@ -64,18 +64,19 @@ var userAlgoSave = function (options,response) {
         var key = sha3(user.get("username")+"TheHufts");
         temp.set("user_id",user_id);
         console.log("saveAlgo key: ", key);
-
+        //create decrypted copy
         var algoFile = aesDecrypt(req.body.algo, req.body.password);
         console.log("    algoFile: ", algoFile);
-        console.log(" encryptedAlfoFile: ",aesEncrypt(algoFile, key) );
+        console.log(" encryptedAlgoFile: ", aesEncrypt(algoFile, key) );
+        //set temp with encrpted Algo using key "key"
         temp.set("encryptedString", aesEncrypt(algoFile, key) );
-
-
 
         //var response2 = userAlgo.save().then(
         Parse.Object.saveAll([userAlgo,temp]).then(
           function (success){
             console.log("Successfully saved user " + user.get("username") + " with algo: "+ userAlgo.get("name"));
+            req.session.user.algos.push({name: req.body.name});
+            console.log("saveAlgo req.session.user.algos: ",req.session.user.algos);
             response["userSaveAlgo"] = true;
             response = JSON.stringify(response);
             //console.log(response);

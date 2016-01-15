@@ -71,7 +71,7 @@ function ent(data_set,options){
       }
       var last_index = buy.length -1;
       if(last_index > -1){ //checking if there any buy signals to make sell signals from
-        console.log(data_set[index][1] > buy[last_index][1], selltracker);
+        //console.log(data_set[index][1] > buy[last_index][1], selltracker);
         if( data_set[index][1] > buy[last_index][1] && selltracker){
           sell.push(data_set[index]);
           selltracker = false;
@@ -83,6 +83,7 @@ function ent(data_set,options){
 
   signals["buy"]  = buy;
   signals["sell"] = sell;
+  //console.log(signals)
   return signals;
  }
 

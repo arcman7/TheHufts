@@ -128,7 +128,7 @@ function uploadFileListener(){
         request.done(function(response){
           console.log(response);
           var filename = file.name.split('.')[0]
-          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td><input type="integer" name="principal" class="'+filename+'" value="dollar amount"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
           algoTesterListener('#'+filename);
 
         });//end done function
