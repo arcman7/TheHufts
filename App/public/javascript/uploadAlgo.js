@@ -128,7 +128,10 @@ function uploadFileListener(){
         request.done(function(response){
           console.log(response);
           var filename = file.name.split('.')[0]
-          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
+          $("table.table.table-striped td").css({'padding-left':'0px'});
+          $("table.table.table-striped td").css({'padding-right':'0px'});
+          // $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
           algoTesterListener('#'+filename);
 
         });//end done function
@@ -148,6 +151,12 @@ function uploadFileListener(){
   };//end .onchange function
 }
 
+// function inspectSourceCode(algoId){
+//   $("#uploaded-algos-container").on('click',algoId,function(e){
+//     e.preventDefault();
+
+//   }
+// }
 
 
 function getUsersAlgoNames (){
@@ -166,7 +175,11 @@ function getUsersAlgoNames (){
     console.log(response);
     if(response.names){
        response.names.forEach(function (algoName){
-        $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td>$</td><td><input type="integer" name="principal" class="'+algoName+'" value="100.00"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+        var filename = algoName;
+        //$("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td>$</td><td><input type="integer" name="principal" class="'+algoName+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+       $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
+       $("table.table.table-striped td").css({'padding-left':'0px'});
+       $("table.table.table-striped td").css({'padding-right':'0px'});
         algoTesterListener('#'+algoName);
        });
     }
@@ -253,14 +266,10 @@ function algoTesterListener(algoId){
                pluginAlgoResults(results);
                $(".results").css("padding","1px");
                $(".results").css("border","1px solid black");
-               $(algoId).html('<i class="fa fa-line-chart text-navy"> Run</i>')
+               $(algoId).html('<i class="fa fa-line-chart text-navy"> Run</i>');
             });
         //resolve(request)
       //}).then(function(response))
-
-      //clearing mysterious 'A' text value from markers
-      // $("#highcharts-6 > svg > g.highcharts-series-group > g > g > text").text('');
-      //edit: The 'A' still fucking comes back anytime you adjust the graph!?
     }
     else{
       swal("Wait!", "Shouldn't you search a stock first so your algorithm will run against something?", "error");
