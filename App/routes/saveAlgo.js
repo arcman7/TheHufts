@@ -60,12 +60,11 @@ var userAlgoSave = function (options,response) {//this function assumes userAlgo
         var tempRelation  = user.relation("tempAlgos");
         tempRelation.add(temp);
 
-        //console.log("saveAlgo req.body: ",req.body);
         var key = sha3(user.get("username")+"TheHufts");
         temp.set("user_id",user_id);
         console.log("saveAlgo key: ", key);
         //create decrypted copy
-        var algoFile = aesDecrypt(req.body.algo, req.body.password);
+        var algoFile = aesDecrypt(data.algo, data.password);
         console.log("    algoFile: ", algoFile);
         console.log(" encryptedAlgoFile: ", aesEncrypt(algoFile, key) );
         //set temp with encrpted Algo using key "key"
@@ -75,7 +74,7 @@ var userAlgoSave = function (options,response) {//this function assumes userAlgo
         Parse.Object.saveAll([userAlgo,temp]).then(
           function (success){
             console.log("Successfully saved user " + user.get("username") + " with algo: "+ userAlgo.get("name"));
-            req.session.user.algos.push({name: req.body.name});
+            req.session.user.algos.push({name: data.name});
             console.log("saveAlgo req.session.user.algos: ",req.session.user.algos);
             response["userSaveAlgo"] = true;
             response = JSON.stringify(response);
@@ -102,19 +101,29 @@ var userAlgoSave = function (options,response) {//this function assumes userAlgo
 
 // Create the user's algo
 var requestType  = "saveAlgoCloud";
-
 var userAlgo     = new Algo();
 
-console.log(req.body.name);
-userAlgo.set("name", req.body.name);
-userAlgo.set("encryptedString", req.body.algo);
-userAlgo.set("fileType",req.body.fileType);
+var key          = gateKeeper.gateKey;
+var confirmation = "TheHufts";
+var data         = aesDecrypt(req.body.data, key);
+data             = JSON.parse(data);
 
-var temp         = new TempAlgo();
-temp.set("name", req.body.name);
-temp.set("fileType",req.body.fileType);
+if(confirmation != data.confirmation){
+  res.send("{error-code:k}"); //error k = key miss-match
+}
+else{ // continue with login/register route
+  var requestType;
+  var status;
+  console.log(data.name);
+  userAlgo.set("name", data.name);
+  userAlgo.set("encryptedString", data.algo);
+  userAlgo.set("fileType",data.fileType);
 
-Parse.Object.saveAll([userAlgo,temp]).then(
+  var temp         = new TempAlgo();
+  temp.set("name", data.name);
+  temp.set("fileType",data.fileType);
+
+  Parse.Object.saveAll([userAlgo,temp]).then(
     function (success){
         console.log(" userAlgo  and temp algo successfully saved");
         status                = true;
@@ -129,6 +138,8 @@ Parse.Object.saveAll([userAlgo,temp]).then(
         response[requestType] = status;
         res.send(response);
       }
-  );
+  );//end parse.saveAll
+}//end else
+
 }); //end router post anon-function
 module.exports = router;

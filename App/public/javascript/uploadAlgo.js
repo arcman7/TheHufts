@@ -1,3 +1,4 @@
+//this file depends on crypto js being loaded first
 function encrypt(string,key){
   var encrypted = CryptoJS.AES.encrypt(string,key).toString();
   return encrypted;
@@ -7,7 +8,6 @@ function decrypt(string,key){
   var decrypted = CryptoJS.AES.decrypt(string, key);
   return decrypted.toString(CryptoJS.enc.Utf8);
 }
-
 
 var yousuck = " Please refresh the page and try again.";
 var userAlgoFunctions = {};
@@ -85,7 +85,39 @@ function checkLogin(){
     });
 }
 
+function saveAlgo(data,filename){
+  var request = $.ajax({
+      url: protocol + "//" + domain+"/saveAlgo",
+      type:"post",
+      data: {data: data}
+  });
 
+  request.done(function (response){
+    console.log(response);
+    $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
+    $("table.table.table-striped td").css({'padding-left':'0px'});
+    $("table.table.table-striped td").css({'padding-right':'0px'});
+    // $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+    algoTesterListener('#'+filename);
+    inspectSourceCode('#'+filename+"TheHufts");
+  });//end done function
+}
+
+function queryGateKeeper(data,callback,filename){
+  data = JSON.stringify(data);
+  var gateKeeperURL = protocol + "//" + domain + "/gateKeeper/knockKnock";
+
+  $.ajax({
+          url: gateKeeperURL,
+          type: "get"
+  }).
+  done(function(response){
+    var key = response;
+    data = encrypt(data, key);
+    var confirmation = encrypt("TheHufts",key);
+    callback(data,filename);
+  });
+}
 
 
 function uploadFileListener(){
@@ -118,24 +150,9 @@ function uploadFileListener(){
         //console.log(algoScript);
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
-        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password};
+        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password, confirmation: "TheHufts"};
+        queryGateKeeper(data,saveAlgo,filename);
         //console.log(fileType)
-        var request = $.ajax({
-          url: protocol + "//" + domain+"/saveAlgo",
-          type:"post",
-          data: data
-        });
-        request.done(function(response){
-          console.log(response);
-          var filename = file.name.split('.')[0]
-          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
-          $("table.table.table-striped td").css({'padding-left':'0px'});
-          $("table.table.table-striped td").css({'padding-right':'0px'});
-          // $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-          algoTesterListener('#'+filename);
-
-        });//end done function
-
         }//end if results[0]
       else{
         alert(results[1]);
@@ -151,23 +168,53 @@ function uploadFileListener(){
   };//end .onchange function
 }
 
-// function inspectSourceCode(algoId){
-//   $("#uploaded-algos-container").on('click',algoId,function(e){
-//     e.preventDefault();
+function inspectSourceCode(algoId){
+  $("#uploaded-algos-container").on('click','#'+algoId,function (e){
+    e.preventDefault();
+    var url = protocol + "//" + domain + "/passAlgoFile";
+    var username = String(window.location).split('=')[1];
+    var algoName = algoId.split("TheHufts")[0];
+    //console.log(algoName);
+    var data = { username: username, algoName: algoName};
+    var request = $.ajax({
+      url: url,
+      type: "post",
+      data: data
+    });
 
-//   }
-// }
+    request.done(function (response){
+        response = JSON.parse(response);
+        var fileType = response.fileType;
+        var text = decrypt(response.algoFile, window.access_key);
+          //set text-area for code pad to be generated from
+        $('#code1').text(text);
+        $('.codemirror').remove();
+          //update codemirror pad
+        var newCodeMirror = CodeMirror.fromTextArea(document.getElementById('code1'), {
+            mode: "javascript",
+            theme: "default",
+            lineNumbers: true,
+            readOnly: true
+        });  //end codemirror
+        newCodeMirror.setSize(800, 900);
+      });//end done function
+
+    request.fail(function (error){
+      console.log(error);
+    })
+  });//end on click
+}
+
 
 
 function getUsersAlgoNames (){
   //var accessKey = prompt("Please confirm with your access key: ", "access-key");
-  var accessKey = "huffer";
   var username = String(window.location).split('=')[1];
 
   $.ajax({
     url: protocol + "//" + domain + "/getAlgoNames",
     type: "post",
-    data: {username: username, accessKey: accessKey}
+    data: {username: username}
   })
   .done(function(response){
     //console.log(response,typeof(response));
@@ -177,10 +224,11 @@ function getUsersAlgoNames (){
        response.names.forEach(function (algoName){
         var filename = algoName;
         //$("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td>$</td><td><input type="integer" name="principal" class="'+algoName+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-       $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
+       $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
        $("table.table.table-striped td").css({'padding-left':'0px'});
        $("table.table.table-striped td").css({'padding-right':'0px'});
         algoTesterListener('#'+algoName);
+        inspectSourceCode(algoName+'TheHufts');
        });
     }
 
@@ -236,7 +284,7 @@ function algoTesterListener(algoId){
         var startDate = yahooDateString(d300ago);
         var filename = algoId.slice(1);
         var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain, protocol: protocol};
-        console.log(data);
+        //console.log(data);
         $(algoId).html('<i class="fa fa-cog fa-spin"></i>');
         var request = $.ajax({
               url: protocol + "//" + domain + "/hufterAPI",

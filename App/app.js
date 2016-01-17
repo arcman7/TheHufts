@@ -38,6 +38,8 @@ var checkLogin    = require('./routes/checkLogin');
 var saveAlgo      = require('./routes/saveAlgo');
 var getAlgoNames  = require('./routes/getAlgoNames');
 var hufterAPI     = require('./routes/hufterAPI');
+var setBrowserKey = require('./routes/setBrowserKey');
+var passAlgoFile = require('./routes/passAlgoFile');
 //mozilla session manager
 var session = require('client-sessions');//mozilla
 //error logger for node
@@ -102,6 +104,7 @@ app.use('/uploadAlgo.js', obuscateJS('/uploadAlgo.js'));
 app.use('/bundle.js', obuscateJS('/bundle.js'));
 app.use('/loginFront.js', obuscateJS('/loginFront.js'));
 app.use('/logoutFront.js', obuscateJS('/logoutFront.js'));
+app.use('/browserClientSetup.js', obuscateJS('/browserClientSetup.js'));
 //Note about Front-end javascript assets:
 //line 73 allows src refs to take the form /javascript/file_name.js - express looks in the javascript folder under public, and will serve up the static files un obuscated, allows shows them as coming from the javascript folder, the obuscated assets will show up as being in the root level directory since their src refs all start with '/' , however all the front-end js files, obuscated or not actually exist in the same directory.
 
@@ -114,6 +117,8 @@ app.use('/checkLogin', checkLogin);
 app.use('/saveAlgo', saveAlgo);
 app.use('/getAlgoNames', getAlgoNames);
 app.use('/hufterAPI', hufterAPI);
+app.use('/setBrowserKey', setBrowserKey);
+app.use('/passAlgoFile', passAlgoFile);
 //if no matching route is found this is the default server response
 // app.use(function(req, res, next) {
 //   console.log("error middle ware, requested resource path: "+ req.path);
