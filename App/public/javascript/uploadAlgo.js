@@ -146,8 +146,7 @@ function uploadFileListener(){
         // var fileType =  file.name.split('.').pop();
         var filename = file.name.split('.')[0];
         var password = prompt("Password confirmation: ", "password");
-        //console.log(password);
-        //console.log(algoScript);
+
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
         var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password, confirmation: "TheHufts"};
@@ -161,21 +160,18 @@ function uploadFileListener(){
     };
     reader.readAsText(file);
 
-    // var filename = file.name.split('.')[0]
-    // $("#uploaded-algos-container").append('<tr><td> '+ filename +' </td><td></td><td><a id="'+ filename +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-    // //$("#uploaded-algos-container").append(html_string);
-    // algoTesterListener('#'+filename);
   };//end .onchange function
 }
 
 function inspectSourceCode(algoId){
-  $("#uploaded-algos-container").on('click','#'+algoId,function (e){
+    $("#uploaded-algos-container").on('click','#'+algoId,function (e){
     e.preventDefault();
     var url = protocol + "//" + domain + "/passAlgoFile";
     var username = String(window.location).split('=')[1];
     var algoName = algoId.split("TheHufts")[0];
-    //console.log(algoName);
-    var data = { username: username, algoName: algoName};
+    console.log(algoName);
+    var demo = $(this).attr("class").split("Demo")[1];
+    var data = { username: username, algoName: algoName, demo: demo};
     var request = $.ajax({
       url: url,
       type: "post",
@@ -183,6 +179,7 @@ function inspectSourceCode(algoId){
     });
 
     request.done(function (response){
+      console.log('done');
         response = JSON.parse(response);
         var fileType = response.fileType;
         var text = decrypt(response.algoFile, window.access_key);
@@ -205,8 +202,6 @@ function inspectSourceCode(algoId){
   });//end on click
 }
 
-
-
 function getUsersAlgoNames (){
   //var accessKey = prompt("Please confirm with your access key: ", "access-key");
   var username = String(window.location).split('=')[1];
@@ -220,15 +215,16 @@ function getUsersAlgoNames (){
     //console.log(response,typeof(response));
     response = JSON.parse(response);
     console.log(response);
-    if(response.names){
-       response.names.forEach(function (algoName){
-        var filename = algoName;
-        //$("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td>$</td><td><input type="integer" name="principal" class="'+algoName+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-       $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
+    if(response.algos){
+       response.algos.forEach(function (algo){
+        var filename = algo.name;
+        var demo = (algo.demo ? "true" : "false");
+
+       $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts" class="Demo'+demo+'"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+filename+'" class="Demo'+demo+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
        $("table.table.table-striped td").css({'padding-left':'0px'});
        $("table.table.table-striped td").css({'padding-right':'0px'});
-        algoTesterListener('#'+algoName);
-        inspectSourceCode(algoName+'TheHufts');
+        algoTesterListener('#'+filename);
+        inspectSourceCode(filename+'TheHufts');
        });
     }
 
@@ -275,6 +271,7 @@ function algoTesterListener(algoId){
     e.preventDefault();
     console.log('worked');
     var username = String(window.location).split('=')[1];
+    var demo = $(this).attr("class").split("Demo")[1];
 
     if(globalSymbol){
       //new Promise(resolve,reject){
@@ -283,7 +280,7 @@ function algoTesterListener(algoId){
         var d300ago = new Date(d - 300*3600*1000*24);
         var startDate = yahooDateString(d300ago);
         var filename = algoId.slice(1);
-        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain, protocol: protocol};
+        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain, protocol: protocol, demo: demo};
         //console.log(data);
         $(algoId).html('<i class="fa fa-cog fa-spin"></i>');
         var request = $.ajax({

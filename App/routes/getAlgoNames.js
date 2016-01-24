@@ -115,28 +115,16 @@ function roughSizeOfObject( object ) {
 }
 
 router.post('/', function (req, res, next) {
-  //has the effect of setting the session again, including assignment of the users algorithms
-  //console.log("getAlgoNames req.body:" + JSON.stringify(req.body));
-      // new Promise(function(resolve, reject){
-      //   resetSessionAlgos(req.body.username,req,res)
-      //   resolve(reset);
-      // })
-      // .then(function(){
   var response = {};
   response["names"] = [];
-  //console.log("req.session: " + JSON.stringify(req.session));
   if(req.session.user){
     // if user is logged in
     var list = req.session.user.algos;
-    //console.log("getAlgoNames req.session.user.algos: ",req.session.user.algos);
-
     if (!list){  //the user has no uploaded algos
-      response["names"] = false;
+      response["algos"] = false;
     }
     else{
-      list.forEach(function(algo){
-         response["names"].push(algo.name);
-      });
+      response["algos"] = list;
     }
     response = JSON.stringify(response);
   }
