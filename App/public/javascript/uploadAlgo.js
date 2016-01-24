@@ -99,7 +99,7 @@ function saveAlgo(data,filename){
     $("table.table.table-striped td").css({'padding-right':'0px'});
     // $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
     algoTesterListener('#'+filename);
-    inspectSourceCode('#'+filename+"TheHufts");
+    inspectSourceCode(filename+"TheHufts");
   });//end done function
 }
 

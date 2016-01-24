@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Storing user-sessions
 app.use(session({
   cookieName: 'session',
-  secret: "TheHuftsMotherFucker",//gateKeeper.randomString(77,"aA#!"),
+  secret: "TheHuftyHufters",//gateKeeper.randomString(77,"aA#!"),
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000,
   cookie: {

@@ -11,7 +11,7 @@ function randomString(length, chars) {
 
 
 function setBrowserKey(){
-  window.access_key = randomString(77,"aA#!");
+  window.access_key = randomString(77,"aA#");
   var url = protocol+ '//' + domain + '/setBrowserKey';
 
   var username = String(window.location).split('=')[1];

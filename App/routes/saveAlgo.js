@@ -74,7 +74,14 @@ var userAlgoSave = function (options,response) {//this function assumes userAlgo
         Parse.Object.saveAll([userAlgo,temp]).then(
           function (success){
             console.log("Successfully saved user " + user.get("username") + " with algo: "+ userAlgo.get("name"));
-            req.session.user.algos.push({name: data.name});
+            if(req.session.user.algos){
+              console.log(req.session.user);
+              req.session.user.algos.push({name: data.name, demo: false});
+            }
+            else{
+              req.session.user.algos = [];
+              req.session.user.algos.push({name: data.name, demo: false});
+            }
             console.log("saveAlgo req.session.user.algos: ",req.session.user.algos);
             response["userSaveAlgo"] = true;
             response = JSON.stringify(response);

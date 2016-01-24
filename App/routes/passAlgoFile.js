@@ -28,9 +28,11 @@ function sha3(string){
 }
 //Encryption-Decryption END
 
+//Parse initialization
 var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
 var parseSecret2 = "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm";
 Parse.initialize(parseSecret1, parseSecret2);
+//Parse initalization END
 
 router.post('/', function (req, res, next)
   {

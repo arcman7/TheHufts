@@ -45,7 +45,7 @@ router.post('/', function (req, res) {
       var tempRelation  = object.relation("tempAlgos");
       tempRelation.query().find().then(
         function (list){
-          //console.log("list: ",list);
+          console.log("logout list: ",list);
           if(list.length > 0){
             Parse.Object.destroyAll(list).then(
               function (success) {

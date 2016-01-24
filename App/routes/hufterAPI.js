@@ -28,8 +28,15 @@ function sha3(string){
   return hashedString;
 }
 
+//Parse initialization
+var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
+var parseSecret2 = "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm";
+Parse.initialize(parseSecret1, parseSecret2);
+//Parse initalization END
+
 function getUserAlgo(req,res,next){
-   console.log("getUserAlgo req.body: " + JSON.stringify(req.body));
+   //Parse.Cloud.useMasterKey();
+   //console.log("getUserAlgo req.body: " + JSON.stringify(req.body));
    var requestType = "getAlgoFiles";
    var User        = Parse.Object.extend("UserC");
    var query       = new Parse.Query(User);
@@ -52,12 +59,14 @@ function getUserAlgo(req,res,next){
         var tempRelation = object.relation("tempAlgos");
         tempRelation.query().find().then(
             function (list){
+              console.log("hufterAPI: list: ",list);
               if (list.length == 0){  //the user has no uploaded algos
                 req.algo = false
               }
               else{ //storing users algos in user object
                 list.forEach(function (algo){
-                  if(req.body.filename == algo.get("name")){
+                  console.log(req.body.filename,algo.get("name"));
+                  if(req.body.filename === algo.get("name")){
                     var encryptedAlgo = algo.get("encryptedString");
                     var key = sha3(user.username+"TheHufts");
                     var algoFile = aesDecrypt(encryptedAlgo,key);
