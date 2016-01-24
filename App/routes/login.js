@@ -233,8 +233,8 @@ router.post('/', function (req, res) {
         parseUser.set("accessToken","TheHufts");
         parseUser.set("pwd",password);
         user.accessToken  = parseUser.get("accessToken");
-        user.username     = object.get('username');
-        user.email        = object.get('email');
+        user.username     = parseUser.get('username');
+        user.email        = parseUser.get('email');
         parseUuser.save(null, {
           success: function(object) {
             console.log(" user successfully saved");
