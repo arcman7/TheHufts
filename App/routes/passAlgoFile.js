@@ -48,19 +48,12 @@ router.post('/', function (req, res, next)
       tempRelation.query().find().then(
         function (list){
           list.every(function (algo){
-
             if(algo.get("name") == data.algoName){
               var accessToken = object.get("accessToken");
               var encryptedAlgo = algo.get("encryptedString");
-
               var key = sha3(username+"TheHufts");
-              //console.log(encryptedAlgo,key)
-
               //decrypt file
               var algoFile = aesDecrypt(encryptedAlgo,key);
-              //console.log(algoFile);
-              //console.log(JSON.stringify(object))
-              //console.log(accessKey);
               //encrypt file for browser
               var browserEncryptedAlgo = aesEncrypt(algoFile,accessToken);
               console.log(browserEncryptedAlgo);

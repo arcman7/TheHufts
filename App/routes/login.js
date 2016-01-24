@@ -56,10 +56,8 @@ function queryParseUser(options,req,res,next) {
 
         var session_id = aesEncrypt(user.username, "TheHufts");
         req.session.user.session_id = session_id;
-
         res.locals.user  = user;
-        //console.log("req.session: ", JSON.stringify(req.session));
-        //console.log("req.cookies: ", JSON.stringify(req.cookies));
+
         // finish processing the middleware and run the route
         next();
       },
@@ -229,13 +227,16 @@ router.post('/', function (req, res) {
         var password = data.password;
         parseUser.set("username", data.username);
         var session_id = aesEncrypt(user.username, "TheHufts");
+        var nameList      = [];
+
         parseUser.set("email", data.email);
         parseUser.set("accessToken","TheHufts");
         parseUser.set("pwd",password);
+        parseUser.set("demo",true);
         user.accessToken  = parseUser.get("accessToken");
         user.username     = parseUser.get('username');
         user.email        = parseUser.get('email');
-        parseUuser.save(null, {
+        parseUser.save(null, {
           success: function(object) {
             console.log(" user successfully saved");
             getDemoAlgoNames(nameList,user,object,data,req,res);
