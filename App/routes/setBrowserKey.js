@@ -36,11 +36,17 @@ Parse.initialize(parseSecret1, parseSecret2);
 router.post('/', function (req, res, next)
   {
     var data = req.body;
+    console.log("setbrowserKey: ",data);
     var User     = Parse.Object.extend("UserC");
     var query    = new Parse.Query(User);
-    var username = aesDecrypt(data.username, "TheHufts");
+    var username;
+    if(data.username){
+      username = aesDecrypt(data.username, "TheHufts");
+    }
+    else{
+      username = "hufty";
+    }
     var response = {}; requestType = "setUserAcessToken";
-
     query.equalTo( "username", username );
     query.first().then(
       function (object) {

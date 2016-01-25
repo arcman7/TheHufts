@@ -29,18 +29,12 @@ function sha3(string){
 }
 //Encryption-Decryption END
 
-
-
-router.post('/', function (req, res) {
-// Declare the types.
-var User = Parse.Object.extend("UserC");
-var Algo = Parse.Object.extend("Algo");
-var TempAlgo = Parse.Object.extend("TempAlgo");
-
-var response = {};
-
-var userAlgoSave = function (options,response) {//this function assumes userAlgo is an already existing global variable
+function userAlgoSave (req, res, options, response, userAlgo, temp) {//this function assumes userAlgo is an already existing global variable
   console.log("hi from userAlgoSave");
+  console.log(req.body);
+  var key          = gateKeeper.gateKey;
+  var data         = aesDecrypt(req.body.data, key);
+  data             = JSON.parse(data);
    var User           = Parse.Object.extend("UserC");
    var query          = new Parse.Query(User);
 
@@ -106,47 +100,53 @@ var userAlgoSave = function (options,response) {//this function assumes userAlgo
     ); //end query.first function call
 }//end queryParseUser
 
-// Create the user's algo
-var requestType  = "saveAlgoCloud";
-var userAlgo     = new Algo();
 
-var key          = gateKeeper.gateKey;
-var confirmation = "TheHufts";
-var data         = aesDecrypt(req.body.data, key);
-data             = JSON.parse(data);
+router.post('/', function (req, res) {
+  // Declare the types.
+  var User = Parse.Object.extend("UserC");
+  var Algo = Parse.Object.extend("Algo");
+  var TempAlgo = Parse.Object.extend("TempAlgo");
+  var response = {};
+  // Create the user's algo
+  var requestType  = "saveAlgoCloud";
+  var userAlgo     = new Algo();
+  var confirmation = "TheHufts";
+  var key          = gateKeeper.gateKey;
+  var data         = aesDecrypt(req.body.data, key);
+  data             = JSON.parse(data);
 
-if(confirmation != data.confirmation){
-  res.send("{error-code:k}"); //error k = key miss-match
-}
-else{ // continue with login/register route
-  var requestType;
-  var status;
-  console.log(data.name);
-  userAlgo.set("name", data.name);
-  userAlgo.set("encryptedString", data.algo);
-  userAlgo.set("fileType",data.fileType);
+  if(confirmation != data.confirmation){
+    res.send("{error-code:k}"); //error k = key miss-match
+  }
+  else{ // continue with login/register route
+    var requestType;
+    var status;
+    console.log(data.name);
+    userAlgo.set("name", data.name);
+    userAlgo.set("encryptedString", data.algo);
+    userAlgo.set("fileType",data.fileType);
 
-  var temp         = new TempAlgo();
-  temp.set("name", data.name);
-  temp.set("fileType",data.fileType);
+    var temp         = new TempAlgo();
+    temp.set("name", data.name);
+    temp.set("fileType",data.fileType);
 
-  Parse.Object.saveAll([userAlgo,temp]).then(
-    function (success){
-        console.log(" userAlgo  and temp algo successfully saved");
-        status                = true;
-        response[requestType] = status;
-        var userC = req.session.user;
-        console.log("userC: " + userC.email);
-        userAlgoSave(userC,response)
-      },
-      function (error) {
-        console.log("failed to save algo" + error.message)
-        status                = false;
-        response[requestType] = status;
-        res.send(response);
-      }
-  );//end parse.saveAll
-}//end else
+    Parse.Object.saveAll([userAlgo,temp]).then(
+      function (success){
+          console.log(" userAlgo  and temp algo successfully saved");
+          status                = true;
+          response[requestType] = status;
+          var userC = req.session.user;
+          console.log("userC: " + userC.email);
+          userAlgoSave(req, res, userC, response, userAlgo, temp);
+        },
+        function (error) {
+          console.log("failed to save algo" + error.message)
+          status                = false;
+          response[requestType] = status;
+          res.send(response);
+        }
+    );//end parse.saveAll
+  }//end else
 
 }); //end router post anon-function
 module.exports = router;

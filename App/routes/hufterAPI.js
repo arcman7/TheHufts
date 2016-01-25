@@ -61,6 +61,7 @@ function getUserAlgo(req,res,next,object){
        var protocol      = req.body.protocol;
        var algo          = req.body.algo;
        var data = {algo: algo,"startDate": req.body.startDate,"endDate": req.body.endDate, "symbols": req.body.symbols, "lang": req.body.lang };
+       console.log(data)
        data = JSON.stringify(data);
        data = aesEncrypt(data,"yolocity");
        data = encodeURIComponent(data);
@@ -78,7 +79,7 @@ function getUserAlgo(req,res,next,object){
 function getDemoAlgo(req,res,next,object){
   var DemoAlgo  = Parse.Object.extend("DemoAlgo");
   var demoQuery = new Parse.Query(DemoAlgo);
-  demoQuery.find().then(
+  return demoQuery.find().then(
     function (list){
       console.log("getDemoAlgo.list: ")
       list.forEach(function (algo){
@@ -131,7 +132,13 @@ function hufterAPIQuery(fullQuery,res){
 function getAlgo(req,res,next){
   var User        = Parse.Object.extend("UserC");
   var query       = new Parse.Query(User);
-  var username = aesDecrypt(req.body.username, "TheHufts");
+  var username;
+  if(req.body.username){
+    username    = aesDecrypt(req.body.username, "TheHufts");
+  }
+  else{
+    username = "hufty";
+  }
   query.equalTo( 'username', username )//.select(userAttributes);
     query.first().then(
       function (object) {
@@ -169,7 +176,6 @@ router.post('/',function (req,res,next){
     //Parse.Cloud.useMasterKey();
    console.log("hufter API: " + JSON.stringify(req.body));
    var requestType = "getAlgoFiles";
-   var username = aesDecrypt(req.body.username, "TheHufts");
 
   new Promise(function(resolve,reject){
     resolve(getAlgo(req,res,next))

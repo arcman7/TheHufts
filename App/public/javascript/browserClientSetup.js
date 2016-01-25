@@ -9,6 +9,41 @@ function randomString(length, chars) {
   return result;
 }
 
+function initializeCoderPadWithDemo(){
+  var username = String(window.location).split('=')[1];
+  var url = protocol + "//" + domain + "/passAlgoFile";
+
+  var data = { username: username, algoName: 'psychicDemo', demo: true};
+    var request = $.ajax({
+      url: url,
+      type: "post",
+      data: data
+    });
+
+    request.done(function (response){
+      //console.log('done');
+      //console.log(response);
+      //console.log("key: ", window.access_key);
+      response = JSON.parse(response);
+      var fileType = response.fileType;
+      var text = decrypt(response.algoFile, window.access_key);
+        //set text-area for code pad to be generated from
+      $('#code1').text(text);
+      $('.codemirror').remove();
+        //update codemirror pad
+      var newCodeMirror = CodeMirror.fromTextArea(document.getElementById('code1'), {
+          mode: "javascript",
+          theme: "default",
+          lineNumbers: true,
+          readOnly: true
+      });  //end codemirror
+      newCodeMirror.setSize(800, 900);
+      });//end done function
+
+    request.fail(function (error){
+      console.log(error);
+    });
+}
 
 function setBrowserKey(){
   window.access_key = randomString(77,"aA#");
@@ -25,6 +60,7 @@ function setBrowserKey(){
     data: data
   }).done(function (response){
     console.log(response);
+    initializeCoderPadWithDemo()
   });
 }
 

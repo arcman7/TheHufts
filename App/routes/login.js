@@ -163,7 +163,7 @@ router.post('/', function (req, res) {
                   function (list){
                     console.log("login list: ",list);
                     if (list.length == 0){  //the user has no uploaded algos
-                      user.algos = false;
+                      getDemoAlgoNames(nameList,user,object,data,req,res);
                     }
                     else{ //storing users algos in user object
                       var createTempAlgoLocked = curriedCreateTempAlgo(data.password,object,tempAlgoArray);
@@ -194,7 +194,7 @@ router.post('/', function (req, res) {
                           console.log("line 152 error: " + error.message + " "+error.code)
                         }
                       );
-                    }
+                    }//end else
 
                   },
                   function (error){
@@ -210,6 +210,7 @@ router.post('/', function (req, res) {
               res.send(response);
             }
          },//end query user success function
+
          function (error) {
             console.log(" (line 133 login.js) LOGIN-Error: " + error.code + " " + error.message);
             status                = false;
@@ -240,24 +241,6 @@ router.post('/', function (req, res) {
           success: function(object) {
             console.log(" user successfully saved");
             getDemoAlgoNames(nameList,user,object,data,req,res);
-
-          //  var session_id = aesEncrypt(user.get("username"), "TheHufts");
-          //   status                = true;
-          //   response[requestType] = status;
-          //   response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
-          //   response              = JSON.stringify(response);
-
-          //   user.email       = user.get('email');
-          //   user.username    = user.get('username');
-          //   user.accessToken = user.get('accessToken');
-
-          //   req.user         = user;
-          //   req.session.user = user;  //refresh the session value
-          //   req.session.user.session_id = session_id;
-
-          //   res.locals.user  = user;
-          // // finishing processing the middleware and run the route
-          //   res.send(response);
           },
           error: function(user, error) {
             console.log("failed to save " + error.message)

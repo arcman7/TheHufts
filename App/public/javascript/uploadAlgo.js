@@ -94,7 +94,8 @@ function saveAlgo(data,filename){
 
   request.done(function (response){
     console.log(response);
-    $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
+    var demo = false;
+    $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts" class="Demo'+demo+'"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+filename+'" class="Demo'+demo+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
     $("table.table.table-striped td").css({'padding-left':'0px'});
     $("table.table.table-striped td").css({'padding-right':'0px'});
     // $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
@@ -201,6 +202,7 @@ function inspectSourceCode(algoId){
     })
   });//end on click
 }
+
 
 function getUsersAlgoNames (){
   //var accessKey = prompt("Please confirm with your access key: ", "access-key");

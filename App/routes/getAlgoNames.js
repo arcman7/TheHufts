@@ -115,21 +115,24 @@ function roughSizeOfObject( object ) {
 }
 
 router.post('/', function (req, res, next) {
+  console.log("getAlgoNames req.session.user: ",req.session.user)
   var response = {};
-  response["names"] = [];
+  response["algos"] = [];
   if(req.session.user){
     // if user is logged in
     var list = req.session.user.algos;
-    if (!list){  //the user has no uploaded algos
-      response["algos"] = false;
-    }
-    else{
+    if (list){
       response["algos"] = list;
     }
+    else{//user has no uploaded algos
+      response["algos"].push({name: "psychicDemo", demo: true});
+    }
+
     response = JSON.stringify(response);
   }
   else{
-    response["names"] = false;
+    response["algos"].push({name: "psychicDemo", demo: true});
+    response = JSON.stringify(response);
   }
   res.send(response);
 });
